@@ -443,6 +443,10 @@ img {
   width: 48px;
   height: 3px;
   background: var(--orange);
+  transition: width 220ms ease;
+}
+.home-intro:hover .intro-caption span {
+  width: 72px;
 }
 .home-intro .tags {
   margin-top: 20px;
@@ -467,6 +471,10 @@ img {
   height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
+  transition: transform 180ms ease;
+}
+.home-navigation > a:hover .nav-dot {
+  transform: scale(1.45);
 }
 .home-navigation strong {
   display: block;
@@ -528,9 +536,12 @@ img {
   padding: 8px 16px;
   min-height: 34.556px;
   margin-top: 0;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
 }
 .home-about .action:hover {
   background: #fff;
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--foreground);
 }
 .home-stats {
   display: grid;
@@ -552,6 +563,11 @@ img {
   font-family: var(--font-archivo-black);
   font-size: 38.4px;
   line-height: 1;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.home-stats > div:hover strong {
+  color: var(--orange);
+  transform: translateY(-2px) scale(1.04);
 }
 .home-stats span {
   font-size: 11px;
@@ -2853,7 +2869,11 @@ body {
   }
   .home-navigation > a,
   .home-nav-arrow,
+  .nav-dot,
+  .intro-caption span,
+  .home-about .action,
   .home-stats > div,
+  .home-stats strong,
   .home-cta > .accent-square {
     transition: none;
   }
