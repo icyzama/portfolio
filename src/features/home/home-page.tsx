@@ -18,8 +18,8 @@ export function HomePage() {
         <p className="home-brand-note">
           <span className="home-brand-dot" aria-hidden="true" />
           <span className="home-brand-copy">
-            <strong>SOFTWARE + CLOUD</strong>
-            <small>COMMUNITY LEADER</small>
+            <strong>FULL STACK DEVELOPER</strong>
+            <small>CLOUD + COMMUNITY LEADERSHIP</small>
           </span>
         </p>
       </section>
