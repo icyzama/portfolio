@@ -67,7 +67,7 @@ export function HomePage() {
           <h2>WHO AM I?</h2>
           <p>{profile.homeBio}</p>
           <ActionLink href="/about">
-            READ MORE →
+            LEARN MORE →
           </ActionLink>
         </section>
         <section className="home-stats" aria-label="At a glance">
