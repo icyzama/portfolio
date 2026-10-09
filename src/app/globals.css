@@ -461,10 +461,27 @@ img {
   gap: 10px;
   padding: 14px 20px;
   border-bottom: 1.778px solid var(--foreground);
-  transition: background-color 160ms ease;
+  transition: background-color 180ms ease, color 180ms ease;
 }
-.home-navigation > a:hover {
-  background: white;
+.home-navigation > a[data-tone="yellow"]:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+.home-navigation > a[data-tone="orange"]:hover {
+  background: var(--orange);
+  color: var(--foreground);
+}
+.home-navigation > a[data-tone="blue"]:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.home-navigation > a[data-tone="ink"]:hover {
+  background: var(--foreground);
+  color: #fff;
+}
+.home-navigation > a:hover small {
+  color: inherit;
+  opacity: .76;
 }
 .nav-dot {
   width: 7px;
@@ -475,6 +492,7 @@ img {
 }
 .home-navigation > a:hover .nav-dot {
   transform: scale(1.45);
+  background: currentColor;
 }
 .home-navigation strong {
   display: block;

@@ -54,7 +54,7 @@ export function HomePage() {
         </section>
         <nav className="home-navigation" aria-label="Explore the portfolio">
           {navigation.map((item) => (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} data-tone={item.color}>
               <span className={`nav-dot tone-${item.color}`} />
               <span>
                 <strong>{item.label}</strong>
