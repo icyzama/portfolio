@@ -15,9 +15,12 @@ export function HomePage() {
       <section className="home-masthead">
         <p className="eyebrow">October 2026 - Manila, Philippines</p>
         <h1>{profile.name}</h1>
-        <p className="availability">
-          <span />
-          Currently interning
+        <p className="home-brand-note">
+          <span className="home-brand-dot" aria-hidden="true" />
+          <span className="home-brand-copy">
+            <strong>SOFTWARE + CLOUD</strong>
+            <small>COMMUNITY LEADER</small>
+          </span>
         </p>
       </section>
       <div className="edition-strip">
@@ -27,7 +30,7 @@ export function HomePage() {
         <span aria-hidden="true">·</span>
         <span>Est. 2026</span>
         <span aria-hidden="true">·</span>
-        <span>Expected Graduation 2027</span>
+        <span>Full Stack Developer</span>
       </div>
       <div className="home-grid">
         <section className="home-intro">

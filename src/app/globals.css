@@ -304,9 +304,9 @@ img {
   border-color: var(--accent);
 }
 .home-masthead {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 20px;
   padding: 12px 24px;
   min-height: 78.667px;
@@ -315,32 +315,53 @@ img {
 .home-masthead h1 {
   font-size: clamp(30px,3.745vw,59px);
   line-height: 1;
+  justify-self: center;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 0;
   color: #000;
 }
 .home-masthead .eyebrow {
+  justify-self: start;
   letter-spacing: 2.5px;
   font-size: 10px;
   color: rgba(0, 0, 0, .62);
 }
-.availability {
+.home-brand-note {
   display: flex;
   align-items: center;
+  justify-self: end;
   gap: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: rgba(0, 0, 0, .62);
+  padding: 8px 10px;
+  border: var(--rule);
+  background: var(--background);
+  box-shadow: 2px 2px 0 var(--foreground);
+  color: var(--foreground);
   white-space: nowrap;
 }
-.availability span {
+.home-brand-dot {
   width: 7px;
   height: 7px;
-  background: var(--accent);
+  flex: 0 0 7px;
+  background: var(--orange);
   border-radius: 50%;
+}
+.home-brand-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.home-brand-copy strong {
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: .7px;
+}
+.home-brand-copy small {
+  color: rgba(0, 0, 0, .58);
+  font-size: 8px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: .55px;
 }
 .edition-strip {
   height: 42.667px;
@@ -2227,6 +2248,7 @@ body {
     display: none !important;
   }
   .home-masthead {
+    display: flex;
     flex-wrap: wrap;
   }
   .home-masthead h1 {
@@ -2238,7 +2260,7 @@ body {
     order: 2;
     max-width: none;
   }
-  .availability {
+  .home-brand-note {
     order: 3;
   }
   .home-grid {
@@ -2409,9 +2431,15 @@ body {
     font-size: 8px;
     letter-spacing: 1.2px;
   }
-  .availability {
+  .home-brand-note {
+    padding: 7px 8px;
+    gap: 7px;
+  }
+  .home-brand-copy strong {
     font-size: 8px;
-    letter-spacing: 0.8px;
+  }
+  .home-brand-copy small {
+    font-size: 7px;
   }
   .edition-strip {
     gap: 12px;
