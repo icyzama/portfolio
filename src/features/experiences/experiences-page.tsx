@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Asset, PageHero, Tags } from "@/components/ui/design";
 import { organizations, projects } from "@/content/portfolio";
 
-const tabs = ["Student Orgs", "Projects & Hackathons", "Internships"];
+const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
 export function ExperiencesPage() {
   const query = useSearchParams().get("tab");
   const router = useRouter();
@@ -136,7 +136,7 @@ export function ExperiencesPage() {
               </div>
             </div>
             <aside className="organization-list" aria-label="All organizations">
-              <h2>ALL ORGANISATIONS</h2>
+              <h2>ALL ORGANIZATIONS</h2>
               {organizations.map((item, index) => (
                 <button
                   key={`${item.name}-${index}`}

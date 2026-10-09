@@ -644,6 +644,8 @@ img {
 }
 .about-opening {
   position: relative;
+  view-timeline-name: --about-opening;
+  view-timeline-axis: block;
 }
 .about-scroll-cue {
   position: absolute;
@@ -680,10 +682,20 @@ img {
   scroll-margin-top: 24px;
 }
 @supports (animation-timeline: view()) {
+  .about-hero h1 {
+    transform-origin: left center;
+    animation: about-title-zoom linear both;
+    animation-timeline: --about-opening;
+    animation-range: exit 0% exit 100%;
+  }
   .about-bio {
     animation: about-bio-reveal linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 35%;
+  }
+  @keyframes about-title-zoom {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: .25; transform: scale(1.14); }
   }
   @keyframes about-bio-reveal {
     from { opacity: .35; transform: translateY(32px); }
@@ -2755,6 +2767,7 @@ body {
     scroll-behavior: auto;
   }
   .about-scroll-cue span,
+  .about-hero h1,
   .about-bio {
     animation: none;
   }

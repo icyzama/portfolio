@@ -51,10 +51,10 @@ export function SiteHeader() {
             {item.href === "/about" && (
               <div className="nav-dropdown">
                 <Link href="/about" onClick={() => setOpen(false)}>
-                  About me
+                  About Me
                 </Link>
                 <Link href="/about#tech-stack" onClick={() => setOpen(false)}>
-                  Tech stack
+                  Technical Skills
                 </Link>
               </div>
             )}
@@ -66,7 +66,7 @@ export function SiteHeader() {
                     href={`/experiences?tab=${tab}`}
                     onClick={() => setOpen(false)}
                   >
-                    {["Student orgs", "Hackathons & comps", "Internships"][i]}
+                    {["Student Organizations", "Hackathons & Competitions", "Internships"][i]}
                   </Link>
                 ))}
               </div>

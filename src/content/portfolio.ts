@@ -15,13 +15,13 @@ export const navigation = [
   {
     label: "About",
     href: "/about",
-    description: "About Me + Tech Stack",
+    description: "About Me + Technical Skills",
     color: "yellow",
   },
   {
     label: "Experiences",
     href: "/experiences",
-    description: "Orgs + Hackathons",
+    description: "Organizations + Hackathons",
     color: "orange",
   },
   {
@@ -30,7 +30,7 @@ export const navigation = [
     description: "Work & Side Projects",
     color: "blue",
   },
-  { label: "Blog", href: "/blog", description: "Coming Soon", color: "orange" },
+  { label: "Blog", href: "/blog", description: "Coming soon", color: "orange" },
   {
     label: "Services",
     href: "/services",
