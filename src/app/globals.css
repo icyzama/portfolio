@@ -456,28 +456,50 @@ img {
   grid-template-rows: repeat(6, 1fr);
 }
 .home-navigation > a {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 14px 20px;
   border-bottom: 1.778px solid var(--foreground);
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: color 180ms ease;
 }
-.home-navigation > a[data-tone="yellow"]:hover {
-  background: var(--accent);
-  color: var(--foreground);
+.home-navigation > a::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 2px;
+  background: var(--nav-hover-background);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms cubic-bezier(.2, .7, .2, 1);
 }
-.home-navigation > a[data-tone="orange"]:hover {
-  background: var(--orange);
-  color: var(--foreground);
+.home-navigation > a > * {
+  position: relative;
+  z-index: 1;
 }
-.home-navigation > a[data-tone="blue"]:hover {
-  background: var(--primary);
-  color: #fff;
+.home-navigation > a[data-tone="yellow"] {
+  --nav-hover-background: var(--accent);
+  --nav-hover-foreground: var(--foreground);
 }
-.home-navigation > a[data-tone="ink"]:hover {
-  background: var(--foreground);
-  color: #fff;
+.home-navigation > a[data-tone="orange"] {
+  --nav-hover-background: var(--orange);
+  --nav-hover-foreground: var(--foreground);
+}
+.home-navigation > a[data-tone="blue"] {
+  --nav-hover-background: var(--primary);
+  --nav-hover-foreground: #fff;
+}
+.home-navigation > a[data-tone="ink"] {
+  --nav-hover-background: var(--foreground);
+  --nav-hover-foreground: #fff;
+}
+.home-navigation > a:hover {
+  color: var(--nav-hover-foreground);
+}
+.home-navigation > a:hover::before {
+  transform: scaleX(1);
 }
 .home-navigation > a:hover small {
   color: inherit;
@@ -2886,6 +2908,7 @@ body {
     animation: none;
   }
   .home-navigation > a,
+  .home-navigation > a::before,
   .home-nav-arrow,
   .nav-dot,
   .intro-caption span,
