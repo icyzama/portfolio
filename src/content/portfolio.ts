@@ -4,10 +4,10 @@ export const profile = {
   github: "https://github.com/icyzama",
   linkedin: "https://linkedin.com/in/reynaldquijano",
   homeBio:
-    "Fourth-year IT student passionate about cloud, data, and software engineering. I build scalable solutions, design with purpose, and turn ideas into impactful technology.",
-  bio: "I’m a fourth-year IT student at National University – Manila passionate about cloud computing, data, and software engineering. I enjoy turning ideas into scalable, user-focused applications and bringing together design and engineering to build technology that makes an impact.",
+    "Fourth-year Information Technology student at National University - Manila, aspiring cloud and data engineer. I build responsive, database-driven applications with the PERN stack and TypeScript, and contribute to frontend development, quality assurance, UI/UX, and project coordination.",
+  bio: "I am a fourth-year Information Technology student at National University - Manila, specializing in Mobile and Web Applications. I have hands-on full-stack experience with PostgreSQL, Express.js, React, Node.js, and TypeScript, and I am interested in cloud computing, data, and building reliable software.",
   bioMore:
-    "Outside of class, you’ll find me leading student organizations, working on innovative projects, or exploring cloud and full-stack development. I’m always looking for opportunities to learn, collaborate, and build meaningful solutions.",
+    "I currently work as a Full Stack Developer Intern at NexVision Innovations. Outside of work, I lead AWS student communities, help organize cloud workshops, and contribute to university projects. I expect to graduate in August 2027.",
   resume: null as string | null,
 };
 
@@ -46,7 +46,7 @@ export const navigation = [
 ] as const;
 
 export type ProjectCategory =
-  "Hackathon" | "Research" | "Side Project" | "Personal";
+  "Hackathon" | "Research" | "Side Project" | "Personal" | "University Project";
 export type Project = {
   slug: string;
   name: string;
@@ -61,65 +61,42 @@ export type Project = {
   sourceUrl?: string;
 };
 
-// Sample entries copied from the original Figma design; replace before publishing.
 export const projects: Project[] = [
   {
-    slug: "adaptlearn",
-    name: "AdaptLearn",
-    recognition: "Best AI Hack · HackMIT",
+    slug: "smartflood",
+    name: "SmartFlood",
+    recognition: "Capstone Project",
     description:
-      "Adaptive learning platform that generates personalised quiz paths using LLM embeddings and spaced repetition.",
-    tags: ["Python", "OpenAI", "React", "FastAPI"],
-    year: "2024",
-    category: "Hackathon",
+      "AI-optimized relief allocation and near-real-time flood monitoring for flood-affected communities. Led project planning, task coordination, documentation, frontend development, UI/UX prototyping, and quality assurance.",
+    tags: ["Next.js", "TypeScript", "UI/UX", "Quality Assurance"],
+    year: "2026",
+    category: "University Project",
     tone: "yellow",
     icon: "/figma/projects-icontrophy.svg",
   },
   {
-    slug: "signsync",
-    name: "SignSync",
-    recognition: "Top 10 · TreeHacks Stanford",
+    slug: "dalo",
+    name: "DALO",
+    recognition: "Best Website",
     description:
-      "Real-time ASL interpreter using a custom transformer model and MediaPipe for hand landmark detection.",
-    tags: ["PyTorch", "OpenCV", "React"],
-    year: "2024",
-    category: "Research",
+      "An event platform project focused on making every event an experience. Designed the interfaces and interactive Figma prototypes, then contributed to frontend development.",
+    tags: ["Figma", "Prototyping", "Frontend"],
+    year: "2025",
+    category: "Hackathon",
     tone: "cream",
     icon: "/figma/projects-iconmedal.svg",
   },
   {
-    slug: "flashdeck",
-    name: "FlashDeck",
-    recognition: "1st Place · MLH",
+    slug: "kuryentech",
+    name: "Kuryentech",
+    recognition: "Top 15 Nationally - Philippines",
     description:
-      "Chrome extension that turns lecture PDFs into spaced-repetition flashcard decks in one click.",
-    tags: ["TypeScript", "Chrome API", "PDF.js"],
-    year: "2023",
-    category: "Side Project",
+      "Worked as a frontend developer, designing the project interfaces and visuals. Also presented the project pitch and contributed research as part of a four-member team.",
+    tags: ["Frontend", "UI Design", "Research", "Pitching"],
+    year: "2024",
+    category: "Hackathon",
     tone: "blue",
     icon: "/figma/projects-iconmedal1.svg",
-  },
-  {
-    slug: "campuscarbon",
-    name: "CampusCarbon",
-    recognition: "Participant · HackHarvard",
-    description:
-      "Carbon footprint tracker for university campuses with live dashboards and department comparisons.",
-    tags: ["React", "Node.js", "MongoDB", "Chart.js"],
-    year: "2023",
-    category: "Hackathon",
-    tone: "orange",
-  },
-  {
-    slug: "portfolioos",
-    name: "PortfolioOS",
-    recognition: "WIP",
-    description:
-      "This portfolio — a brutalist multi-page site built with React, Vite, and Tailwind CSS v4.",
-    tags: ["React", "TypeScript", "Tailwind v4"],
-    year: "2024",
-    category: "Personal",
-    tone: "cream",
   },
 ];
 
@@ -128,50 +105,98 @@ export const organizations = [
     name: "AWS Student User Group Philippines",
     shortName: "AWS Student User Group PH",
     role: "Director for Marketing",
-    period: "2025 – Present",
+    period: "Dec 2025 - Present",
     description:
-      "Lead technical workshops and grow a 200+ member community of computing students on campus.",
+      "Lead technical workshops and grow a 200+ member community of computing students on campus. As Director for Marketing, manage the group's brand identity and creative output.",
     tags: ["Leadership", "Events", "Tech", "Marketing"],
+    highlights: [
+      "Manage the organization's brand identity and visual standards across digital and physical marketing channels.",
+      "Keep creative outputs and communication strategies aligned with AWS learning objectives and professional standards.",
+      "Oversee end-to-end production of graphic design and promotional assets.",
+    ],
   },
   {
-    name: "AWS Learning Club – Legarda",
-    shortName: "AWS Learning Club – Legarda",
+    name: "AWS Learning Club - Legarda",
+    shortName: "AWS Learning Club - Legarda",
     role: "Chief Executive Officer and Lead",
-    period: "[Dates]",
-    description: "[Add your responsibilities and contributions.]",
-    tags: ["Leadership", "Cloud"],
+    period: "Jul 2025 - Present",
+    description:
+      "Lead a 90+ member community focused on building students' technical and cloud-computing skills. Organized 5+ workshops attended by 80+ participants.",
+    tags: ["Community Leadership", "Cloud", "Workshops"],
+    highlights: [
+      "Set the organization's strategic direction in line with AWS learning objectives.",
+      "Coordinate and promote workshops, supporting smooth event delivery and strong participant engagement.",
+      "Build opportunities for students to learn technical and cloud-computing skills.",
+    ],
   },
   {
-    name: "AWS Learning Club – Legarda",
-    shortName: "AWS Learning Club – Legarda",
+    name: "AWS Learning Club - Legarda",
+    shortName: "AWS Learning Club - Legarda",
     role: "Cloud Computing and Infrastructure Officer",
-    period: "[Dates]",
-    description: "[Add your responsibilities and contributions.]",
-    tags: ["Cloud", "Infrastructure"],
+    period: "Aug 2024 - Jul 2025",
+    description:
+      "Supported the club's cloud-learning program as a resource speaker and technical officer.",
+    tags: ["AWS", "Cloud Fundamentals", "Technical Events"],
+    highlights: [
+      "Delivered workshops on AWS services and cloud fundamentals as a resource speaker.",
+      "Supported technical setup for organization events, training, and cloud-related activities.",
+    ],
   },
   {
-    name: "NU Wizards’ Circle",
-    shortName: "NU Wizards’ Circle",
-    role: "Communications Director",
-    period: "[Dates]",
-    description: "[Add your responsibilities and contributions.]",
-    tags: ["Communications"],
+    name: "NU Wizards' Circle",
+    shortName: "NU Wizards' Circle",
+    role: "Communications Coordinator",
+    period: "Jul 2025 - Nov 2025",
+    description:
+      "Coordinated communications and partnership outreach for NU Wizards' Circle and its four houses.",
+    tags: ["Communications", "Partnerships", "External Relations"],
+    highlights: [
+      "Helped the organization secure community partnerships and sponsors for the organization and its four houses.",
+      "Coordinated communication between the Office of the Vice President for Linkages (OVP-Linkages), partners, and sponsors.",
+      "Managed the official organization email and served as the primary contact for speakers, sponsors, and partners.",
+    ],
+  },
+  {
+    name: "Junior Blockchain Education Consortium of the Philippines - NU Manila",
+    shortName: "JBECP - NU Manila",
+    role: "Operations Committee Member",
+    period: "Aug 2024 - Nov 2025",
+    description:
+      "Supported the planning and delivery of blockchain education events and activities at NU Manila.",
+    tags: ["Event Operations", "Documentation", "Budget Support"],
+    highlights: [
+      "Assisted with event logistics, documentation, and coordination for blockchain education initiatives.",
+      "Supported event operations to help deliver organized activities.",
+      "Verified reimbursements, liquidation forms, and budget requests for accuracy and proper allocation.",
+    ],
   },
   {
     name: "NU CCIT Student Council",
     shortName: "NU CCIT Student Council",
     role: "Director Auditor for Bookkeeping and Budgeting",
-    period: "[Dates]",
-    description: "[Add your responsibilities and contributions.]",
-    tags: ["Leadership"],
+    period: "Aug 2024 - Nov 2025",
+    description:
+      "Oversaw financial records, budgets, and expense checks for the NU CCIT Student Council.",
+    tags: ["Auditing", "Financial Records", "Budgeting"],
+    highlights: [
+      "Audited and maintained accurate, up-to-date financial records.",
+      "Monitored budgets, expenses, and financial compliance to support transparency and accountability.",
+      "Verified reimbursements, liquidation forms, and budget requests for accuracy and proper allocation.",
+    ],
   },
   {
-    name: "Google Developers on Campus – NU Manila",
-    shortName: "Google Developers on Campus – NU Manila",
-    role: "Creatives",
-    period: "[Dates]",
-    description: "[Add your responsibilities and contributions.]",
-    tags: ["Creatives"],
+    name: "Google Developers on Campus - NU Manila",
+    shortName: "Google Developers on Campus - NU Manila",
+    role: "Creative Committee Member",
+    period: "Aug 2023 - Jul 2024",
+    description:
+      "Created visual and promotional materials for Google Developers on Campus events and initiatives.",
+    tags: ["Graphic Design", "Video", "Campaigns"],
+    highlights: [
+      "Produced six graphic posters and two videos for developer community events.",
+      "Helped plan and execute visual campaigns for activities and initiatives.",
+      "Designed layouts, presentations, and other digital assets for event preparation.",
+    ],
   },
 ];
 

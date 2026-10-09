@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { ActionLink, Asset, PageHero, Tags } from "@/components/ui/design";
 import { projects, type Project } from "@/content/portfolio";
 
-const categories = ["All", "Hackathon", "Research", "Side Project", "Personal"];
+const categories = ["All", "Hackathon", "University Project"];
 export function ProjectsPage() {
   const [category, setCategory] = useState("All");
   const [selected, setSelected] = useState<Project | null>(null);
@@ -30,7 +30,7 @@ export function ProjectsPage() {
         }
         className="projects-hero"
         accent="yellow"
-        count="5 Projects"
+        count="3 Projects"
       />
       <div className="filter-bar" aria-label="Filter projects">
         {categories.map((item) => (

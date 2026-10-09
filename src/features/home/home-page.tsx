@@ -3,21 +3,21 @@ import { ActionLink, Asset, Tags } from "@/components/ui/design";
 import { navigation, profile } from "@/content/portfolio";
 
 const updates = [
-  { icon: "icontrophy", text: "Best AI Hack · HackMIT 2024" },
-  { icon: "iconusers", text: "VP · ACM Chapter" },
-  { icon: "iconflask", text: "Research Assistant · ML Lab" },
-  { icon: "iconbriefcase", text: "Open to Internships · Summer 2026" },
+  { icon: "iconbriefcase", text: "Full Stack Developer Intern - NexVision Innovations" },
+  { icon: "iconusers", text: "CEO & Lead - AWS Learning Club, Legarda" },
+  { icon: "icontrophy", text: "Best Website - DALO" },
+  { icon: "iconflask", text: "Director for Marketing - AWS Student User Group PH" },
 ];
 
 export function HomePage() {
   return (
     <>
       <section className="home-masthead">
-        <p className="eyebrow">Wednesday, August 26, 2026</p>
+        <p className="eyebrow">October 2026 - Manila, Philippines</p>
         <h1>{profile.name}</h1>
         <p className="availability">
           <span />
-          Open to work
+          Currently interning
         </p>
       </section>
       <div className="edition-strip">
@@ -27,7 +27,7 @@ export function HomePage() {
         <span aria-hidden="true">·</span>
         <span>Est. 2026</span>
         <span aria-hidden="true">·</span>
-        <span>Seeking Internship 2026</span>
+        <span>Expected Graduation 2027</span>
       </div>
       <div className="home-grid">
         <section className="home-intro">
@@ -43,17 +43,10 @@ export function HomePage() {
           </h2>
           <p className="intro-caption">
             <span />
-            Hackathons · Orgs · Code
+            Cloud · Web · Leadership
           </p>
           <Tags
-            items={[
-              "React",
-              "TypeScript",
-              "Python",
-              "Node.js",
-              "ML / AI",
-              "Open Source",
-            ]}
+            items={["React.js", "TypeScript", "Node.js", "PostgreSQL", "Python", "AWS"]}
           />
         </section>
         <nav className="home-navigation" aria-label="Explore the portfolio">
@@ -79,9 +72,9 @@ export function HomePage() {
         </section>
         <section className="home-stats" aria-label="At a glance">
           {[
-            ["3+", "Hackathons won"],
-            ["200+", "Org members led"],
-            ["6", "Tech skills"],
+            ["200+", "Community members"],
+            ["5+", "Workshops organized"],
+            ["80+", "Workshop participants"],
           ].map(([number, label]) => (
             <div key={label}>
               <strong>{number}</strong>
@@ -105,13 +98,19 @@ export function HomePage() {
       </div>
       <section className="latest-strip" aria-label="Latest updates">
         <h2>LATEST</h2>
-        <div className="latest-items">
-          {[...updates, ...updates, ...updates].map((item, index) => (
-            <span key={`${item.text}-${index}`} aria-hidden={index >= updates.length}>
-              <Asset src={`/figma/home-${item.icon}.svg`} width={14} />
-              {item.text}
-            </span>
-          ))}
+        <div className="latest-viewport">
+          <div className="latest-items">
+            {[0, 1].map((copy) => (
+              <div className="latest-group" key={copy} aria-hidden={copy === 1}>
+                {updates.map((item) => (
+                  <span key={item.text}>
+                    <Asset src={`/figma/home-${item.icon}.svg`} width={14} />
+                    {item.text}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

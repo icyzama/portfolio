@@ -1,34 +1,111 @@
 import Image from "next/image";
-import { ActionLink, Asset, PageHero } from "@/components/ui/design";
+import { ActionLink, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
 
-const skills = [
-  { label: "React", years: "3 yrs", icon: "/figma/about-iconreactatom.svg" },
-  { label: "TypeScript", years: "2 yrs", text: "TS" },
-  { label: "Python", years: "4 yrs", icon: "/figma/about-iconcode.svg" },
-  { label: "Node.js", years: "2 yrs", text: "◈" },
-  { label: "MongoDB", years: "1 yr", icon: "/figma/about-iconleaf.svg" },
-  { label: "Git", years: "4 yrs", text: "⌥" },
+const skillGroups = [
+  {
+    label: "Frontend & Design",
+    skills: [
+      { label: "React.js", logo: "react" },
+      { label: "HTML5", logo: "html5" },
+      { label: "CSS3", logo: "css" },
+      { label: "Tailwind CSS", logo: "tailwindcss" },
+      { label: "Figma", logo: "figma" },
+    ],
+  },
+  {
+    label: "Backend",
+    skills: [
+      { label: "Node.js", logo: "nodedotjs" },
+      { label: "Express.js", logo: "express" },
+    ],
+  },
+  {
+    label: "Databases",
+    skills: [
+      { label: "MongoDB Atlas", logo: "mongodb" },
+      { label: "MySQL", logo: "mysql" },
+      { label: "Supabase", logo: "supabase" },
+    ],
+  },
+  {
+    label: "Cloud",
+    skills: [
+      { label: "Amazon EC2", logo: "amazonaws" },
+      { label: "Amazon S3", logo: "amazonaws" },
+      { label: "Amazon DynamoDB", logo: "amazonaws" },
+    ],
+  },
+  {
+    label: "Languages",
+    skills: [
+      { label: "JavaScript", logo: "javascript" },
+      { label: "TypeScript", logo: "typescript" },
+      { label: "Dart", logo: "dart" },
+      { label: "Python", logo: "python" },
+    ],
+  },
+  {
+    label: "Tools",
+    skills: [
+      { label: "Git", logo: "git" },
+      { label: "GitHub", logo: "github" },
+      { label: "Adobe Photoshop", logo: "adobephotoshop" },
+      { label: "Canva", logo: "canva" },
+      { label: "CapCut", logo: "capcut" },
+    ],
+  },
 ];
 export function AboutPage() {
   return (
     <>
-      <PageHero
-        label="01 / About"
-        title={
-          <>
-            ABOUT
-            <br />
-            ME.
-          </>
-        }
-        className="about-hero"
-      />
-      <section className="about-bio">
+      <div className="about-opening">
+        <PageHero
+          label="01 / About"
+          title={
+            <>
+              ABOUT
+              <br />
+              ME.
+            </>
+          }
+          className="about-hero"
+        />
+        <a className="about-scroll-cue" href="#about-bio">
+          <span aria-hidden="true">↓</span>
+          SCROLL TO READ MY BIO
+        </a>
+      </div>
+      <section id="about-bio" className="about-bio">
         <div className="about-copy">
           <h2>HEY, I&apos;M REYNALD!</h2>
           <p>{profile.bio}</p>
           <p>{profile.bioMore}</p>
+          <div className="about-pillars" aria-label="How I contribute">
+            <article>
+              <span>01 / BUILD</span>
+              <strong>Full stack development</strong>
+              <p>Building responsive web and mobile applications, from interfaces to data-backed features.</p>
+            </article>
+            <article>
+              <span>02 / DESIGN</span>
+              <strong>Thoughtful experiences</strong>
+              <p>Shaping clear UI/UX flows and delivering polished work across the application.</p>
+            </article>
+            <article>
+              <span>03 / LEAD</span>
+              <strong>Teams that learn</strong>
+              <p>Coordinating projects and creating opportunities for students to learn cloud technology.</p>
+            </article>
+          </div>
+          <div className="about-focus">
+            <p className="eyebrow">WHAT I FOCUS ON</p>
+            <ul>
+              <li>UI/UX Design</li>
+              <li>Full Stack Development</li>
+              <li>Cloud Computing</li>
+            </ul>
+          </div>
           <div className="about-actions">
             {profile.resume ? (
               <ActionLink href={profile.resume} tone="yellow">
@@ -43,10 +120,18 @@ export function AboutPage() {
                 DOWNLOAD RESUME ↓
               </button>
             )}
-            <ActionLink href="/contact">Connect with Me</ActionLink>
+            <a
+              className="action action-plain"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Connect with Me
+            </a>
           </div>
         </div>
         <div className="portrait-panel">
+          <p className="portrait-location">NU MANILA · MANILA, PH</p>
           <div className="portrait-frame"><div className="portrait-crop"><Image
             src="/figma/about-img74051.png"
             width={199}
@@ -55,26 +140,33 @@ export function AboutPage() {
             className="portrait"
             priority
           /></div></div>
+          <div className="portrait-role">
+            <span aria-hidden="true" />
+            <div>
+              <small>CURRENT ROLE</small>
+              <strong>FULL STACK DEVELOPER INTERN</strong>
+            </div>
+          </div>
         </div>
       </section>
       <section id="tech-stack" className="tech-stack">
         <h2>
           <span />
-          TECH STACK
+          TECHNICAL SKILLS
         </h2>
-        <div className="skill-grid">
-          {skills.map((skill) => (
-            <div key={skill.label}>
-              {skill.icon ? (
-                <Asset src={skill.icon} width={28} />
-              ) : (
-                <span className="skill-symbol" aria-hidden="true">
-                  {skill.text}
-                </span>
-              )}
-              <h3>{skill.label}</h3>
-              <p>{skill.years}</p>
-            </div>
+        <div className="skill-groups">
+          {skillGroups.map((group) => (
+            <section className="skill-group" key={group.label}>
+              <h3>{group.label}</h3>
+              <ul className="tags">
+                {group.skills.map((skill) => (
+                  <li className="skill-item" key={skill.label}>
+                    <img src={`/skills/${skill.logo}.svg`} width={24} height={24} alt={`${skill.label} logo`} />
+                    <span>{skill.label}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
         </div>
       </section>
