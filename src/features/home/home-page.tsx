@@ -4,8 +4,8 @@ import { navigation, profile } from "@/content/portfolio";
 
 const updates = [
   { icon: "iconbriefcase", text: "Full Stack Developer Intern - NexVision Innovations" },
-  { icon: "iconusers", text: "CEO & Lead - AWS Learning Club, Legarda" },
-  { icon: "icontrophy", text: "Best Website - DALO" },
+  { icon: "iconusers", text: "Former CEO & Lead - AWS Learning Club, Legarda" },
+  { icon: "icontrophy", text: "Capstone Project: SmartFlood: AI-Optimized Relief Allocation with Near-Real-Time Flood Monitoring for Flood-Affected Communities" },
   { icon: "iconflask", text: "Director for Marketing - AWS Student User Group PH" },
 ];
 

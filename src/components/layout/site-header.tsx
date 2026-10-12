@@ -18,7 +18,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <Link href="/" className="brand" onClick={() => setOpen(false)}>
-        &lt;/&gt; MY PORTFOLIO
+        &lt;/&gt; ICYZAMA
       </Link>
       <button
         className="menu-toggle"

@@ -6,7 +6,7 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <Link href="/" className="footer-brand">
-        &lt;/&gt; MY PORTFOLIO
+        &lt;/&gt; ICYZAMA
       </Link>
       <p>© 2026 · All rights reserved.</p>
       <div className="social-links">
