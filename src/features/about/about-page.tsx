@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ActionLink, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
+import styles from "./about-bio.module.css";
 
 const skillGroups = [
   {
@@ -73,37 +74,20 @@ export function AboutPage() {
           className="about-hero"
         />
       </div>
-      <section id="about-bio" className="about-bio about-panel">
-        <div className="about-copy">
-          <h2>HEY, I&apos;M REYNALD!</h2>
-          <p>{profile.bio}</p>
-          <p>{profile.bioMore}</p>
-          <div className="about-pillars" aria-label="How I contribute">
-            <article>
-              <span>01 / BUILD</span>
-              <strong>Full stack development</strong>
-              <p>Building responsive web and mobile applications, from interfaces to data-backed features.</p>
-            </article>
-            <article>
-              <span>02 / DESIGN</span>
-              <strong>Thoughtful experiences</strong>
-              <p>Shaping clear UI/UX flows and delivering polished work across the application.</p>
-            </article>
-            <article>
-              <span>03 / LEAD</span>
-              <strong>Teams that learn</strong>
-              <p>Coordinating projects and creating opportunities for students to learn cloud technology.</p>
-            </article>
+      <section id="about-bio" className={`${styles.bio} about-panel`} aria-labelledby="bio-title">
+        <div className={styles.copy}>
+          <p className={styles.eyebrow}>02 / THE PERSON BEHIND THE CODE</p>
+          <h2 id="bio-title" className={styles.heading}>HEY, I&apos;M<br /><span>REYNALD.</span></h2>
+          <p className={styles.lead}>Building reliable applications.<br />Exploring cloud and data.</p>
+          <div className={styles.story}>
+            <p>I’m Reynald, a fourth-year BS Information Technology student at National University – Manila, specializing in Mobile and Web Applications. An aspiring cloud and data engineer, I enjoy building responsive, database-driven applications with the PERN stack and TypeScript.</p>
+            <p>Currently a Full Stack Developer Intern at NexVision Innovations, I contribute to frontend development, UI/UX, quality assurance, and project coordination. Beyond the code, I help organize AWS learning initiatives and bring student technology communities together.</p>
           </div>
-          <div className="about-focus">
-            <p className="eyebrow">WHAT I FOCUS ON</p>
-            <ul>
-              <li>UI/UX Design</li>
-              <li>Full Stack Development</li>
-              <li>Cloud Computing</li>
-            </ul>
+          <div className={styles.focus}>
+            <p className={styles.eyebrow}>WHERE I FOCUS</p>
+            <ul><li>Full Stack Development</li><li>UI/UX Design</li><li>Cloud Computing</li></ul>
           </div>
-          <div className="about-actions">
+          <div className={styles.actions}>
             {profile.resume ? (
               <ActionLink href={profile.resume} tone="yellow">
                 DOWNLOAD RESUME ↓
@@ -127,23 +111,31 @@ export function AboutPage() {
             </a>
           </div>
         </div>
-        <div className="portrait-panel">
-          <p className="portrait-location">NU MANILA · MANILA, PH</p>
-          <div className="portrait-frame"><div className="portrait-crop"><Image
+        <figure className={styles.portraitPanel}>
+          <div className={styles.portraitMeta}><span>MANILA, PHILIPPINES</span><span aria-hidden="true">↗</span></div>
+          <div className={styles.portraitFrame}><Image
             src="/figma/about-img74051.png"
-            width={199}
-            height={259}
+            width={1279}
+            height={1919}
+            sizes="(max-width: 700px) 80vw, (max-width: 1100px) 32vw, 330px"
             alt="Reynald Quijano"
-            className="portrait"
-            priority
-          /></div></div>
-          <div className="portrait-role">
-            <span aria-hidden="true" />
-            <div>
-              <small>CURRENT ROLE</small>
-              <strong>FULL STACK DEVELOPER INTERN</strong>
-            </div>
-          </div>
+            className={styles.portrait}
+            preload
+          /></div>
+          <figcaption className={styles.role}><span className={styles.eyebrow}>CURRENTLY AT NEXVISION</span><strong>Full Stack<br />Developer Intern</strong></figcaption>
+          <p className={styles.graduation}>EXPECTED GRADUATION / SEPTEMBER 2027</p>
+        </figure>
+        <div className={styles.expertise} aria-label="How I contribute">
+          {[
+            ["01", "BUILD", "Full Stack Development", "Responsive interfaces, APIs, and databases that work together."],
+            ["02", "DESIGN", "UI/UX & Product Design", "Clear flows and thoughtful interfaces shaped around the people using them."],
+            ["03", "LEAD", "Community & Technology", "Creating opportunities for students to learn cloud technology and build together."],
+          ].map(([number, label, title, description]) => (
+            <article key={number} className={styles.expertiseItem}>
+              <div className={styles.expertiseMeta}><span>{number}</span><p className={styles.eyebrow}>{label}</p></div>
+              <h3>{title}</h3><p>{description}</p>
+            </article>
+          ))}
         </div>
       </section>
       <section id="tech-stack" className="tech-stack about-panel">
