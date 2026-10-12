@@ -59,7 +59,8 @@ const skillGroups = [
 export function AboutPage() {
   return (
     <>
-      <div className="about-opening">
+      <div className="about-deck">
+      <div id="about-me" className="about-opening about-panel">
         <PageHero
           label="01 / About"
           title={
@@ -71,12 +72,8 @@ export function AboutPage() {
           }
           className="about-hero"
         />
-        <a className="about-scroll-cue" href="#about-bio">
-          <span aria-hidden="true">↓</span>
-          SCROLL TO READ MY BIO
-        </a>
       </div>
-      <section id="about-bio" className="about-bio">
+      <section id="about-bio" className="about-bio about-panel">
         <div className="about-copy">
           <h2>HEY, I&apos;M REYNALD!</h2>
           <p>{profile.bio}</p>
@@ -149,7 +146,7 @@ export function AboutPage() {
           </div>
         </div>
       </section>
-      <section id="tech-stack" className="tech-stack">
+      <section id="tech-stack" className="tech-stack about-panel">
         <h2>
           <span />
           TECHNICAL SKILLS
@@ -182,6 +179,7 @@ export function AboutPage() {
             <h2>{value}</h2>
           </section>
         ))}
+      </div>
       </div>
     </>
   );

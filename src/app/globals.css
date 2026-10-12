@@ -2933,6 +2933,131 @@ body {
   border-right: 0;
 }
 
+/* About page: three panels that keep the reference's cream/orange/yellow palette. */
+html:has(.about-deck) {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 54.667px;
+}
+body:has(.about-deck) .site-header {
+  position: sticky;
+  top: 0;
+}
+.about-panel {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@supports (animation-timeline: view()) {
+  .about-panel {
+    animation: about-panel-zoom linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 38%;
+  }
+  @keyframes about-panel-zoom {
+    from { opacity: .78; transform: scale(.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+.about-opening.about-panel {
+  display: flex;
+  min-height: calc(100svh - 54.667px);
+  padding-bottom: 72px;
+}
+.about-opening.about-panel .about-hero {
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 30%);
+  grid-template-rows: 1fr;
+}
+.about-opening.about-panel .page-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: clamp(32px, 7vw, 88px);
+}
+.about-opening.about-panel .page-hero h1 {
+  font-size: clamp(72px, 12vw, 172px);
+}
+.about-opening.about-panel .page-hero-accent {
+  grid-row: 1;
+}
+.about-scroll-cue {
+  bottom: 20px;
+}
+.about-bio.about-panel,
+.tech-stack.about-panel {
+  min-height: calc(100svh - 54.667px);
+  scroll-margin-top: 0;
+  padding-bottom: 78px;
+}
+.about-bio.about-panel {
+  grid-template-rows: minmax(0, 1fr);
+}
+.tech-stack.about-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tech-stack.about-panel > h2 {
+  padding-inline: clamp(24px, 5vw, 64px);
+  font-size: clamp(20px, 3vw, 32px);
+}
+.skill-groups {
+  flex: 1;
+  align-content: center;
+  align-items: stretch;
+  padding-bottom: 28px;
+}
+.tech-stack.about-panel .skill-group {
+  padding: clamp(18px, 2.5vw, 34px);
+  background: rgba(255, 255, 255, .28);
+}
+.tech-stack.about-panel .skill-group h3 {
+  margin-bottom: 22px;
+  font-size: 14px;
+}
+.tech-stack.about-panel .skill-group .tags {
+  gap: 10px;
+}
+.tech-stack.about-panel .skill-group .tags .skill-item {
+  min-height: 48px;
+  padding: 10px 13px;
+  border-width: 2.667px;
+  background: var(--background);
+  box-shadow: 3px 3px 0 var(--foreground);
+  font-size: 12px;
+  font-weight: 700;
+}
+.tech-stack.about-panel .skill-group .tags .skill-item:hover {
+  box-shadow: 4px 4px 0 var(--foreground);
+}
+.about-facts {
+  border-top: var(--rule);
+  border-bottom: var(--rule);
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
+}
+@media (max-width: 700px) {
+  .about-opening.about-panel .about-hero {
+    grid-template-columns: minmax(0, 1fr) 56px;
+  }
+  .about-opening.about-panel .page-hero-copy {
+    padding: 28px 22px;
+  }
+  .about-opening.about-panel .page-hero h1 {
+    font-size: clamp(64px, 16vw, 110px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.about-deck) {
+    scroll-behavior: auto;
+    scroll-snap-type: y proximity;
+  }
+  .about-panel {
+    animation: none;
+  }
+}
+
 @media (max-width: 900px) {
   .skill-groups {
     grid-template-columns: repeat(2, minmax(0, 1fr));
