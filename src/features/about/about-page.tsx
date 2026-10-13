@@ -110,6 +110,9 @@ export function AboutPage() {
               target="_blank"
               rel="noreferrer"
             >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false" style={{ flexShrink: 0 }}>
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
               Connect with Me
             </a>
           </div>
@@ -120,12 +123,12 @@ export function AboutPage() {
             src="/figma/about-img74051.png"
             width={1279}
             height={1919}
-            sizes="(max-width: 700px) 80vw, (max-width: 1100px) 32vw, 330px"
+            sizes="(max-width: 700px) 300px, (max-width: 1100px) 32vw, 360px"
             alt="Reynald Quijano"
             className={styles.portrait}
             preload
           /></div>
-          <figcaption className={styles.role}><span className={styles.eyebrow}>CURRENTLY AT NEXVISION</span><strong>Full Stack<br />Developer Intern</strong></figcaption>
+          <figcaption className={styles.role}><span className={styles.eyebrow}>CURRENTLY AT NEXVISION</span><strong>Full Stack Developer Intern</strong></figcaption>
           <p className={styles.graduation}>EXPECTED GRADUATION / SEPTEMBER 2027</p>
         </figure>
         <div className={styles.expertise} aria-label="How I contribute">
