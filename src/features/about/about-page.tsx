@@ -2,58 +2,61 @@ import Image from "next/image";
 import { ActionLink, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
 import styles from "./about-bio.module.css";
+import skillsStyles from "./about-skills.module.css";
+import { SkillGroup } from "./skill-group";
 
 const skillGroups = [
   {
     label: "Frontend & Design",
     skills: [
-      { label: "React.js", logo: "react" },
-      { label: "HTML5", logo: "html5" },
-      { label: "CSS3", logo: "css" },
-      { label: "Tailwind CSS", logo: "tailwindcss" },
-      { label: "Figma", logo: "figma" },
+      { label: "React.js", logo: "react", description: "Build interactive interfaces with reusable components." },
+      { label: "HTML5", logo: "html5", description: "Structure web pages with semantic, accessible markup." },
+      { label: "CSS3", logo: "css", description: "Style responsive layouts, typography, and animations." },
+      { label: "SCSS", logo: "sass", description: "Organize styles with variables, nesting, and reusable mixins." },
+      { label: "Tailwind CSS", logo: "tailwindcss", description: "Create responsive interfaces with utility classes." },
+      { label: "Figma", logo: "figma", description: "Design interfaces and prototype user flows." },
     ],
   },
   {
     label: "Backend",
     skills: [
-      { label: "Node.js", logo: "nodedotjs" },
-      { label: "Express.js", logo: "express" },
+      { label: "Node.js", logo: "nodedotjs", description: "Run JavaScript on the server for backend applications." },
+      { label: "Express.js", logo: "express", description: "Build web APIs with routing and middleware." },
     ],
   },
   {
     label: "Databases",
     skills: [
-      { label: "MongoDB Atlas", logo: "mongodb" },
-      { label: "MySQL", logo: "mysql" },
-      { label: "Supabase", logo: "supabase" },
+      { label: "MongoDB Atlas", logo: "mongodb", description: "Manage document databases through a cloud platform." },
+      { label: "MySQL", logo: "mysql", description: "Store and query structured data with SQL." },
+      { label: "Supabase", logo: "supabase", description: "Build with PostgreSQL, authentication, and storage services." },
     ],
   },
   {
     label: "Cloud",
     skills: [
-      { label: "Amazon EC2", logo: "amazonaws" },
-      { label: "Amazon S3", logo: "amazonaws" },
-      { label: "Amazon DynamoDB", logo: "amazonaws" },
+      { label: "Amazon EC2", logo: "amazon-ec2", description: "Run applications on configurable cloud servers." },
+      { label: "Amazon S3", logo: "amazon-s3", description: "Store files and assets in cloud object storage." },
+      { label: "Amazon DynamoDB", logo: "amazon-dynamodb", description: "Store key-value and document data in a managed database." },
     ],
   },
   {
     label: "Languages",
     skills: [
-      { label: "JavaScript", logo: "javascript" },
-      { label: "TypeScript", logo: "typescript" },
-      { label: "Dart", logo: "dart" },
-      { label: "Python", logo: "python" },
+      { label: "JavaScript", logo: "javascript", description: "Add application logic and interactive web behavior." },
+      { label: "TypeScript", logo: "typescript", description: "Add static types to JavaScript for clearer, safer code." },
+      { label: "Dart", logo: "dart", description: "Write application logic for mobile and web interfaces." },
+      { label: "Python", logo: "python", description: "Write scripts for automation and data processing." },
     ],
   },
   {
     label: "Tools",
     skills: [
-      { label: "Git", logo: "git" },
-      { label: "GitHub", logo: "github" },
-      { label: "Adobe Photoshop", logo: "adobephotoshop" },
-      { label: "Canva", logo: "canva" },
-      { label: "CapCut", logo: "capcut" },
+      { label: "Git", logo: "git", description: "Track code changes and manage development branches." },
+      { label: "GitHub", logo: "github", description: "Host repositories and collaborate through pull requests." },
+      { label: "Adobe Photoshop", logo: "adobephotoshop", description: "Edit images and create visual assets." },
+      { label: "Canva", logo: "canva", description: "Create graphics, presentations, and visual content." },
+      { label: "CapCut", logo: "capcut", description: "Edit videos with captions, transitions, and effects." },
     ],
   },
 ];
@@ -138,24 +141,17 @@ export function AboutPage() {
           ))}
         </div>
       </section>
-      <section id="tech-stack" className="tech-stack about-panel">
-        <h2>
-          <span />
-          TECHNICAL SKILLS
-        </h2>
-        <div className="skill-groups">
-          {skillGroups.map((group) => (
-            <section className="skill-group" key={group.label}>
-              <h3>{group.label}</h3>
-              <ul className="tags">
-                {group.skills.map((skill) => (
-                  <li className="skill-item" key={skill.label}>
-                    <img src={`/skills/${skill.logo}.svg`} width={24} height={24} alt={`${skill.label} logo`} />
-                    <span>{skill.label}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
+      <section id="tech-stack" className={`${skillsStyles.stack} about-panel`} aria-labelledby="skills-title">
+        <header className={skillsStyles.header}>
+          <div>
+            <p className={skillsStyles.eyebrow}>03 / MY TOOLKIT</p>
+            <h2 id="skills-title">TECHNICAL <span>SKILLS.</span></h2>
+          </div>
+          <p className={skillsStyles.intro}>From interfaces and APIs to databases and cloud infrastructure.</p>
+        </header>
+        <div className={skillsStyles.groups}>
+          {skillGroups.map((group, index) => (
+            <SkillGroup key={group.label} group={group} index={index} />
           ))}
         </div>
       </section>

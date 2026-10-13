@@ -2935,16 +2935,20 @@ body {
 
 /* About page: three panels that keep the reference's cream/orange/yellow palette. */
 html:has(.about-deck) {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-padding-top: 54.667px;
 }
 body:has(.about-deck) .site-header {
   position: sticky;
   top: 0;
 }
+body:has(.about-deck) .site-footer {
+  scroll-snap-align: end;
+  scroll-snap-stop: normal;
+}
 .about-panel {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 @supports (animation-timeline: view()) {
   .about-panel {
@@ -3034,8 +3038,8 @@ body:has(.about-deck) .site-header {
 .about-facts {
   border-top: var(--rule);
   border-bottom: var(--rule);
-  scroll-snap-align: end;
-  scroll-snap-stop: always;
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
 }
 @media (max-width: 700px) {
   .about-opening.about-panel .about-hero {
