@@ -1,0 +1,20 @@
+import Image from "next/image";
+import styles from "./experiences.module.css";
+
+export function ExperiencePhoto({ src, alt }: { src?: string; alt: string }) {
+  return (
+    <figure className={styles.photo} aria-label={src ? undefined : `Photo placeholder: ${alt}`}>
+      {src ? (
+        <Image src={src} alt={alt} width={1280} height={720} sizes="(max-width: 700px) 90vw, 50vw" className={styles.photoImage} />
+      ) : (
+        <div className={styles.photoPlaceholder}>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+            <path d="M4 6h4l2-3h4l2 3h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+          <span>PHOTO COMING SOON</span>
+        </div>
+      )}
+    </figure>
+  );
+}
