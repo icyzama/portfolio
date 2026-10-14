@@ -712,7 +712,7 @@ img {
   padding:64px; min-height:322.03px;
 }
 .page-hero h1 {
-  font-size:96px; line-height:.87; margin-top:12px; letter-spacing:0; color:#000; overflow-wrap:break-word;
+  font-size:96px; line-height:.87; margin-top:18px; letter-spacing:0; color:#000; overflow-wrap:break-word;
 }
 .page-hero-accent {
   border-left: var(--rule);

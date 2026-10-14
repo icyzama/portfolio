@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ActionLink, PageHero } from "@/components/ui/design";
+import { pageLabels } from "@/components/ui/page-label";
 import { profile } from "@/content/portfolio";
 import styles from "./about-bio.module.css";
 import skillsStyles from "./about-skills.module.css";
@@ -66,7 +67,7 @@ export function AboutPage() {
       <div className="about-deck">
       <div id="about-me" className="about-opening about-panel">
         <PageHero
-          label="01 / About"
+          label={pageLabels.about}
           title={
             <>
               ABOUT

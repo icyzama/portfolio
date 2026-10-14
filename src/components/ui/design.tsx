@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { SectionLabel } from "./page-label";
 
 export function Asset({
   src,
@@ -74,7 +75,7 @@ export function PageHero({
   return (
     <section className={`page-hero ${className}`}>
       <div className="page-hero-copy">
-        <p className="eyebrow">{label}</p>
+        <SectionLabel>{label}</SectionLabel>
         <h1>{title}</h1>
       </div>
       <div className={`page-hero-accent tone-${accent}`} aria-hidden={!count}>

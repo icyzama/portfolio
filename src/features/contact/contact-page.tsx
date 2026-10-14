@@ -19,7 +19,7 @@ export function ContactPage() {
   return (
     <>
       <PageHero
-        label="04 / Contact"
+        label="06 / CONTACT"
         title={
           <>
             LET&apos;S

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
+import { PageLabel } from "@/components/ui/page-label";
 import { ExperiencePhoto } from "./experience-photo";
 
 const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
@@ -24,7 +25,7 @@ export function ExperiencesPage() {
   return (
     <div className={styles.page}>
       <header className={styles.hero}>
-        <div><p className={styles.eyebrow}>02 / EXPERIENCES</p><h1>EXPERIENCE.<br /><span>IN ACTION.</span></h1></div>
+        <div><PageLabel page="experiences" /><h1>EXPERIENCE.<br /><span>IN ACTION.</span></h1></div>
         <div className={styles.heroNote}><p>Building applications, bringing communities together, and learning through real projects.</p><ul><li>DEVELOPMENT</li><li>COMMUNITY</li><li>COLLABORATION</li></ul></div>
       </header>
       <div className={styles.tabs} role="tablist" aria-label="Experience categories">
