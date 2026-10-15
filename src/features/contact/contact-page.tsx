@@ -10,6 +10,7 @@ export function ContactPage() {
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [topic, setTopic] = useState("");
   const inFlight = useRef(false);
   const successDialog = useRef<HTMLDialogElement>(null);
   const submitButton = useRef<HTMLButtonElement>(null);
@@ -34,6 +35,7 @@ export function ContactPage() {
       if (!response.ok) throw new Error(result.message || "Your message could not be sent. Please try again.");
       setReplyEmail(String(data.get("email") ?? "").trim());
       form.reset();
+      setTopic("");
       successDialog.current?.showModal();
     } catch (error) {
       setFailed(true);
@@ -117,19 +119,36 @@ export function ContactPage() {
             </label>
           </div>
           <label>
-            <span className="sr-only">Subject</span>
-            <input
-              name="subject"
-              placeholder="Subject"
-              required
-              maxLength={160}
-            />
+            <span className="sr-only">Reason for reaching out</span>
+            <select name="topic" value={topic} onChange={(event) => setTopic(event.target.value)} required>
+              <option value="" disabled>Reason for reaching out</option>
+              <option value="job">Job or internship</option>
+              <option value="project">Freelance project</option>
+              <option value="collaboration">Collaboration</option>
+              <option value="general">General question</option>
+            </select>
           </label>
+          <label>
+            <span className="sr-only">Company or organization, optional</span>
+            <input name="organization" placeholder="Company or organization (optional)" maxLength={120} autoComplete="organization" />
+          </label>
+          {topic === "project" && (
+            <label>
+              <span className="sr-only">Project timeline, optional</span>
+              <select name="timeline" defaultValue="">
+                <option value="">Project timeline (optional)</option>
+                <option value="asap">As soon as possible</option>
+                <option value="within-month">Within a month</option>
+                <option value="one-to-three-months">1–3 months</option>
+                <option value="flexible">Flexible / still planning</option>
+              </select>
+            </label>
+          )}
           <label>
             <span className="sr-only">Your message</span>
             <textarea
               name="message"
-              placeholder="Tell me about your project or just say hi..."
+              placeholder="Share a little context about what you have in mind..."
               required
               maxLength={5000}
               rows={5}

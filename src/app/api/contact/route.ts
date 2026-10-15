@@ -53,10 +53,26 @@ export async function POST(request: Request) {
   const read = (key: string) => typeof fields[key] === "string" ? fields[key].trim() : "";
   const name = read("name");
   const email = read("email");
-  const subject = read("subject");
+  const topic = read("topic");
+  const topicLabels: Record<string, string> = {
+    job: "Job or internship",
+    project: "Freelance project",
+    collaboration: "Collaboration",
+    general: "General question",
+  };
+  const topicLabel = topicLabels[topic];
+  const organization = read("organization");
+  const timeline = read("timeline");
+  const timelineLabels: Record<string, string> = {
+    asap: "As soon as possible",
+    "within-month": "Within a month",
+    "one-to-three-months": "1–3 months",
+    flexible: "Flexible / still planning",
+  };
+  const timelineLabel = timelineLabels[timeline];
   const message = read("message");
-  if (!name || name.length > 100 || !emailPattern.test(email) || email.length > 254 || !subject || subject.length > 160 || !message || message.length > 5000 || /[\r\n\0]/.test(name + email + subject) || message.includes("\0")) {
-    return reply(400, "Please enter a valid name, email, subject, and message within the form limits.");
+  if (!name || name.length > 100 || !emailPattern.test(email) || email.length > 254 || !topicLabel || organization.length > 120 || /[\r\n\0]/.test(name + email + organization) || (timeline && (!timelineLabel || topic !== "project")) || !message || message.length > 5000 || /\0/.test(message)) {
+    return reply(400, "Please enter a valid name, email, reason for reaching out, and message within the form limits.");
   }
 
   const user = process.env.GMAIL_USER?.trim();
@@ -95,8 +111,8 @@ export async function POST(request: Request) {
       from: { name: "Reynald's Portfolio", address: user },
       to: recipient,
       replyTo: { name, address: email },
-      subject: `[Portfolio] ${subject}`,
-      text: `New message from your portfolio\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
+      subject: `[Portfolio] ${topicLabel}`,
+      text: `New message from your portfolio\n\nName: ${name}\nEmail: ${email}\nReason: ${topicLabel}\nOrganization: ${organization || "Not provided"}${timelineLabel ? `\nProject timeline: ${timelineLabel}` : ""}\n\n${message}`,
     });
     if (!sent.accepted.length) throw new Error("Message not accepted");
     return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
