@@ -22,10 +22,19 @@ html {
 }
 body {
   margin: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-dm-sans), Arial, sans-serif;
 }
+#main-content { flex: 1 0 auto; }
+#main-content:has(> [role="status"]) {
+  display: flex;
+  flex-direction: column;
+}
+#main-content:has(> [role="status"]) > [role="status"] { flex: 1; }
 h1,
 h2,
 h3,
