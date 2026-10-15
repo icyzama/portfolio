@@ -3,6 +3,7 @@ import { Archivo_Black, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { PortfolioPreloader } from "@/components/ui/page-loader";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dmSans.variable} ${archivoBlack.variable} h-full antialiased`}
     >
       <body>
+        <PortfolioPreloader />
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>

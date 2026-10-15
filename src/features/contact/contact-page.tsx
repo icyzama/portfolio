@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Asset, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
 import successStyles from "./contact-success.module.css";
+import pageStyles from "@/components/ui/page-system.module.css";
 
 export function ContactPage() {
   const [status, setStatus] = useState("");
@@ -43,7 +44,7 @@ export function ContactPage() {
     }
   }
   return (
-    <>
+    <div className={pageStyles.surface}>
       <PageHero
         label="06 / CONTACT"
         title={
@@ -135,7 +136,7 @@ export function ContactPage() {
             />
           </label>
           </fieldset>
-          <button ref={submitButton} type="submit" className="action action-blue" disabled={sending}>
+          <button ref={submitButton} type="submit" className="action action-yellow" disabled={sending}>
             {sending ? "SENDING…" : "SEND MESSAGE →"}
           </button>
           <p className="form-note sr-only">Sends your message directly to Reynald’s inbox.</p>
@@ -185,6 +186,6 @@ export function ContactPage() {
         <p id="contact-success-description">Thanks for reaching out! I’ll get back to you by email at <strong className={successStyles.email}>{replyEmail}</strong>.</p>
         <button type="button" className="action action-yellow" autoFocus onClick={() => successDialog.current?.close()}>GOT IT ✓</button>
       </dialog>
-    </>
+    </div>
   );
 }

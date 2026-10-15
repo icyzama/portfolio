@@ -4,7 +4,9 @@ import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
-import { PageLabel } from "@/components/ui/page-label";
+import { pageLabels } from "@/components/ui/page-label";
+import pageStyles from "@/components/ui/page-system.module.css";
+import { EditorialHero, EditorialTags } from "@/components/ui/editorial";
 import { ExperiencePhoto } from "./experience-photo";
 
 const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
@@ -23,11 +25,8 @@ export function ExperiencesPage() {
     setSelected((current) => (current + direction + organizations.length) % organizations.length);
   }
   return (
-    <div className={styles.page}>
-      <header className={styles.hero}>
-        <div><PageLabel page="experiences" /><h1>EXPERIENCE.<br /><span>IN ACTION.</span></h1></div>
-        <div className={styles.heroNote}><p>Building applications, bringing communities together, and learning through real projects.</p><ul><li>DEVELOPMENT</li><li>COMMUNITY</li><li>COLLABORATION</li></ul></div>
-      </header>
+    <div className={pageStyles.surface}>
+      <EditorialHero label={pageLabels.experiences} title="EXPERIENCE." highlight="IN ACTION." description="Building applications, bringing communities together, and learning through real projects." topics={["DEVELOPMENT", "COMMUNITY", "COLLABORATION"]} />
       <div className={styles.tabs} role="tablist" aria-label="Experience categories">
         {tabs.map((name, index) => (
           <button type="button" key={name} role="tab" aria-selected={tab === index} aria-controls="experience-panel" id={`experience-tab-${index}`} tabIndex={tab === index ? 0 : -1}
@@ -59,9 +58,9 @@ export function ExperiencesPage() {
                 <h2>{org.name}</h2><p className={styles.role}>{org.role}</p><p className={styles.period}>{org.period}</p>
                 <p className={styles.description}>{org.description}</p>
                 {"highlights" in org && org.highlights && <div className={styles.contributions}><h3>HOW I CONTRIBUTE</h3><ul>{org.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>}
-                <ul className={styles.tags} aria-label="Focus areas">{org.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                <EditorialTags items={org.tags} />
               </article>
-              <div className={styles.navigation}><button type="button" onClick={() => move(-1)} aria-label="Previous organization role">← PREVIOUS</button><button type="button" onClick={() => move(1)} aria-label="Next organization role">NEXT →</button></div>
+              <div className={styles.navigation}><button className={pageStyles.button} type="button" onClick={() => move(-1)} aria-label="Previous organization role">← PREVIOUS</button><button className={pageStyles.button} type="button" onClick={() => move(1)} aria-label="Next organization role">NEXT →</button></div>
             </div>
           </div>
         ) : tab === 1 ? (
@@ -72,7 +71,7 @@ export function ExperiencesPage() {
                 <ExperiencePhoto alt={`${project.name} team or event photo`} />
                 <div className={styles.projectMeta}><span className={styles.projectNumber} aria-hidden="true">0{index + 1}</span><span>{project.year} / {project.category}</span></div>
                 <p className={styles.recognition}>{project.recognition}</p><h3>{project.name}</h3><p className={styles.description}>{project.description}</p>
-                <ul className={styles.tags} aria-label="Skills and tools">{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                <EditorialTags items={project.tags} />
               </article>
             ))}</div>
           </div>
@@ -84,7 +83,7 @@ export function ExperiencesPage() {
               <div className={styles.internshipCopy}><p className={styles.eyebrow}>NEXVISION INNOVATIONS INC.</p><h3>Full Stack<br />Developer Intern</h3>
                 <ExperiencePhoto alt="NexVision internship photo" />
                 <ul className={styles.responsibilities}><li>Develop and maintain CRM features using PostgreSQL, Express.js, React, Node.js, and TypeScript.</li><li>Work with APIs, databases, and application logic to support reliable data flow.</li><li>Collaborate with the development team to debug, test, and improve application components.</li></ul>
-                <ul className={styles.tags} aria-label="Technology stack">{["PostgreSQL", "Express.js", "React", "Node.js", "TypeScript"].map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                <EditorialTags items={["PostgreSQL", "Express.js", "React", "Node.js", "TypeScript"]} />
               </div>
             </article>
           </div>

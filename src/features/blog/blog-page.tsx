@@ -5,6 +5,7 @@ import { EditorialHero, EditorialLink } from "@/components/ui/editorial";
 import { upcomingPosts, profile } from "@/content/portfolio";
 import styles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
+import pageStyles from "@/components/ui/page-system.module.css";
 
 export function BlogPage() {
   function contact(event: FormEvent<HTMLFormElement>) {
@@ -15,7 +16,7 @@ export function BlogPage() {
   const [category, setCategory] = useState("All");
   const visible = category === "All" ? upcomingPosts : upcomingPosts.filter((post) => post.category === category);
   return (
-    <div className={styles.page}>
+    <div className={pageStyles.surface}>
       <EditorialHero label={pageLabels.blog} title="THOUGHTS" highlight="& WRITING." description="Development notes, project lessons, and reflections from my journey in technology. The first posts are on the way." topics={["DEVELOPMENT", "RESEARCH", "COMMUNITY"]} />
       <div className={styles.filters} role="group" aria-label="Filter upcoming posts">
         {["All", "Dev", "Research", "Life", "Leadership"].map((item) => <button type="button" key={item} aria-pressed={item === category} onClick={() => setCategory(item)}>{item}</button>)}
@@ -29,7 +30,7 @@ export function BlogPage() {
         </div>
         {visible.length === 0 && <p className={styles.empty}>No topics listed in this category yet. Have a suggestion? Send it below.</p>}
       </section>
-      <section className={styles.cta}><div><h2>WHAT SHOULD I WRITE ABOUT?</h2><p>Have a topic in mind? Leave your email to start a conversation.</p></div><form className={styles.topicForm} onSubmit={contact}><label className="sr-only" htmlFor="blog-email">Your email address</label><input id="blog-email" name="email" type="email" autoComplete="email" placeholder="your@email.com" required /><button className={`${styles.button} ${styles.primary}`} type="submit">SUGGEST A TOPIC ↗</button></form></section>
+      <section className={styles.cta}><div><h2>WHAT SHOULD I WRITE ABOUT?</h2><p>Have a topic in mind? Leave your email to start a conversation.</p></div><form className={styles.topicForm} onSubmit={contact}><label className="sr-only" htmlFor="blog-email">Your email address</label><input id="blog-email" name="email" type="email" autoComplete="email" placeholder="your@email.com" required /><button className={`${pageStyles.button} ${styles.primary}`} type="submit">SUGGEST A TOPIC ↗</button></form></section>
     </div>
   );
 }

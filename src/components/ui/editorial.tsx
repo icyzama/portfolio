@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import styles from "./editorial.module.css";
+import pageStyles from "./page-system.module.css";
 import { SectionLabel } from "./page-label";
 
 export function EditorialHero({ label, title, highlight, description, topics }: {
@@ -17,5 +18,5 @@ export function EditorialTags({ items }: { items: readonly string[] }) {
 }
 
 export function EditorialLink({ href, children, primary = false }: { href: string; children: ReactNode; primary?: boolean }) {
-  return <Link className={`${styles.button} ${primary ? styles.primary : ""}`} href={href}>{children}</Link>;
+  return <Link className={`${pageStyles.button} ${styles.button} ${primary ? styles.primary : ""}`} href={href}>{children}</Link>;
 }

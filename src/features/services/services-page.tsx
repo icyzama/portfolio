@@ -2,10 +2,11 @@ import { EditorialHero, EditorialTags, EditorialLink } from "@/components/ui/edi
 import { services } from "@/content/portfolio";
 import styles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
+import pageStyles from "@/components/ui/page-system.module.css";
 
 export function ServicesPage() {
   return (
-    <div className={styles.page}>
+    <div className={pageStyles.surface}>
       <EditorialHero label={pageLabels.services} title="LET’S BUILD" highlight="YOUR IDEA." description="Responsive websites and full-stack applications, with thoughtful interfaces and practical functionality." topics={["WEB DEVELOPMENT", "INTERFACES", "INTEGRATIONS"]} />
       <div className={styles.serviceStrip}><p><span aria-hidden="true" />FREELANCE WEB DEVELOPMENT — LET’S DISCUSS YOUR PROJECT</p><EditorialLink href="/contact" primary>CONTACT ME ↗</EditorialLink></div>
       <section className={styles.section} aria-labelledby="services-title">

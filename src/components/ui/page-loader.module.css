@@ -1,0 +1,80 @@
+.loader {
+  min-height: 60svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px 24px;
+  background: var(--background);
+  color: var(--foreground);
+  text-align: center;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-archivo-black), Arial, sans-serif;
+  font-size: clamp(24px, 5vw, 40px);
+  line-height: 1.2;
+  letter-spacing: -.04em;
+}
+
+.symbol {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: var(--rule);
+  background: var(--orange);
+  box-shadow: 4px 4px 0 var(--foreground);
+  font-size: 25px;
+}
+
+.blocks { display: flex; gap: 10px; }
+.blocks span {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--foreground);
+  background: var(--accent);
+  animation: step 900ms ease-in-out infinite;
+}
+.blocks span:nth-child(2) { background: var(--orange); animation-delay: 120ms; }
+.blocks span:nth-child(3) { background: var(--foreground); animation-delay: 240ms; }
+.label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: var(--background);
+  pointer-events: none;
+  animation: reveal 850ms ease-out both;
+}
+.intro .loader { min-height: 0; }
+
+@keyframes step {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-7px); }
+}
+@keyframes reveal {
+  0%, 55% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* Keyboard users can reach page content immediately. */
+:global(body):has(:focus-visible) .intro { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; animation: none; }
+  .blocks span { animation: none; }
+}

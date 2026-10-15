@@ -2,7 +2,7 @@
   min-height: calc(100svh - 54.667px);
   display: flex;
   flex-direction: column;
-  padding: clamp(28px, 3.5vw, 48px);
+  padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px));
   background: var(--background);
 }
 
@@ -39,7 +39,7 @@
   max-width: 260px;
   font-size: 13px;
   line-height: 1.65;
-  color: #4c4b46;
+  color: var(--text-muted, #4c4b46);
 }
 
 .groups {
@@ -47,7 +47,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-content: center;
   flex: 1;
-  gap: 22px;
+  gap: var(--card-gap, 24px);
   padding: 28px 5px 5px 0;
 }
 
@@ -55,9 +55,9 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 20px;
+  padding: var(--card-space, clamp(20px, 2vw, 26px));
   border: var(--rule);
-  box-shadow: 4px 4px 0 var(--foreground);
+  box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground));
 }
 
 .groupHeader {
@@ -102,7 +102,7 @@
   width: min(300px, calc(100vw - 32px));
   max-height: calc(100svh - 32px);
   overflow: auto;
-  padding: 20px;
+  padding: var(--card-space, clamp(20px, 2vw, 26px));
   border: var(--rule);
   background: var(--background);
   color: var(--foreground);
@@ -179,11 +179,10 @@
 }
 
 @media (max-width: 600px) {
-  .stack { padding: 28px 22px 32px; min-height: 0; }
+  .stack { padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px)); min-height: 0; }
   .header { padding-bottom: 22px; }
   .header h2 { font-size: clamp(27px, 7vw, 40px); }
-  .groups { grid-template-columns: minmax(0, 1fr); gap: 18px; padding-top: 22px; }
-  .group { padding: 18px; }
+  .groups { grid-template-columns: minmax(0, 1fr); gap: var(--card-gap, 24px); padding-top: 22px; }
   .skill { font-size: 12px; }
 }
 

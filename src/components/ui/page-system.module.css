@@ -1,0 +1,98 @@
+/* Shared by the inner pages only; the dashboard keeps its existing styles. */
+.surface {
+  --rule: 2.667px solid var(--foreground);
+  --page-gutter: clamp(24px, 4vw, 56px);
+  --section-space: clamp(28px, 3vw, 40px);
+  --card-space: clamp(20px, 2vw, 26px);
+  --card-gap: 24px;
+  --shadow-card: 4px 4px 0 var(--foreground);
+  --shadow-control: 4px 4px 0 var(--foreground);
+  --shadow-dialog: 7px 7px 0 var(--foreground);
+  --text-muted: #4c4b46;
+  --title-size: clamp(42px, 6.3vw, 88px);
+  background: var(--background);
+  min-width: 0;
+}
+
+.button,
+.surface :global(.action) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 18px;
+  border: var(--rule);
+  border-radius: 0;
+  background: var(--button-background, var(--background));
+  color: var(--foreground);
+  box-shadow: var(--shadow-control, 4px 4px 0 var(--foreground));
+  font-family: var(--font-archivo-black), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: .6px;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: normal;
+  transition: background-color 150ms ease, color 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.surface :global(.action-yellow) { background: var(--accent); }
+.surface :focus-visible { outline: 3px solid var(--foreground); outline-offset: 4px; }
+.surface :global(.contact-aside) :focus-visible { outline-color: var(--accent); }
+
+@media (hover: hover) {
+  .button:hover:not(:disabled),
+  .surface :global(.action):hover:not(:disabled) {
+    background: var(--foreground);
+    color: var(--background);
+    transform: translate(-1px, -1px);
+  }
+}
+
+.button:active:not(:disabled),
+.surface :global(.action):active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--foreground);
+}
+
+.surface :global(.page-hero-copy) { padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px)); }
+.surface :global(.page-hero) h1 {
+  font-size: var(--title-size, clamp(42px, 6.3vw, 88px));
+  line-height: 1.04;
+  letter-spacing: -.055em;
+  color: var(--foreground);
+  white-space: normal;
+}
+.surface :global(.about-opening.about-panel .page-hero-copy) { padding-inline: var(--page-gutter, clamp(24px, 4vw, 56px)); }
+.surface :global(.contact-form),
+.surface :global(.contact-aside) { padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px)); }
+.surface :global(.contact-aside) h2 { line-height: 1.15; letter-spacing: -.035em; white-space: normal; }
+.surface :global(.contact-links) > a { gap: 16px; padding: 24px; border-right-width: 2.667px; }
+.surface :global(.contact-links) > a > span:last-child { min-width: 0; }
+.surface :global(.contact-links) strong { font-family: var(--font-dm-sans), Arial, sans-serif; font-size: 13px; font-weight: 700; }
+.surface :global(.contact-form) input,
+.surface :global(.contact-form) textarea {
+  border: var(--rule);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.surface :global(.contact-form) input::placeholder,
+.surface :global(.contact-form) textarea::placeholder { color: var(--text-muted, #4c4b46); }
+
+@media (max-width: 700px) {
+  .surface { --page-gutter: 24px; --section-space: 28px; --title-size: clamp(36px, 9vw, 66px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .surface :global(.action) { transition: none; }
+  .button:hover:not(:disabled),
+  .button:active:not(:disabled),
+  .surface :global(.action):hover:not(:disabled),
+  .surface :global(.action):active:not(:disabled) { transform: none; }
+}

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import pageStyles from "@/components/ui/page-system.module.css";
 import { ActionLink, PageHero } from "@/components/ui/design";
 import { pageLabels } from "@/components/ui/page-label";
 import { profile } from "@/content/portfolio";
@@ -63,7 +64,7 @@ const skillGroups = [
 ];
 export function AboutPage() {
   return (
-    <>
+    <div className={pageStyles.surface}>
       <div className="about-deck">
       <div id="about-me" className="about-opening about-panel">
         <PageHero
@@ -173,6 +174,6 @@ export function AboutPage() {
         ))}
       </div>
       </div>
-    </>
+    </div>
   );
 }

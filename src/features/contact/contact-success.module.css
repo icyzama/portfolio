@@ -10,7 +10,7 @@
   border-top: 6px solid var(--orange);
   background: var(--background);
   color: var(--foreground);
-  box-shadow: 7px 7px 0 var(--foreground);
+  box-shadow: var(--shadow-dialog, 7px 7px 0 var(--foreground));
 }
 .dialog::backdrop { background: #0f0f0fb3; }
 .icon {
@@ -30,7 +30,7 @@
   letter-spacing: -.04em;
   white-space: normal;
 }
-.dialog p { font-size: 14px; line-height: 1.8; color: #4c4b46; }
+.dialog p { font-size: 14px; line-height: 1.8; color: var(--text-muted, #4c4b46); }
 .email { color: var(--foreground); overflow-wrap: anywhere; }
 .dialog button { width: 100%; min-height: 48px; margin-top: 26px; }
 .dialog button:focus-visible { outline-color: var(--foreground); }

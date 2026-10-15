@@ -11,7 +11,7 @@
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
-  padding: clamp(28px, 4vw, 56px);
+  padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px));
   border-right: var(--rule);
 }
 .eyebrow {
@@ -47,25 +47,18 @@
 .story p {
   font-size: 14px;
   line-height: 1.75;
-  color: #4c4b46;
+  color: var(--text-muted, #4c4b46);
 }
 .focus {
   align-self: stretch;
   border-top: 1px solid #0f0f0f40;
   padding-top: 18px;
 }
-.focus > p { color: #595850; margin-bottom: 10px; }
+.focus > p { color: var(--text-muted, #4c4b46); margin-bottom: 10px; }
 .focus ul { display: flex; flex-wrap: wrap; gap: 8px 14px; list-style: none; padding: 0; }
 .focus li { font-size: 11px; font-weight: 700; line-height: 1.5; }
 .focus li + li { border-left: 2px solid var(--orange); padding-left: 14px; }
 .actions { display: flex; flex-wrap: wrap; gap: 16px; padding: 2px 4px 4px 0; }
-.actions :global(.action) {
-  min-height: 46px;
-  padding: 12px 18px;
-  font-size: 10px;
-}
-.actions :global(.action-plain) { box-shadow: none; }
-.actions :global(.action):active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--foreground); }
 .portraitPanel {
   margin: 0;
   padding: clamp(26px, 3.5vw, 48px);
@@ -90,21 +83,21 @@
 }
 .portrait { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(1.17); transform-origin: 50% 70%; }
 .role { width: 100%; max-width: 360px; margin-top: 8px; border-left: 4px solid var(--orange); padding: 2px 0 2px 14px; }
-.role .eyebrow { font-size: 9px; color: #4c4b46; }
+.role .eyebrow { font-size: 9px; color: var(--text-muted, #4c4b46); }
 .role strong { display: block; font-family: var(--font-dm-sans), Arial, sans-serif; font-weight: 800; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.35; letter-spacing: -.025em; margin-top: 5px; }
-.graduation { width: 100%; max-width: 360px; font-size: 9px; font-weight: 600; color: #4c4b46; letter-spacing: .5px; line-height: 1.6; }
+.graduation { width: 100%; max-width: 360px; font-size: 9px; font-weight: 600; color: var(--text-muted, #4c4b46); letter-spacing: .5px; line-height: 1.6; }
 .expertise { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--rule); }
 .expertiseItem { padding: 24px clamp(22px, 3vw, 40px) 28px; border-right: var(--rule); transition: background-color 180ms; }
 .expertiseItem:last-child { border-right: 0; }
 .expertiseMeta { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
 .expertiseMeta > span { font-family: var(--font-archivo-black); font-size: 32px; line-height: 1; letter-spacing: -1.5px; color: var(--orange); }
-.expertiseMeta > p { color: #595850; }
+.expertiseMeta > p { color: var(--text-muted, #4c4b46); }
 .expertiseItem h3 { white-space: normal; font-size: 16px; line-height: 1.25; letter-spacing: -.25px; margin-bottom: 10px; }
-.expertiseItem > p { max-width: 340px; font-size: 12px; line-height: 1.65; color: #4c4b46; }
+.expertiseItem > p { max-width: 340px; font-size: 12px; line-height: 1.65; color: var(--text-muted, #4c4b46); }
 @media (hover: hover) { .expertiseItem:hover { background: var(--accent); } }
 @media (max-width: 1000px) {
   .bio { grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr); }
-  .copy { padding: 30px; gap: 18px; }
+  .copy { gap: 18px; }
   .portraitPanel { padding: 28px; }
   .heading { font-size: clamp(36px, 4.8vw, 48px); }
 }
@@ -120,7 +113,6 @@
   .expertiseItem > p { max-width: 480px; }
   .expertiseMeta { margin-bottom: 12px; }
   .actions { gap: 14px; }
-  .actions :global(.action) { padding-inline: 14px; }
   .focus li + li { padding-left: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .expertiseItem { transition: none; } }
