@@ -3,12 +3,16 @@
 import { useRef, useState } from "react";
 import { Asset, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
+import successStyles from "./contact-success.module.css";
 
 export function ContactPage() {
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState(false);
   const inFlight = useRef(false);
+  const successDialog = useRef<HTMLDialogElement>(null);
+  const submitButton = useRef<HTMLButtonElement>(null);
+  const [replyEmail, setReplyEmail] = useState("");
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (inFlight.current) return;
@@ -27,8 +31,9 @@ export function ContactPage() {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Your message could not be sent. Please try again.");
-      setStatus(result.message);
+      setReplyEmail(String(data.get("email") ?? "").trim());
       form.reset();
+      successDialog.current?.showModal();
     } catch (error) {
       setFailed(true);
       setStatus(error instanceof Error && error.name === "Error" ? error.message : "Could not connect to send your message. Please try again or use the email link above.");
@@ -130,7 +135,7 @@ export function ContactPage() {
             />
           </label>
           </fieldset>
-          <button type="submit" className="action action-blue" disabled={sending}>
+          <button ref={submitButton} type="submit" className="action action-blue" disabled={sending}>
             {sending ? "SENDING…" : "SEND MESSAGE →"}
           </button>
           <p className="form-note sr-only">Sends your message directly to Reynald’s inbox.</p>
@@ -161,6 +166,25 @@ export function ContactPage() {
           </div>
         </aside>
       </div>
+      <dialog
+        ref={successDialog}
+        className={successStyles.dialog}
+        aria-labelledby="contact-success-title"
+        aria-describedby="contact-success-description"
+        onClose={() => submitButton.current?.focus({ preventScroll: true })}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) successDialog.current?.close();
+        }}
+      >
+        <div className={successStyles.icon} aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="m5 12 4 4L19 6" /></svg>
+        </div>
+        <h2 id="contact-success-title">MESSAGE SENT.</h2>
+        <p id="contact-success-description">Thanks for reaching out! I’ll get back to you by email at <strong className={successStyles.email}>{replyEmail}</strong>.</p>
+        <button type="button" className="action action-yellow" autoFocus onClick={() => successDialog.current?.close()}>GOT IT ✓</button>
+      </dialog>
     </>
   );
 }

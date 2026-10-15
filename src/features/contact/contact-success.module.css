@@ -1,0 +1,36 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  width: min(460px, calc(100vw - 40px));
+  max-height: calc(100svh - 48px);
+  margin: auto;
+  padding: clamp(24px, 5vw, 36px);
+  overflow: auto;
+  border: var(--rule);
+  border-top: 6px solid var(--orange);
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: 7px 7px 0 var(--foreground);
+}
+.dialog::backdrop { background: #0f0f0fb3; }
+.icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 24px;
+  border: var(--rule);
+  background: var(--accent);
+  box-shadow: 3px 3px 0 var(--foreground);
+}
+.dialog h2 {
+  margin-bottom: 16px;
+  font-size: clamp(26px, 6vw, 36px);
+  line-height: 1.15;
+  letter-spacing: -.04em;
+  white-space: normal;
+}
+.dialog p { font-size: 14px; line-height: 1.8; color: #4c4b46; }
+.email { color: var(--foreground); overflow-wrap: anywhere; }
+.dialog button { width: 100%; min-height: 48px; margin-top: 26px; }
+.dialog button:focus-visible { outline-color: var(--foreground); }
