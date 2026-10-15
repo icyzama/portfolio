@@ -2,7 +2,7 @@
 .photoImage { display: block; width: 100%; height: 100%; object-fit: cover; }
 .photoPlaceholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; width: 100%; height: 100%; min-height: 120px; outline: 1px dashed #0f0f0f55; outline-offset: -12px; }
 .photoPlaceholder svg { color: var(--text-muted, #4c4b46); }
-.photoPlaceholder span { background: var(--accent); padding: 6px 10px; font-size: 9px; font-weight: 800; letter-spacing: 1px; line-height: 1.5; }
+.photoPlaceholder span { background: var(--background); padding: 6px 10px; font-size: 9px; font-weight: 800; letter-spacing: 1px; line-height: 1.5; }
 .eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; line-height: 1.6; }
 .tabs { display: flex; overflow-x: auto; border-bottom: var(--rule); scrollbar-width: thin; }
 .tabs button { display: flex; align-items: center; justify-content: center; gap: 12px; flex: 1 0 auto; min-height: 56px; padding: 14px 22px; border: 0; border-right: var(--rule); background: var(--background); font-size: 12px; font-weight: 800; }
@@ -19,7 +19,7 @@
 .directoryHeading > span { font-size: 9px; font-weight: 800; }
 .directory > button { display: flex; align-items: flex-start; gap: 14px; width: 100%; padding: 16px 24px; text-align: left; border: 0; border-bottom: 1px solid var(--foreground); background: transparent; }
 .directory > button:last-child { border-bottom: 0; }
-.directory > button[aria-pressed="true"] { background: var(--accent); }
+.directory > button[aria-pressed="true"] { background: var(--surface-hover, #e9e5dc); box-shadow: inset 4px 0 0 var(--orange); }
 .directory > button:focus-visible { outline-color: var(--foreground); outline-offset: -5px; }
 .rowNumber { flex: 0 0 24px; font-size: 13px; font-weight: 800; padding-top: 2px; }
 .directoryCopy { display: grid; gap: 4px; flex: 1; min-width: 0; }
@@ -32,7 +32,7 @@
 .detailMeta { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 16px; }
 .detailMeta > span { font-size: 10px; font-weight: 800; white-space: nowrap; }
 .detail h2 { font-size: clamp(22px, 2.4vw, 30px); white-space: normal; letter-spacing: -.04em; line-height: 1.2; }
-.role { display: inline-block; background: var(--accent); margin-top: 12px; padding: 5px 9px; font-size: 12px; font-weight: 800; line-height: 1.5; }
+.role { display: inline-block; border-left: 3px solid var(--orange); background: var(--background); margin-top: 12px; padding: 5px 9px; font-size: 12px; font-weight: 800; line-height: 1.5; }
 .period { margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--text-muted, #4c4b46); }
 .description { font-size: 13px; line-height: 1.7; color: var(--text-muted, #4c4b46); }
 .detail > .description { margin-top: 16px; }
@@ -50,19 +50,19 @@
 .projectMeta { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
 .projectNumber { font-family: var(--font-archivo-black); font-size: 30px; line-height: 1; letter-spacing: -.06em; color: var(--orange); }
 .projectMeta > span:last-child { font-size: 10px; font-weight: 700; text-align: right; }
-.recognition { align-self: flex-start; background: var(--accent); border: 1px solid var(--foreground); padding: 6px 10px; font-size: 10px; font-weight: 800; line-height: 1.5; }
+.recognition { align-self: flex-start; background: var(--background); border: 1px solid var(--foreground); border-left: 3px solid var(--orange); padding: 6px 10px; font-size: 10px; font-weight: 800; line-height: 1.5; }
 .project h3 { font-size: clamp(24px, 2.6vw, 32px); white-space: normal; letter-spacing: -.035em; margin: 14px 0 10px; }
 .project > .description { flex: 1; }
 .internship { display: grid; grid-template-columns: minmax(200px, .7fr) minmax(0, 2fr); border: var(--rule); box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground)); }
 .internshipMeta { padding: 24px; background: var(--orange); border-right: var(--rule); }
 .internshipMeta > p:nth-child(2) { margin-top: 26px; font-size: 16px; font-weight: 800; line-height: 1.7; }
 .internshipMeta > p:nth-child(2) span { font-size: 12px; }
-.current { display: inline-block; margin-top: 24px; border: 1.5px solid var(--foreground); background: var(--accent); padding: 7px 10px; font-size: 9px; font-weight: 800; letter-spacing: .6px; }
+.current { display: inline-block; margin-top: 24px; border: 1.5px solid var(--foreground); background: var(--background); padding: 7px 10px; font-size: 9px; font-weight: 800; letter-spacing: .6px; }
 .internshipCopy { min-width: 0; padding: clamp(22px, 2.5vw, 32px); }
 .internshipCopy h3 { font-size: clamp(24px, 3vw, 36px); line-height: 1.15; letter-spacing: -.04em; white-space: normal; margin: 14px 0 18px; }
 @media (hover: hover) {
-  .tabs button:not([aria-selected="true"]):hover { background: var(--accent); }
-  .directory > button:not([aria-pressed="true"]):hover { background: #ffe50033; }
+  .tabs button:not([aria-selected="true"]):hover { background: var(--surface-hover, #e9e5dc); }
+  .directory > button:not([aria-pressed="true"]):hover { background: var(--surface-hover, #e9e5dc); }
 }
 @media (max-width: 1000px) {
   .organizations { grid-template-columns: minmax(250px, 1fr) minmax(0, 1.5fr); }

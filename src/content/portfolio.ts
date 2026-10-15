@@ -50,6 +50,8 @@ export type ProjectCategory =
 export type Project = {
   slug: string;
   name: string;
+  fullTitle?: string;
+  subtitle?: string;
   description: string;
   recognition: string;
   tags: string[];
@@ -59,12 +61,22 @@ export type Project = {
   icon?: string;
   liveUrl?: string;
   sourceUrl?: string;
+  preview?: { src: string; alt: string; zoom?: boolean; cropTop?: boolean };
 };
 
 export const projects: Project[] = [
   {
     slug: "smartflood",
     name: "SmartFlood",
+    fullTitle: "SmartFlood: AI-Optimized Relief Allocation with Near-Real-Time Flood Monitoring for Flood-Affected Communities",
+    subtitle: "AI-Optimized Relief Allocation with Near-Real-Time Flood Monitoring for Flood-Affected Communities",
+    liveUrl: "https://smart-flood-landing-page-hb6z.vercel.app",
+    sourceUrl: "https://github.com/wendev27/SmartFlood-V4",
+    preview: {
+      src: "/projects/smartflood.png",
+      alt: "SmartFlood landing page showing flood alerts and a solar-powered monitoring device",
+      zoom: true,
+    },
     recognition: "Capstone Project",
     description:
       "AI-optimized relief allocation and near-real-time flood monitoring for flood-affected communities. Led project planning, task coordination, documentation, frontend development, UI/UX prototyping, and quality assurance.",
@@ -77,18 +89,50 @@ export const projects: Project[] = [
   {
     slug: "dalo",
     name: "DALO",
+    fullTitle: "DALO: Where Every Event Becomes an Experience",
+    subtitle: "Where Every Event Becomes an Experience",
+    sourceUrl: "https://github.com/jamenggay/Event-Registration-System",
+    preview: {
+      src: "/projects/dalo.png",
+      alt: "DALO event platform login page with a colorful logo and sign-in form",
+      zoom: true,
+      cropTop: true,
+    },
     recognition: "Best Website",
     description:
       "An event platform project focused on making every event an experience. Designed the interfaces and interactive Figma prototypes, then contributed to frontend development.",
     tags: ["Figma", "Prototyping", "Frontend"],
     year: "2025",
-    category: "Hackathon",
+    category: "University Project",
     tone: "cream",
     icon: "/figma/projects-iconmedal.svg",
   },
   {
+    slug: "ecobridge",
+    name: "EcoBridge",
+    fullTitle: "EcoBridge: Sustainable Resource Redistribution System",
+    subtitle: "Sustainable Resource Redistribution System",
+    sourceUrl: "https://github.com/DDoS-Depressed-Devs-on-Site/EcoBridge-Full",
+    preview: {
+      src: "/projects/ecobridge.png",
+      alt: "EcoBridge homepage with its forest-themed design and AI-assisted donation matching message",
+    },
+    recognition: "GDSC-L Hackfest 2025 Entry",
+    description:
+      "A platform that helps communities redistribute surplus food, clothing, and other supplies. In a five-person team, I designed the UI and prototypes in Figma and built frontend features with React.",
+    tags: ["React", "Figma", "UI/UX", "Team Project"],
+    year: "2025",
+    category: "Hackathon",
+    tone: "blue",
+  },
+  {
     slug: "kuryentech",
     name: "Kuryentech",
+    sourceUrl: "https://github.com/0CottonBuds/KuryenTech",
+    preview: {
+      src: "/projects/kuryentech-team.jpg",
+      alt: "The four-member Kuryentech team holding certificates at the IDOL hackathon",
+    },
     recognition: "Top 15 Nationally - Philippines",
     description:
       "Worked as a frontend developer, designing the project interfaces and visuals. Also presented the project pitch and contributed research as part of a four-member team.",

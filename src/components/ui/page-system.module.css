@@ -9,6 +9,7 @@
   --shadow-control: 4px 4px 0 var(--foreground);
   --shadow-dialog: 7px 7px 0 var(--foreground);
   --text-muted: #4c4b46;
+  --surface-hover: #e9e5dc;
   --title-size: clamp(42px, 6.3vw, 88px);
   background: var(--background);
   min-width: 0;
@@ -71,6 +72,7 @@
 .surface :global(.contact-aside) { padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px)); }
 .surface :global(.contact-aside) h2 { line-height: 1.15; letter-spacing: -.035em; white-space: normal; }
 .surface :global(.contact-links) > a { gap: 16px; padding: 24px; border-right-width: 2.667px; }
+.surface :global(.contact-links) > a:hover { background: var(--surface-hover, #e9e5dc); }
 .surface :global(.contact-links) > a > span:last-child { min-width: 0; }
 .surface :global(.contact-links) strong { font-family: var(--font-dm-sans), Arial, sans-serif; font-size: 13px; font-weight: 700; }
 .surface :global(.contact-form) input,

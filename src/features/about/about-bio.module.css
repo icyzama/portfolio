@@ -94,7 +94,7 @@
 .expertiseMeta > p { color: var(--text-muted, #4c4b46); }
 .expertiseItem h3 { white-space: normal; font-size: 16px; line-height: 1.25; letter-spacing: -.25px; margin-bottom: 10px; }
 .expertiseItem > p { max-width: 340px; font-size: 12px; line-height: 1.65; color: var(--text-muted, #4c4b46); }
-@media (hover: hover) { .expertiseItem:hover { background: var(--accent); } }
+@media (hover: hover) { .expertiseItem:hover { background: var(--surface-hover, #e9e5dc); } }
 @media (max-width: 1000px) {
   .bio { grid-template-columns: minmax(0, 1.45fr) minmax(260px, 1fr); }
   .copy { gap: 18px; }
