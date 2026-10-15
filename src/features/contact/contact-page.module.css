@@ -1,0 +1,170 @@
+.surface {
+  --contact-pad: clamp(24px, 4vw, 48px);
+}
+
+.formHeading {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.eyebrow {
+  color: var(--text-muted, #4c4b46);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 1.1px;
+}
+
+.formHeading h2 {
+  font-size: clamp(21px, 2vw, 27px);
+  line-height: 1.2;
+  letter-spacing: -.035em;
+}
+
+.surface :global(.contact-links) > a {
+  min-width: 0;
+  min-height: 100px;
+  padding: clamp(18px, 2.4vw, 30px);
+  gap: 16px;
+  border-right: var(--rule);
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.surface :global(.contact-links) > a:last-child {
+  border-right: 0;
+}
+
+.surface :global(.contact-links) > a:hover {
+  background: var(--surface-hover, #e9e5dc);
+}
+
+.surface :global(.contact-icon) {
+  width: 48px;
+  height: 48px;
+  box-shadow: 3px 3px 0 var(--foreground);
+}
+
+.surface :global(.contact-links) strong {
+  font-family: var(--font-dm-sans), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.surface :global(.contact-grid) {
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, .75fr);
+  min-height: 0;
+}
+
+.surface :global(.contact-form) {
+  min-width: 0;
+  padding: var(--contact-pad);
+  gap: 16px;
+}
+
+.surface :global(.contact-form) input,
+.surface :global(.contact-form) textarea,
+.surface :global(.contact-form) select {
+  border: var(--rule);
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-dm-sans), Arial, sans-serif;
+  font-size: 14px;
+}
+
+.surface :global(.contact-form) input::placeholder,
+.surface :global(.contact-form) textarea::placeholder,
+.surface :global(.contact-form) select:invalid {
+  color: var(--text-muted, #4c4b46);
+}
+
+.surface :global(.contact-fields) {
+  gap: 14px;
+}
+
+.surface :global(.form-pair) {
+  gap: 14px;
+}
+
+.surface :global(.contact-form) textarea {
+  min-height: 130px;
+  height: 150px;
+}
+
+.surface :global(.contact-aside) {
+  min-width: 0;
+  padding: var(--contact-pad);
+  justify-content: flex-start;
+  gap: 22px;
+}
+
+.surface :global(.contact-aside) h2 {
+  font-size: clamp(29px, 3.2vw, 42px);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+
+.surface :global(.contact-aside) > p {
+  max-width: 32ch;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.surface :global(.response-note) {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+@media (max-width: 1000px) {
+  .surface :global(.contact-grid) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(270px, .8fr);
+  }
+
+  .surface :global(.contact-links) > a {
+    padding: 20px;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .surface :global(.contact-grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .surface :global(.contact-aside) {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .surface :global(.contact-links) > a {
+    min-height: 82px;
+    padding: 18px 24px;
+  }
+
+  .surface :global(.contact-grid) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .surface :global(.contact-form) {
+    padding: 30px 24px;
+  }
+
+  .surface :global(.contact-aside) {
+    min-height: 330px;
+    padding: 32px 24px;
+  }
+
+  .surface :global(.contact-aside) h2 {
+    font-size: clamp(31px, 9vw, 42px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .surface :global(.contact-links) > a {
+    transition: none;
+  }
+}

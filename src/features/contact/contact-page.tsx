@@ -5,6 +5,7 @@ import { Asset, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
 import successStyles from "./contact-success.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
+import styles from "./contact-page.module.css";
 
 export function ContactPage() {
   const [status, setStatus] = useState("");
@@ -46,7 +47,7 @@ export function ContactPage() {
     }
   }
   return (
-    <div className={pageStyles.surface}>
+    <div className={`${pageStyles.surface} ${styles.surface}`}>
       <PageHero
         label="06 / CONTACT"
         title={
@@ -89,7 +90,10 @@ export function ContactPage() {
       </div>
       <div className="contact-grid">
         <form className="contact-form" onSubmit={submit} aria-busy={sending}>
-          <h2>SEND A MESSAGE</h2>
+          <div className={styles.formHeading}>
+            <p className={styles.eyebrow}>01 / DIRECT MESSAGE</p>
+            <h2>SEND A MESSAGE.</h2>
+          </div>
           <div className="contact-honeypot" aria-hidden="true">
             <label htmlFor="contact-website">Leave this field empty</label>
             <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
@@ -118,20 +122,22 @@ export function ContactPage() {
               />
             </label>
           </div>
-          <label>
-            <span className="sr-only">Reason for reaching out</span>
-            <select name="topic" value={topic} onChange={(event) => setTopic(event.target.value)} required>
-              <option value="" disabled>Reason for reaching out</option>
-              <option value="job">Job or internship</option>
-              <option value="project">Freelance project</option>
-              <option value="collaboration">Collaboration</option>
-              <option value="general">General question</option>
-            </select>
-          </label>
-          <label>
-            <span className="sr-only">Company or organization, optional</span>
-            <input name="organization" placeholder="Company or organization (optional)" maxLength={120} autoComplete="organization" />
-          </label>
+          <div className="form-pair">
+            <label>
+              <span className="sr-only">Reason for reaching out</span>
+              <select name="topic" value={topic} onChange={(event) => setTopic(event.target.value)} required>
+                <option value="" disabled>Reason for reaching out</option>
+                <option value="job">Job or internship</option>
+                <option value="project">Freelance project</option>
+                <option value="collaboration">Collaboration</option>
+                <option value="general">General question</option>
+              </select>
+            </label>
+            <label>
+              <span className="sr-only">Company or organization, optional</span>
+              <input name="organization" placeholder="Company or organization (optional)" maxLength={120} autoComplete="organization" />
+            </label>
+          </div>
           {topic === "project" && (
             <label>
               <span className="sr-only">Project timeline, optional</span>
@@ -168,8 +174,6 @@ export function ContactPage() {
             LET&apos;S BUILD
             <br />
             SOMETHING
-            <br />
-            AMAZING
             <br />
             TOGETHER.
           </h2>
