@@ -54,11 +54,12 @@ export function ExperiencesPage() {
             <div className={styles.feature}>
               <article id="organization-detail" className={styles.detail} aria-live="polite" aria-atomic="true">
                 <div className={styles.detailMeta}><p className={styles.eyebrow}>STUDENT ORGANIZATION</p><span>{String(selected + 1).padStart(2, "0")} / {String(organizations.length).padStart(2, "0")}</span></div>
-                <ExperiencePhoto alt={`${org.name} event photo`} />
+                <ExperiencePhoto src={org.photo} alt={org.photoAlt ?? `${org.name} event photo with Reynald and fellow members`} fit={org.photoFit} />
                 <h2>{org.name}</h2><p className={styles.role}>{org.role}</p><p className={styles.period}>{org.period}</p>
                 <p className={styles.description}>{org.description}</p>
                 {"highlights" in org && org.highlights && <div className={styles.contributions}><h3>HOW I CONTRIBUTE</h3><ul>{org.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>}
                 <EditorialTags items={org.tags} />
+                {org.link && <a className={`${pageStyles.button} ${styles.orgLink}`} href={org.link} target="_blank" rel="noreferrer">VIEW ORGANIZATION ON FACEBOOK <span aria-hidden="true">↗</span></a>}
               </article>
               <div className={styles.navigation}><button className={pageStyles.button} type="button" onClick={() => move(-1)} aria-label="Previous organization role">← PREVIOUS</button><button className={pageStyles.button} type="button" onClick={() => move(1)} aria-label="Next organization role">NEXT →</button></div>
             </div>
@@ -68,9 +69,9 @@ export function ExperiencesPage() {
             <div className={styles.sectionHeading}><p className={styles.eyebrow}>BUILDING WITH A TEAM</p><h2>PROJECTS & HACKATHONS</h2></div>
             <div className={styles.projectGrid}>{hackathons.map((project, index) => (
               <article className={styles.project} key={project.slug}>
-                <ExperiencePhoto alt={`${project.name} team or event photo`} />
+                <ExperiencePhoto src={project.preview?.src} alt={project.preview?.alt ?? `${project.name} team or event photo`} />
                 <div className={styles.projectMeta}><span className={styles.projectNumber} aria-hidden="true">0{index + 1}</span><span>{project.year} / {project.category}</span></div>
-                <p className={styles.recognition}>{project.recognition}</p><h3>{project.name}</h3><p className={styles.description}>{project.description}</p>
+                <p className={styles.recognition}>{project.recognition}</p><h3>{project.name}</h3>{project.subtitle && <p className={styles.projectSubtitle}>{project.subtitle}</p>}<p className={styles.description}>{project.description}</p>
                 <EditorialTags items={project.tags} />
               </article>
             ))}</div>

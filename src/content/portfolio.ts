@@ -144,7 +144,21 @@ export const projects: Project[] = [
   },
 ];
 
-export const organizations = [
+export type Organization = {
+  name: string;
+  shortName: string;
+  role: string;
+  period: string;
+  description: string;
+  tags: string[];
+  highlights?: string[];
+  photo?: string;
+  photoAlt?: string;
+  photoFit?: "cover" | "contain";
+  link?: string;
+};
+
+export const organizations: Organization[] = [
   {
     name: "AWS Student User Group Philippines",
     shortName: "AWS Student User Group PH",
@@ -219,6 +233,10 @@ export const organizations = [
     shortName: "NU CCIT Student Council",
     role: "Director Auditor for Bookkeeping and Budgeting",
     period: "Aug 2024 - Nov 2025",
+    photo: "/experiences/nu-ccit-student-council.jpg",
+    photoAlt: "NU CCIT Student Council budgeting and bookkeeping committee poster featuring Reynald as director",
+    photoFit: "contain",
+    link: "https://www.facebook.com/ccitsc",
     description:
       "Oversaw financial records, budgets, and expense checks for the NU CCIT Student Council.",
     tags: ["Auditing", "Financial Records", "Budgeting"],
@@ -233,6 +251,9 @@ export const organizations = [
     shortName: "Google Developers on Campus - NU Manila",
     role: "Creative Committee Member",
     period: "Aug 2023 - Jul 2024",
+    photo: "/experiences/gdg-nu-manila.jpg",
+    photoAlt: "Reynald with fellow students at a Google Developer Student Clubs NU Manila event",
+    link: "https://www.facebook.com/gdgoc.numanila",
     description:
       "Created visual and promotional materials for Google Developers on Campus events and initiatives.",
     tags: ["Graphic Design", "Video", "Campaigns"],

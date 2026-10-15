@@ -1,9 +1,9 @@
 import Image from "next/image";
 import styles from "./experiences.module.css";
 
-export function ExperiencePhoto({ src, alt }: { src?: string; alt: string }) {
+export function ExperiencePhoto({ src, alt, fit = "cover" }: { src?: string; alt: string; fit?: "cover" | "contain" }) {
   return (
-    <figure className={styles.photo} aria-label={src ? undefined : `Photo placeholder: ${alt}`}>
+    <figure className={`${styles.photo} ${fit === "contain" ? styles.photoContain : ""}`} aria-label={src ? undefined : `Photo placeholder: ${alt}`}>
       {src ? (
         <Image src={src} alt={alt} width={1280} height={720} sizes="(max-width: 700px) 90vw, 50vw" className={styles.photoImage} />
       ) : (
