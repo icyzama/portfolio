@@ -31,8 +31,8 @@ export function ContactPage() {
       />
       <div className="contact-links">
         <a href={`mailto:${profile.email}`}>
-          <span className="contact-icon">
-            <Asset src="/figma/contact-iconmail.svg" width={21} />
+          <span className="contact-icon" aria-hidden="true">
+            <Asset src="/skills/contact-gmail.svg" width={30} height={23} />
           </span>
           <span>
             <small>EMAIL</small>
@@ -40,8 +40,8 @@ export function ContactPage() {
           </span>
         </a>
         <a href={profile.github}>
-          <span className="contact-icon text-icon" aria-hidden="true">
-            ⌥
+          <span className="contact-icon" aria-hidden="true">
+            <Asset src="/skills/contact-github.svg" width={30} />
           </span>
           <span>
             <small>GITHUB</small>
@@ -49,8 +49,8 @@ export function ContactPage() {
           </span>
         </a>
         <a href={profile.linkedin}>
-          <span className="contact-icon text-icon" aria-hidden="true">
-            in
+          <span className="contact-icon" aria-hidden="true">
+            <Asset src="/skills/contact-linkedin.svg" width={30} />
           </span>
           <span>
             <small>LINKEDIN</small>

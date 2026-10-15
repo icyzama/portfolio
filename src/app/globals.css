@@ -1663,12 +1663,14 @@ img {
   background: var(--accent);
 }
 .contact-icon {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
   display: grid;
   place-items: center;
-  background: var(--accent);
+  background: var(--background);
+  color: var(--foreground);
   border: var(--rule);
+  box-shadow: 3px 3px 0 var(--foreground);
   flex-shrink: 0;
 }
 .text-icon {
@@ -1678,9 +1680,9 @@ img {
 .contact-links small {
   display: block;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 1px;
-  color: rgba(0, 0, 0, 0.35);
+  color: #4c4b46;
 }
 .contact-links strong {
   display: block;
