@@ -135,7 +135,7 @@ export const projects: Project[] = [
     },
     recognition: "Top 15 Nationally - Philippines",
     description:
-      "Worked as a frontend developer, designing the project interfaces and visuals. Also presented the project pitch and contributed research as part of a four-member team.",
+      "A web application that helps households manage energy use by tracking appliance costs, visualizing consumption trends, and setting targets. It also offers AI-driven recommendations to reduce costs and support more sustainable practices.",
     tags: ["Frontend", "UI Design", "Research", "Pitching"],
     year: "2024",
     category: "Hackathon",
