@@ -1,20 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Asset, PageHero } from "@/components/ui/design";
 import { profile } from "@/content/portfolio";
 
 export function ContactPage() {
   const [status, setStatus] = useState("");
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const inFlight = useRef(false);
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const subject = `${String(data.get("subject")) || "Portfolio enquiry"} — ${String(data.get("name"))}`;
-    const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`;
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus(
-      "Your email draft is ready in your email app. Send it there to complete your enquiry.",
-    );
+    if (inFlight.current) return;
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    inFlight.current = true;
+    setSending(true);
+    setFailed(false);
+    setStatus("");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data)),
+        signal: AbortSignal.timeout(30_000),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || "Your message could not be sent. Please try again.");
+      setStatus(result.message);
+      form.reset();
+    } catch (error) {
+      setFailed(true);
+      setStatus(error instanceof Error && error.name === "Error" ? error.message : "Could not connect to send your message. Please try again or use the email link above.");
+    } finally {
+      inFlight.current = false;
+      setSending(false);
+    }
   }
   return (
     <>
@@ -59,8 +80,13 @@ export function ContactPage() {
         </a>
       </div>
       <div className="contact-grid">
-        <form className="contact-form" onSubmit={submit}>
+        <form className="contact-form" onSubmit={submit} aria-busy={sending}>
           <h2>SEND A MESSAGE</h2>
+          <div className="contact-honeypot" aria-hidden="true">
+            <label htmlFor="contact-website">Leave this field empty</label>
+            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+          </div>
+          <fieldset className="contact-fields" disabled={sending}>
           <div className="form-pair">
             <label>
               <span className="sr-only">Your name</span>
@@ -103,11 +129,12 @@ export function ContactPage() {
               rows={5}
             />
           </label>
-          <button type="submit" className="action action-blue">
-            SEND MESSAGE →
+          </fieldset>
+          <button type="submit" className="action action-blue" disabled={sending}>
+            {sending ? "SENDING…" : "SEND MESSAGE →"}
           </button>
-          <p className="form-note sr-only">Opens an email draft in your email app.</p>
-          <p className="form-status" role="status">
+          <p className="form-note sr-only">Sends your message directly to Reynald’s inbox.</p>
+          <p className="form-status" role={failed ? "alert" : "status"} aria-live="polite">
             {status}
           </p>
         </form>
