@@ -5,6 +5,7 @@ import { EditorialHero } from "@/components/ui/editorial";
 import { upcomingPosts, profile } from "@/content/portfolio";
 import { pageLabels } from "@/components/ui/page-label";
 import pageStyles from "@/components/ui/page-system.module.css";
+import editorialStyles from "@/components/ui/editorial.module.css";
 import styles from "./blog-page.module.css";
 
 export function BlogPage() {
@@ -16,13 +17,16 @@ export function BlogPage() {
 
   return (
     <div className={pageStyles.surface}>
-      <EditorialHero
-        label={pageLabels.blog}
-        title="THOUGHTS"
-        highlight="& WRITING."
-        description="Notes on projects, tools, and lessons from building in tech."
-        topics={["DEVELOPMENT", "COMMUNITY"]}
-      />
+      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Blog introduction">
+        <EditorialHero
+          label={pageLabels.blog}
+          title="THOUGHTS"
+          highlight="& WRITING."
+          description="Notes on projects, tools, and lessons from building in tech."
+          topics={["DEVELOPMENT", "COMMUNITY"]}
+          className={editorialStyles.openingHero}
+        />
+      </section>
       <section className={styles.content} aria-labelledby="writing-list-title">
         <div className={styles.heading}>
           <div>

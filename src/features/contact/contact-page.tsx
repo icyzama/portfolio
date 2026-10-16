@@ -48,17 +48,20 @@ export function ContactPage() {
   }
   return (
     <div className={`${pageStyles.surface} ${styles.surface}`}>
-      <PageHero
-        label="06 / CONTACT"
-        title={
-          <>
-            LET&apos;S
-            <br />
-            TALK.
-          </>
-        }
-        accent="orange"
-      />
+      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Contact introduction">
+        <PageHero
+          label="06 / CONTACT"
+          title={
+            <>
+              LET&apos;S
+              <br />
+              TALK.
+            </>
+          }
+          accent="orange"
+          className={pageStyles.titlePanelHero}
+        />
+      </section>
       <div className="contact-links">
         <a href={`mailto:${profile.email}`}>
           <span className="contact-icon" aria-hidden="true">

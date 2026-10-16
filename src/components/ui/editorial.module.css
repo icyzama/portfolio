@@ -1,4 +1,5 @@
 .hero { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr); gap: 36px; padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px)); align-items: end; border-bottom: var(--rule); }
+.openingHero { flex: 1; min-height: 0; align-content: center; border-bottom: 0; }
 .eyebrow { font-size: 10px; line-height: 1.6; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
 .hero h1 { margin-top: 18px; font-size: var(--title-size, clamp(42px, 6.3vw, 88px)); line-height: 1.04; letter-spacing: -.055em; white-space: normal; }
 .hero h1 span { display: inline-block; background: var(--accent); padding: 0 8px 4px; margin: 6px 0 0 -8px; }

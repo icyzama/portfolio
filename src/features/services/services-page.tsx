@@ -7,7 +7,9 @@ import pageStyles from "@/components/ui/page-system.module.css";
 export function ServicesPage() {
   return (
     <div className={pageStyles.surface}>
-      <EditorialHero label={pageLabels.services} title="LET’S BUILD" highlight="YOUR IDEA." description="Responsive websites and full-stack applications, with thoughtful interfaces and practical functionality." topics={["WEB DEVELOPMENT", "INTERFACES", "INTEGRATIONS"]} />
+      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Services introduction">
+        <EditorialHero label={pageLabels.services} title="LET’S BUILD" highlight="YOUR IDEA." description="Responsive websites and full-stack applications, with thoughtful interfaces and practical functionality." topics={["WEB DEVELOPMENT", "INTERFACES", "INTEGRATIONS"]} className={styles.openingHero} />
+      </section>
       <div className={styles.serviceStrip}><p><span aria-hidden="true" />FREELANCE WEB DEVELOPMENT — LET’S DISCUSS YOUR PROJECT</p><EditorialLink href="/contact" primary>CONTACT ME ↗</EditorialLink></div>
       <section className={styles.section} aria-labelledby="services-title">
         <div className={styles.sectionHeading}><h2 id="services-title">HOW I CAN HELP</h2><span>DESIGN / DEVELOPMENT</span></div>

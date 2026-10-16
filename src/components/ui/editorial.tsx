@@ -4,10 +4,10 @@ import styles from "./editorial.module.css";
 import pageStyles from "./page-system.module.css";
 import { SectionLabel } from "./page-label";
 
-export function EditorialHero({ label, title, highlight, description, topics }: {
-  label: string; title: string; highlight: string; description: string; topics: readonly string[];
+export function EditorialHero({ label, title, highlight, description, topics, className = "" }: {
+  label: string; title: string; highlight: string; description: string; topics: readonly string[]; className?: string;
 }) {
-  return <header className={styles.hero}>
+  return <header className={`${styles.hero} ${className}`}>
     <div><SectionLabel>{label}</SectionLabel><h1>{title}<br /><span>{highlight}</span></h1></div>
     <div className={styles.heroNote}><p>{description}</p><ul>{topics.map((topic) => <li key={topic}>{topic}</li>)}</ul></div>
   </header>;

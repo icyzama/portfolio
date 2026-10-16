@@ -21,7 +21,9 @@ export function ProjectsPage() {
   }
   return (
     <div className={pageStyles.surface}>
-      <EditorialHero label={pageLabels.projects} title="SELECTED" highlight="WORK." description="Interfaces, applications, and ideas built through university projects and hackathons." topics={["FULL STACK", "UI/UX", "TEAMWORK"]} />
+      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Projects introduction">
+        <EditorialHero label={pageLabels.projects} title="SELECTED" highlight="WORK." description="Interfaces, applications, and ideas built through university projects and hackathons." topics={["FULL STACK", "UI/UX", "TEAMWORK"]} className={styles.openingHero} />
+      </section>
       <div className={styles.filters} role="group" aria-label="Filter projects">
         {categories.map((item) => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
         <span className={styles.filterStatus} role="status">{visible.length} {visible.length === 1 ? "PROJECT" : "PROJECTS"}</span>

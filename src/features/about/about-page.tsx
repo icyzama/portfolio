@@ -1,6 +1,8 @@
 import Image from "next/image";
 import pageStyles from "@/components/ui/page-system.module.css";
-import { ActionLink, PageHero } from "@/components/ui/design";
+import { ActionLink } from "@/components/ui/design";
+import { EditorialHero } from "@/components/ui/editorial";
+import editorialStyles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
 import { profile } from "@/content/portfolio";
 import styles from "./about-bio.module.css";
@@ -66,17 +68,14 @@ export function AboutPage() {
   return (
     <div className={pageStyles.surface}>
       <div className="about-deck">
-      <div id="about-me" className="about-opening about-panel">
-        <PageHero
+      <div id="about-me" className={`about-opening about-panel screen-panel ${pageStyles.titlePanel}`}>
+        <EditorialHero
           label={pageLabels.about}
-          title={
-            <>
-              ABOUT
-              <br />
-              ME.
-            </>
-          }
-          className="about-hero"
+          title="ABOUT"
+          highlight="ME."
+          description="Get to know me, explore my technical skills, and learn what shapes my approach to building for the web."
+          topics={["FULL STACK", "CLOUD", "UI/UX"]}
+          className={`${editorialStyles.openingHero} about-editorial-hero`}
         />
       </div>
       <section id="about-bio" className={`${styles.bio} about-panel`} aria-labelledby="bio-title">

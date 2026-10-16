@@ -2988,12 +2988,14 @@ body:has(.about-deck) .site-footer {
   scroll-snap-align: end;
   scroll-snap-stop: normal;
 }
-.about-panel {
+.about-panel,
+.screen-panel {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
 }
 @supports (animation-timeline: view()) {
-  .about-panel {
+  .about-panel,
+  .screen-panel {
     animation: about-panel-zoom linear both;
     animation-timeline: view();
     animation-range: entry 0% entry 38%;
@@ -3007,6 +3009,13 @@ body:has(.about-deck) .site-footer {
   display: flex;
   min-height: calc(100svh - 54.667px);
   padding-bottom: 72px;
+}
+.about-opening.about-panel .about-editorial-hero {
+  flex: 1;
+  min-height: 0;
+  align-content: center;
+  padding: var(--section-space, clamp(28px, 3vw, 40px)) var(--page-gutter, clamp(24px, 4vw, 56px));
+  border-bottom: 0;
 }
 .about-opening.about-panel .about-hero {
   flex: 1;
