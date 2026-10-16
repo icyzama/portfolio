@@ -6,6 +6,7 @@ import styles from "./experiences.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { EditorialHero, EditorialTags } from "@/components/ui/editorial";
 import editorialStyles from "@/components/ui/editorial.module.css";
+import { TitlePanel } from "@/components/ui/title-panel";
 import { pageLabels } from "@/components/ui/page-label";
 import { ExperiencePhoto } from "./experience-photo";
 
@@ -21,7 +22,7 @@ export function ExperiencesPage() {
 
   return (
     <div className={pageStyles.surface}>
-      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Experiences introduction">
+      <TitlePanel label="Experiences introduction">
         <EditorialHero
           label={pageLabels.experiences}
           title="EXPERIENCE."
@@ -30,7 +31,7 @@ export function ExperiencesPage() {
           topics={["DEVELOPMENT", "COMMUNITY", "COLLABORATION"]}
           className={editorialStyles.openingHero}
         />
-      </section>
+      </TitlePanel>
       <div className={styles.deck}>
       <section className={styles.section} aria-labelledby="organizations-title">
         <header className={styles.sectionHeading}>

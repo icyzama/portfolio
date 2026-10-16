@@ -3,6 +3,7 @@ import pageStyles from "@/components/ui/page-system.module.css";
 import { ActionLink } from "@/components/ui/design";
 import { EditorialHero } from "@/components/ui/editorial";
 import editorialStyles from "@/components/ui/editorial.module.css";
+import { TitlePanel } from "@/components/ui/title-panel";
 import { pageLabels } from "@/components/ui/page-label";
 import { profile } from "@/content/portfolio";
 import styles from "./about-bio.module.css";
@@ -68,7 +69,7 @@ export function AboutPage() {
   return (
     <div className={pageStyles.surface}>
       <div className="about-deck">
-      <div id="about-me" className={`about-opening about-panel screen-panel ${pageStyles.titlePanel}`}>
+      <TitlePanel id="about-me" label="About introduction" className="about-opening about-panel">
         <EditorialHero
           label={pageLabels.about}
           title="ABOUT"
@@ -77,7 +78,7 @@ export function AboutPage() {
           topics={["FULL STACK", "CLOUD", "UI/UX"]}
           className={`${editorialStyles.openingHero} about-editorial-hero`}
         />
-      </div>
+      </TitlePanel>
       <section id="about-bio" className={`${styles.bio} about-panel`} aria-labelledby="bio-title">
         <div className={styles.copy}>
           <p className={styles.eyebrow}>02 / THE PERSON BEHIND THE CODE</p>

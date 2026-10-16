@@ -8,6 +8,7 @@ import { projects, type Project } from "@/content/portfolio";
 import styles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
 import pageStyles from "@/components/ui/page-system.module.css";
+import { TitlePanel } from "@/components/ui/title-panel";
 
 const categories = ["All", "Hackathon", "University Project"];
 export function ProjectsPage() {
@@ -21,9 +22,9 @@ export function ProjectsPage() {
   }
   return (
     <div className={pageStyles.surface}>
-      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Projects introduction">
+      <TitlePanel label="Projects introduction">
         <EditorialHero label={pageLabels.projects} title="SELECTED" highlight="WORK." description="Interfaces, applications, and ideas built through university projects and hackathons." topics={["FULL STACK", "UI/UX", "TEAMWORK"]} className={styles.openingHero} />
-      </section>
+      </TitlePanel>
       <div className={styles.filters} role="group" aria-label="Filter projects">
         {categories.map((item) => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
         <span className={styles.filterStatus} role="status">{visible.length} {visible.length === 1 ? "PROJECT" : "PROJECTS"}</span>

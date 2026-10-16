@@ -3,13 +3,14 @@ import { services } from "@/content/portfolio";
 import styles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
 import pageStyles from "@/components/ui/page-system.module.css";
+import { TitlePanel } from "@/components/ui/title-panel";
 
 export function ServicesPage() {
   return (
     <div className={pageStyles.surface}>
-      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Services introduction">
+      <TitlePanel label="Services introduction">
         <EditorialHero label={pageLabels.services} title="LET’S BUILD" highlight="YOUR IDEA." description="Responsive websites and full-stack applications, with thoughtful interfaces and practical functionality." topics={["WEB DEVELOPMENT", "INTERFACES", "INTEGRATIONS"]} className={styles.openingHero} />
-      </section>
+      </TitlePanel>
       <div className={styles.serviceStrip}><p><span aria-hidden="true" />FREELANCE WEB DEVELOPMENT — LET’S DISCUSS YOUR PROJECT</p><EditorialLink href="/contact" primary>CONTACT ME ↗</EditorialLink></div>
       <section className={styles.section} aria-labelledby="services-title">
         <div className={styles.sectionHeading}><h2 id="services-title">HOW I CAN HELP</h2><span>DESIGN / DEVELOPMENT</span></div>

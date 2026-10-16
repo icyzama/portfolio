@@ -7,6 +7,7 @@ import editorialStyles from "@/components/ui/editorial.module.css";
 import { profile } from "@/content/portfolio";
 import successStyles from "./contact-success.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
+import { TitlePanel } from "@/components/ui/title-panel";
 import styles from "./contact-page.module.css";
 
 export function ContactPage() {
@@ -50,7 +51,7 @@ export function ContactPage() {
   }
   return (
     <div className={`${pageStyles.surface} ${styles.surface}`}>
-      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Contact introduction">
+      <TitlePanel label="Contact introduction">
         <EditorialHero
           label="06 / CONTACT"
           title="LET’S"
@@ -59,7 +60,7 @@ export function ContactPage() {
           topics={["EMAIL", "LINKEDIN", "GITHUB"]}
           className={editorialStyles.openingHero}
         />
-      </section>
+      </TitlePanel>
       <div className="contact-links">
         <a href={`mailto:${profile.email}`}>
           <span className="contact-icon" aria-hidden="true">

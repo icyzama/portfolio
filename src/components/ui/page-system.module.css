@@ -111,6 +111,19 @@
 
 @media (max-width: 700px) {
   .surface { --page-gutter: 24px; --section-space: 28px; --title-size: clamp(36px, 9vw, 66px); }
+  .titlePanel {
+    height: auto;
+    min-height: calc(100svh - 54.667px);
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-height: 650px) and (min-width: 701px) {
+  .titlePanel {
+    height: auto;
+    min-height: calc(100svh - 54.667px);
+    padding-bottom: 32px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

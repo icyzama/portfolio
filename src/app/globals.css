@@ -3005,11 +3005,6 @@ body:has(.about-deck) .site-footer {
     to { opacity: 1; transform: scale(1); }
   }
 }
-.about-opening.about-panel {
-  display: flex;
-  min-height: calc(100svh - 54.667px);
-  padding-bottom: 72px;
-}
 .about-opening.about-panel .about-editorial-hero {
   flex: 1;
   min-height: 0;
