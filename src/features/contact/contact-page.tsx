@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Asset, PageHero } from "@/components/ui/design";
+import { Asset } from "@/components/ui/design";
+import { EditorialHero } from "@/components/ui/editorial";
+import editorialStyles from "@/components/ui/editorial.module.css";
 import { profile } from "@/content/portfolio";
 import successStyles from "./contact-success.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
@@ -49,17 +51,13 @@ export function ContactPage() {
   return (
     <div className={`${pageStyles.surface} ${styles.surface}`}>
       <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Contact introduction">
-        <PageHero
+        <EditorialHero
           label="06 / CONTACT"
-          title={
-            <>
-              LET&apos;S
-              <br />
-              TALK.
-            </>
-          }
-          accent="orange"
-          className={pageStyles.titlePanelHero}
+          title="LET’S"
+          highlight="TALK."
+          description="Choose a contact channel or send me a message about a project, opportunity, or collaboration."
+          topics={["EMAIL", "LINKEDIN", "GITHUB"]}
+          className={editorialStyles.openingHero}
         />
       </section>
       <div className="contact-links">

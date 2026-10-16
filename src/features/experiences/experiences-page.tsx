@@ -5,6 +5,7 @@ import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { EditorialHero, EditorialTags } from "@/components/ui/editorial";
+import editorialStyles from "@/components/ui/editorial.module.css";
 import { pageLabels } from "@/components/ui/page-label";
 import { ExperiencePhoto } from "./experience-photo";
 
@@ -20,18 +21,17 @@ export function ExperiencesPage() {
 
   return (
     <div className={pageStyles.surface}>
-      <div className={styles.deck}>
-      <section className={`${styles.opening} screen-panel ${pageStyles.titlePanel}`} aria-label="Experiences introduction">
+      <section className={`${pageStyles.titlePanel} screen-panel`} aria-label="Experiences introduction">
         <EditorialHero
           label={pageLabels.experiences}
           title="EXPERIENCE."
           highlight="IN ACTION."
           description="Building applications, bringing communities together, and learning through real projects."
           topics={["DEVELOPMENT", "COMMUNITY", "COLLABORATION"]}
-          className={styles.openingHero}
+          className={editorialStyles.openingHero}
         />
       </section>
-
+      <div className={styles.deck}>
       <section className={styles.section} aria-labelledby="organizations-title">
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>01 / STUDENT ORGANIZATIONS</p>

@@ -6,8 +6,6 @@
 .photoPlaceholder span { background: var(--background); padding: 6px 10px; font-size: 9px; font-weight: 800; letter-spacing: 1px; line-height: 1.5; }
 .eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; line-height: 1.6; }
 .deck { display: block; }
-.opening { width: 100%; }
-.openingHero { flex: 1; min-height: 0; align-content: center; border-bottom: 0; }
 .organizations { display: grid; flex: 1; align-content: center; grid-template-columns: minmax(280px, 1fr) minmax(0, 1.7fr); }
 .directory { border-right: var(--rule); }
 .directoryHeading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 22px 24px; border-bottom: var(--rule); }
