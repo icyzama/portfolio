@@ -3073,11 +3073,23 @@ html:has(.about-deck) {
   scroll-snap-type: y proximity;
   scroll-padding-top: 54.667px;
 }
+html:has(.focus-sections) {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 54.667px;
+}
 body:has(.about-deck) .site-header {
   position: sticky;
   top: 0;
 }
+body:has(.focus-sections) .site-header {
+  position: sticky;
+  top: 0;
+}
 body:has(.about-deck) .site-footer {
+  scroll-snap-align: end;
+  scroll-snap-stop: normal;
+}
+body:has(.focus-sections) .site-footer {
   scroll-snap-align: end;
   scroll-snap-stop: normal;
 }

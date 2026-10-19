@@ -17,7 +17,7 @@ export function BlogPage() {
   }
 
   return (
-    <div className={pageStyles.surface}>
+    <div className={`${pageStyles.surface} focus-sections`}>
       <TitlePanel label="Blog introduction">
         <EditorialHero
           label={pageLabels.blog}
@@ -28,7 +28,7 @@ export function BlogPage() {
           className={editorialStyles.openingHero}
         />
       </TitlePanel>
-      <section className={styles.content} aria-labelledby="writing-list-title">
+      <section className={`${styles.content} screen-panel`} aria-labelledby="writing-list-title">
         <div className={styles.heading}>
           <div>
             <p className={styles.eyebrow}>CURRENTLY IN PROGRESS</p>
@@ -50,7 +50,7 @@ export function BlogPage() {
           ))}
         </div>
       </section>
-      <section className={styles.suggestion} aria-labelledby="suggestion-title">
+      <section className={`${styles.suggestion} screen-panel`} aria-labelledby="suggestion-title">
         <div>
           <p className={styles.eyebrow}>HAVE AN IDEA?</p>
           <h2 id="suggestion-title">Suggest a topic.</h2>

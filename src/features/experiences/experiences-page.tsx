@@ -33,7 +33,7 @@ export function ExperiencesPage() {
   }
 
   return (
-    <div className={pageStyles.surface}>
+    <div className={`${pageStyles.surface} focus-sections`}>
       <TitlePanel label="Experiences introduction">
         <EditorialHero
           label={pageLabels.experiences}
@@ -84,7 +84,7 @@ export function ExperiencesPage() {
         tabIndex={0}
         aria-labelledby={`experience-tab-${activeTab}`}
       >
-      <section className={styles.section} aria-labelledby="organizations-title" hidden={activeTab !== 0}>
+      <section className={`${styles.section} screen-panel`} aria-labelledby="organizations-title" hidden={activeTab !== 0}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>01 / STUDENT ORGANIZATIONS</p>
           <h2 id="organizations-title">LEARNING WITH COMMUNITY.</h2>
@@ -116,7 +116,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="projects-title" hidden={activeTab !== 1}>
+      <section className={`${styles.section} screen-panel`} aria-labelledby="projects-title" hidden={activeTab !== 1}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>02 / PROJECTS & HACKATHONS</p>
           <h2 id="projects-title">BUILDING WITH A TEAM.</h2>
@@ -143,7 +143,7 @@ export function ExperiencesPage() {
         ))}</div>
       </section>
 
-      <section className={styles.section} aria-labelledby="internship-title" hidden={activeTab !== 2}>
+      <section className={`${styles.section} screen-panel`} aria-labelledby="internship-title" hidden={activeTab !== 2}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>03 / INTERNSHIP</p>
           <h2 id="internship-title">LEARNING BY BUILDING.</h2>

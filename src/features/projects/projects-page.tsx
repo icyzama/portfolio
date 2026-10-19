@@ -22,7 +22,7 @@ export function ProjectsPage() {
     dialog.current?.showModal();
   }
   return (
-    <div className={pageStyles.surface}>
+    <div className={`${pageStyles.surface} focus-sections`}>
       <TitlePanel label="Projects introduction">
         <EditorialHero label={pageLabels.projects} title="SELECTED" highlight="WORK." description="Interfaces, applications, and ideas built through university projects and hackathons." topics={["FULL STACK", "UI/UX", "TEAMWORK"]} className={styles.openingHero} />
       </TitlePanel>
@@ -59,7 +59,7 @@ export function ProjectsPage() {
           </button>
         ))}
       </div>
-      <section id="projects-panel" className={styles.section} role="tabpanel" aria-labelledby={`project-tab-${categories.indexOf(category)}`}>
+      <section id="projects-panel" className={`${styles.section} screen-panel`} role="tabpanel" aria-labelledby={`project-tab-${categories.indexOf(category)}`}>
         <div className={`${styles.grid} ${category !== "All" ? styles.compactProjectGrid : ""}`}>
           {visible.map((project) => (
             <article className={styles.card} key={project.slug}>

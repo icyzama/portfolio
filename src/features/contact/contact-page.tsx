@@ -50,7 +50,7 @@ export function ContactPage() {
     }
   }
   return (
-    <div className={`${pageStyles.surface} ${styles.surface}`}>
+    <div className={`${pageStyles.surface} ${styles.surface} focus-sections`}>
       <TitlePanel label="Contact introduction">
         <EditorialHero
           label="06 / CONTACT"
@@ -90,7 +90,7 @@ export function ContactPage() {
           </span>
         </a>
       </div>
-      <div className="contact-grid">
+      <div className="contact-grid screen-panel">
         <form className="contact-form" onSubmit={submit} aria-busy={sending}>
           <div className={styles.formHeading}>
             <p className={styles.eyebrow}>01 / DIRECT MESSAGE</p>
