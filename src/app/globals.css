@@ -85,6 +85,78 @@ img {
   outline: 3px solid var(--primary);
   outline-offset: 4px;
 }
+
+/* Shared motion language: quick editorial reveals with a slightly mechanical finish. */
+@keyframes route-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes header-drop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+@keyframes footer-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.route-enter {
+  animation: route-enter 360ms cubic-bezier(.2, .75, .25, 1) both;
+}
+.site-header {
+  animation: header-drop 440ms cubic-bezier(.2, .75, .25, 1) both;
+}
+.site-footer {
+  animation: footer-rise 440ms 120ms cubic-bezier(.2, .75, .25, 1) both;
+}
+.motion-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 560ms cubic-bezier(.2, .75, .25, 1),
+    transform 560ms cubic-bezier(.2, .75, .25, 1);
+  transition-delay: calc(var(--reveal-order, 0) * 55ms);
+  will-change: opacity, transform;
+}
+.motion-reveal.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+/* Small interactions make repeated controls feel responsive across every page. */
+.nav-item > a,
+.header-contact,
+.social-links a,
+.tags li,
+button,
+input,
+textarea,
+select {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+.header-contact:hover,
+.social-links a:hover {
+  transform: translateY(-2px);
+}
+.tags li:hover {
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 currentColor;
+}
+button:active:not(:disabled),
+.action:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--foreground);
+}
+input:focus,
+textarea:focus,
+select:focus {
+  transform: translateY(-1px);
+}
 .tone-blue :focus-visible,
 .tone-orange :focus-visible,
 .contact-aside :focus-visible,
@@ -2958,6 +3030,27 @@ body {
   }
   .latest-items {
     animation: none;
+  }
+  .route-enter,
+  .site-header,
+  .site-footer {
+    animation: none;
+  }
+  .motion-reveal,
+  .motion-reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .nav-item > a,
+  .header-contact,
+  .social-links a,
+  .tags li,
+  button,
+  input,
+  textarea,
+  select {
+    transition: none;
   }
 }
 
