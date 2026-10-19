@@ -164,8 +164,12 @@ export const organizations: Organization[] = [
     shortName: "AWS Student User Group PH",
     role: "Director for Marketing",
     period: "Dec 2025 - Present",
+    photo: "/experiences/aws-sug-ph-marketing-director.jpg",
+    photoAlt: "Reynald Quijano, Director for Marketing of AWS Student User Group Philippines",
+    photoFit: "contain",
+    link: "https://www.facebook.com/AWSCloudClubsPhilippines",
     description:
-      "Lead technical workshops and grow a 200+ member community of computing students on campus. As Director for Marketing, manage the group's brand identity and creative output.",
+      "Lead nationwide marketing for AWS Student User Group Philippines, managing the organization's brand identity, creative direction, and promotional output for its community and events across the country.",
     tags: ["Leadership", "Events", "Tech", "Marketing"],
     highlights: [
       "Manage the organization's brand identity and visual standards across digital and physical marketing channels.",
@@ -178,6 +182,10 @@ export const organizations: Organization[] = [
     shortName: "AWS Learning Club - Legarda",
     role: "Chief Executive Officer and Lead",
     period: "Jul 2025 - Present",
+    photo: "/experiences/aws-learning-club-legarda-ceo.jpg",
+    photoAlt: "Reynald Quijano, Chief Executive Officer of AWS Learning Club Legarda",
+    photoFit: "contain",
+    link: "https://www.facebook.com/awslclegarda",
     description:
       "Lead a 90+ member community focused on building students' technical and cloud-computing skills. Organized 5+ workshops attended by 80+ participants.",
     tags: ["Community Leadership", "Cloud", "Workshops"],
@@ -192,6 +200,10 @@ export const organizations: Organization[] = [
     shortName: "AWS Learning Club - Legarda",
     role: "Cloud Computing and Infrastructure Officer",
     period: "Aug 2024 - Jul 2025",
+    photo: "/experiences/aws-learning-club-legarda-cloud-officer.jpg",
+    photoAlt: "Reynald Quijano, Cloud Computing and Infrastructure Officer of AWS Learning Club Legarda",
+    photoFit: "contain",
+    link: "https://www.facebook.com/awslclegarda",
     description:
       "Supported the club's cloud-learning program as a resource speaker and technical officer.",
     tags: ["AWS", "Cloud Fundamentals", "Technical Events"],
@@ -205,6 +217,9 @@ export const organizations: Organization[] = [
     shortName: "NU Wizards' Circle",
     role: "Communications Coordinator",
     period: "Jul 2025 - Nov 2025",
+    photo: "/experiences/nu-wizards-circle.png",
+    photoAlt: "NU Wizards' Circle Revert organization banner",
+    link: "https://www.facebook.com/nuwizardscircle",
     description:
       "Coordinated communications and partnership outreach for NU Wizards' Circle and its four houses.",
     tags: ["Communications", "Partnerships", "External Relations"],
@@ -219,6 +234,9 @@ export const organizations: Organization[] = [
     shortName: "JBECP - NU Manila",
     role: "Operations Committee Member",
     period: "Aug 2024 - Nov 2025",
+    photo: "/experiences/jbecp-nu-manila.jpg",
+    photoAlt: "JBECP NU Manila Build-A-Block Campus Builders Program virtual event",
+    link: "https://www.facebook.com/jbecpnuph",
     description:
       "Supported the planning and delivery of blockchain education events and activities at NU Manila.",
     tags: ["Event Operations", "Documentation", "Budget Support"],
@@ -233,9 +251,8 @@ export const organizations: Organization[] = [
     shortName: "NU CCIT Student Council",
     role: "Director Auditor for Bookkeeping and Budgeting",
     period: "Aug 2024 - Nov 2025",
-    photo: "/experiences/nu-ccit-student-council.jpg",
-    photoAlt: "NU CCIT Student Council budgeting and bookkeeping committee poster featuring Reynald as director",
-    photoFit: "contain",
+    photo: "/experiences/nu-ccit-student-council-cultural-recall.jpg",
+    photoAlt: "NU CCIT Student Council members together at the Cultural Recall event",
     link: "https://www.facebook.com/ccitsc",
     description:
       "Oversaw financial records, budgets, and expense checks for the NU CCIT Student Council.",

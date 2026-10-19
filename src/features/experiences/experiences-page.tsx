@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
@@ -10,11 +11,22 @@ import { TitlePanel } from "@/components/ui/title-panel";
 import { pageLabels } from "@/components/ui/page-label";
 import { ExperiencePhoto } from "./experience-photo";
 
-const hackathons = projects.filter((project) => project.category === "Hackathon");
+const hackathons = projects.filter(
+  (project) => project.category === "Hackathon" || project.slug === "smartflood",
+);
+const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
+const tabKeys = ["orgs", "hackathons", "internships"] as const;
 
 export function ExperiencesPage() {
+  const query = useSearchParams().get("tab");
+  const router = useRouter();
+  const activeTab = query === "hackathons" ? 1 : query === "internships" ? 2 : 0;
   const [selected, setSelected] = useState(0);
   const org = organizations[selected];
+
+  function selectTab(index: number) {
+    router.replace(`/experiences?tab=${tabKeys[index]}`, { scroll: false });
+  }
 
   function move(direction: number) {
     setSelected((current) => (current + direction + organizations.length) % organizations.length);
@@ -32,8 +44,47 @@ export function ExperiencesPage() {
           className={editorialStyles.openingHero}
         />
       </TitlePanel>
-      <div className={styles.deck}>
-      <section className={styles.section} aria-labelledby="organizations-title">
+      <div className={styles.tabs} role="tablist" aria-label="Experience categories">
+        {tabs.map((name, index) => (
+          <button
+            type="button"
+            key={name}
+            id={`experience-tab-${index}`}
+            role="tab"
+            aria-selected={activeTab === index}
+            aria-controls="experience-panel"
+            tabIndex={activeTab === index ? 0 : -1}
+            onClick={() => selectTab(index)}
+            onKeyDown={(event) => {
+              const next = event.key === "ArrowRight"
+                ? (index + 1) % tabs.length
+                : event.key === "ArrowLeft"
+                  ? (index + tabs.length - 1) % tabs.length
+                  : event.key === "Home"
+                    ? 0
+                    : event.key === "End"
+                      ? tabs.length - 1
+                      : null;
+              if (next !== null) {
+                event.preventDefault();
+                selectTab(next);
+                document.getElementById(`experience-tab-${next}`)?.focus();
+              }
+            }}
+          >
+            <span className={styles.tabNumber} aria-hidden="true">0{index + 1}</span>
+            {name}
+          </button>
+        ))}
+      </div>
+      <div
+        id="experience-panel"
+        className={styles.panel}
+        role="tabpanel"
+        tabIndex={0}
+        aria-labelledby={`experience-tab-${activeTab}`}
+      >
+      <section className={styles.section} aria-labelledby="organizations-title" hidden={activeTab !== 0}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>01 / STUDENT ORGANIZATIONS</p>
           <h2 id="organizations-title">LEARNING WITH COMMUNITY.</h2>
@@ -65,7 +116,7 @@ export function ExperiencesPage() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="projects-title">
+      <section className={styles.section} aria-labelledby="projects-title" hidden={activeTab !== 1}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>02 / PROJECTS & HACKATHONS</p>
           <h2 id="projects-title">BUILDING WITH A TEAM.</h2>
@@ -73,7 +124,18 @@ export function ExperiencesPage() {
         </header>
         <div className={styles.projectGrid}>{hackathons.map((project, index) => (
           <article className={styles.project} key={project.slug}>
-            <ExperiencePhoto src={project.preview?.src} alt={project.preview?.alt ?? `${project.name} team or event photo`} />
+            {project.slug === "smartflood" ? (
+              <figure
+                className={`${styles.photo} ${styles.smartFloodPhoto}`}
+                role="img"
+                aria-label={project.preview?.alt ?? "SmartFlood project preview"}
+              />
+            ) : (
+              <ExperiencePhoto
+                src={project.preview?.src}
+                alt={project.preview?.alt ?? `${project.name} team or event photo`}
+              />
+            )}
             <div className={styles.projectMeta}><span className={styles.projectNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span>{project.year} / {project.category}</span></div>
             <p className={styles.recognition}>{project.recognition}</p><h3>{project.name}</h3>{project.subtitle && <p className={styles.projectSubtitle}>{project.subtitle}</p>}<p className={styles.description}>{project.description}</p>
             <EditorialTags items={project.tags} />
@@ -81,7 +143,7 @@ export function ExperiencesPage() {
         ))}</div>
       </section>
 
-      <section className={styles.section} aria-labelledby="internship-title">
+      <section className={styles.section} aria-labelledby="internship-title" hidden={activeTab !== 2}>
         <header className={styles.sectionHeading}>
           <p className={styles.eyebrow}>03 / INTERNSHIP</p>
           <h2 id="internship-title">LEARNING BY BUILDING.</h2>

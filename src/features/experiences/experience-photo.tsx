@@ -5,7 +5,20 @@ export function ExperiencePhoto({ src, alt, fit = "cover" }: { src?: string; alt
   return (
     <figure className={`${styles.photo} ${fit === "contain" ? styles.photoContain : ""}`} aria-label={src ? undefined : `Photo placeholder: ${alt}`}>
       {src ? (
-        <Image src={src} alt={alt} width={1280} height={720} sizes="(max-width: 700px) 90vw, 50vw" className={styles.photoImage} />
+        <>
+          {fit === "contain" && (
+            <Image
+              src={src}
+              alt=""
+              width={1280}
+              height={720}
+              sizes="(max-width: 700px) 90vw, 50vw"
+              className={styles.photoBackdrop}
+              aria-hidden="true"
+            />
+          )}
+          <Image src={src} alt={alt} width={1280} height={720} sizes="(max-width: 700px) 90vw, 50vw" className={styles.photoImage} />
+        </>
       ) : (
         <div className={styles.photoPlaceholder}>
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
