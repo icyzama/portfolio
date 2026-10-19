@@ -11,6 +11,7 @@ import pageStyles from "@/components/ui/page-system.module.css";
 import { TitlePanel } from "@/components/ui/title-panel";
 
 const categories = ["All", "Hackathon", "University Project"];
+const categoryLabels = ["All Projects", "Hackathons", "University Projects"];
 export function ProjectsPage() {
   const [category, setCategory] = useState("All");
   const [selected, setSelected] = useState<Project | null>(null);
@@ -25,12 +26,41 @@ export function ProjectsPage() {
       <TitlePanel label="Projects introduction">
         <EditorialHero label={pageLabels.projects} title="SELECTED" highlight="WORK." description="Interfaces, applications, and ideas built through university projects and hackathons." topics={["FULL STACK", "UI/UX", "TEAMWORK"]} className={styles.openingHero} />
       </TitlePanel>
-      <div className={styles.filters} role="group" aria-label="Filter projects">
-        {categories.map((item) => <button type="button" key={item} aria-pressed={category === item} onClick={() => setCategory(item)}>{item}</button>)}
-        <span className={styles.filterStatus} role="status">{visible.length} {visible.length === 1 ? "PROJECT" : "PROJECTS"}</span>
+      <div className={`${styles.filters} ${styles.projectTabs}`} role="tablist" aria-label="Project categories">
+        {categories.map((item, index) => (
+          <button
+            type="button"
+            key={item}
+            id={`project-tab-${index}`}
+            role="tab"
+            aria-selected={category === item}
+            aria-controls="projects-panel"
+            tabIndex={category === item ? 0 : -1}
+            onClick={() => setCategory(item)}
+            onKeyDown={(event) => {
+              const next = event.key === "ArrowRight"
+                ? (index + 1) % categories.length
+                : event.key === "ArrowLeft"
+                  ? (index + categories.length - 1) % categories.length
+                  : event.key === "Home"
+                    ? 0
+                    : event.key === "End"
+                      ? categories.length - 1
+                      : null;
+              if (next !== null) {
+                event.preventDefault();
+                setCategory(categories[next]);
+                document.getElementById(`project-tab-${next}`)?.focus();
+              }
+            }}
+          >
+            <span className={styles.tabNumber} aria-hidden="true">0{index + 1}</span>
+            {categoryLabels[index]}
+          </button>
+        ))}
       </div>
-      <section className={styles.section} aria-label="Selected projects">
-        <div className={styles.grid}>
+      <section id="projects-panel" className={styles.section} role="tabpanel" aria-labelledby={`project-tab-${categories.indexOf(category)}`}>
+        <div className={`${styles.grid} ${category !== "All" ? styles.compactProjectGrid : ""}`}>
           {visible.map((project) => (
             <article className={styles.card} key={project.slug}>
               <div className={styles.meta}><span className={styles.number} aria-hidden="true">{String(projects.indexOf(project) + 1).padStart(2, "0")}</span><span>{project.year}<br />{project.category}</span></div>
