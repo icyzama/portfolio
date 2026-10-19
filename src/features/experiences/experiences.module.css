@@ -8,8 +8,8 @@
 .photoPlaceholder svg { color: var(--text-muted, #4c4b46); }
 .photoPlaceholder span { background: var(--background); padding: 6px 10px; font-size: 9px; font-weight: 800; letter-spacing: 1px; line-height: 1.5; }
 .eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 1.2px; line-height: 1.6; }
-.tabs { position: sticky; top: 0; z-index: 18; display: flex; overflow-x: auto; border-bottom: var(--rule); background: var(--background); scrollbar-width: thin; }
-.tabs button { display: flex; flex: 1 0 auto; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 14px 22px; border: 0; border-right: var(--rule); background: var(--background); font-size: 12px; font-weight: 800; }
+.tabs { position: sticky; top: 0; z-index: 18; display: flex; overflow: hidden; border-bottom: var(--rule); background: var(--background); }
+.tabs button { display: flex; flex: 1 1 0; min-width: 0; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 14px 22px; border: 0; border-right: var(--rule); background: var(--background); font-size: 12px; font-weight: 800; white-space: normal; text-align: center; }
 .tabs button:last-child { border-right: 0; }
 .tabs button[aria-selected="true"] { background: var(--foreground); color: var(--background); }
 .tabs button:focus-visible { outline-color: var(--foreground); outline-offset: -5px; }
@@ -17,7 +17,14 @@
 .panel { min-height: 0; }
 .panel:focus-visible { outline-color: var(--foreground); outline-offset: -5px; }
 .organizationGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-.organizationCard { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: var(--rule); background: var(--background); box-shadow: var(--shadow-card, 5px 5px 0 var(--foreground)); }
+.organizationCard { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: var(--rule); background: var(--background); box-shadow: var(--shadow-card, 5px 5px 0 var(--foreground)); animation: card-rise 520ms cubic-bezier(.2, .75, .25, 1) both; transition: transform 180ms ease, box-shadow 180ms ease; }
+.organizationCard:nth-child(2) { animation-delay: 60ms; }
+.organizationCard:nth-child(3) { animation-delay: 120ms; }
+.organizationCard:nth-child(4) { animation-delay: 180ms; }
+.organizationCard:nth-child(5) { animation-delay: 240ms; }
+.organizationCard:nth-child(6) { animation-delay: 300ms; }
+.organizationCard:nth-child(7) { animation-delay: 360ms; }
+.organizationCard:nth-child(8) { animation-delay: 420ms; }
 .organizationCard > .photo { height: clamp(220px, 23vw, 330px); margin: 0; border: 0; border-bottom: var(--rule); }
 .organizationCardBody { display: flex; flex: 1; min-width: 0; flex-direction: column; padding: clamp(20px, 2.2vw, 30px); }
 .organizationCardBody h3 { margin-top: 8px; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.12; letter-spacing: -.04em; white-space: normal; }
@@ -39,7 +46,9 @@
 .sectionDescription { max-width: 600px; margin-top: 2px; color: var(--text-muted, #4c4b46); font-size: 13px; line-height: 1.7; }
 .sectionHeading h2 { font-size: clamp(23px, 3vw, 36px); line-height: 1.25; white-space: normal; letter-spacing: -.035em; }
 .projectGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-right: 5px; }
-.project { display: flex; flex-direction: column; border: var(--rule); padding: clamp(14px, 1.35vw, 19px); box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground)); }
+.project { display: flex; flex-direction: column; border: var(--rule); padding: clamp(14px, 1.35vw, 19px); box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground)); animation: card-rise 460ms cubic-bezier(.2, .75, .25, 1) both; transition: transform 180ms ease, box-shadow 180ms ease; }
+.project:nth-child(2) { animation-delay: 80ms; }
+.project:nth-child(3) { animation-delay: 160ms; }
 .project > .photo { height: clamp(110px, 10vw, 145px); }
 .projectMeta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .projectNumber { font-family: var(--font-archivo-black); font-size: 26px; line-height: 1; letter-spacing: -.06em; color: var(--orange); }
@@ -48,7 +57,7 @@
 .project h3 { font-size: clamp(20px, 1.8vw, 25px); white-space: normal; letter-spacing: -.035em; margin: 8px 0 6px; }
 .projectSubtitle { margin: -4px 0 12px; color: var(--text-muted, #4c4b46); font-size: 12px; font-weight: 700; line-height: 1.55; }
 .project > .description { flex: 1; }
-.internship { display: grid; grid-template-columns: minmax(200px, .7fr) minmax(0, 2fr); border: var(--rule); box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground)); }
+.internship { display: grid; grid-template-columns: minmax(200px, .7fr) minmax(0, 2fr); border: var(--rule); box-shadow: var(--shadow-card, 4px 4px 0 var(--foreground)); animation: card-rise 520ms cubic-bezier(.2, .75, .25, 1) both; transition: transform 180ms ease, box-shadow 180ms ease; }
 .internshipMeta { padding: 24px; background: var(--orange); border-right: var(--rule); }
 .internshipMeta > p:nth-child(2) { margin-top: 26px; font-size: 16px; font-weight: 800; line-height: 1.7; }
 .internshipMeta > p:nth-child(2) span { font-size: 12px; }
@@ -58,8 +67,16 @@
 .internshipCopy .photo { background: var(--background); }
 .internshipCopy .photoPlaceholder { background: var(--background); color: var(--foreground); outline-color: rgba(15, 15, 15, .34); }
 .internshipCopy .photoPlaceholder span { background: var(--background); color: var(--foreground); }
+@keyframes card-rise {
+  from { opacity: 0; transform: translateY(22px) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 @media (hover: hover) {
   .tabs button:not([aria-selected="true"]):hover { background: var(--surface-hover, #e9e5dc); }
+  .organizationCard:hover, .project:hover, .internship:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--foreground); }
+  .organizationCard .photoImage, .project .photoImage, .internship .photoImage { transition: transform 420ms cubic-bezier(.2, .75, .25, 1), filter 220ms ease; }
+  .organizationCard:hover .photoImage, .project:hover .photoImage, .internship:hover .photoImage { transform: scale(1.035); filter: saturate(1.08); }
+  .organizationCard .orgLink:hover { transform: translate(-2px, -2px); }
 }
 @media (max-width: 1000px) {
   .organizationGrid { grid-template-columns: 1fr; }
@@ -73,4 +90,8 @@
   .internshipMeta > p:nth-child(2) { margin-top: 12px; }
   .current { margin-top: 14px; }
   .internshipCopy { padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .organizationCard, .project, .internship { animation: none; transition: none; }
+  .organizationCard .photoImage, .project .photoImage, .internship .photoImage { transition: none; }
 }
