@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
@@ -21,15 +20,9 @@ export function ExperiencesPage() {
   const query = useSearchParams().get("tab");
   const router = useRouter();
   const activeTab = query === "hackathons" ? 1 : query === "internships" ? 2 : 0;
-  const [selected, setSelected] = useState(0);
-  const org = organizations[selected];
 
   function selectTab(index: number) {
     router.replace(`/experiences?tab=${tabKeys[index]}`, { scroll: false });
-  }
-
-  function move(direction: number) {
-    setSelected((current) => (current + direction + organizations.length) % organizations.length);
   }
 
   return (
@@ -90,29 +83,24 @@ export function ExperiencesPage() {
           <h2 id="organizations-title">LEARNING WITH COMMUNITY.</h2>
           <p className={styles.sectionDescription}>Taking on student leadership roles and creating opportunities to learn and build together.</p>
         </header>
-        <div className={styles.organizations}>
-          <aside className={styles.directory} aria-label="All organization roles">
-            <div className={styles.directoryHeading}><h3>COMMUNITY & LEADERSHIP</h3><span>{organizations.length} ROLES</span></div>
-            {organizations.map((item, index) => (
-              <button type="button" key={`${item.name}-${index}`} aria-pressed={selected === index} aria-controls="organization-detail" onClick={() => setSelected(index)}>
-                <span className={styles.rowNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <span className={styles.directoryCopy}><strong>{item.shortName}</strong><span>{item.role}</span><small>{item.period}</small></span>
-                <span className={styles.arrow} aria-hidden="true">↗</span>
-              </button>
-            ))}
-          </aside>
-          <div className={styles.feature}>
-            <article id="organization-detail" className={styles.detail} aria-live="polite" aria-atomic="true">
-              <div className={styles.detailMeta}><p className={styles.eyebrow}>STUDENT ORGANIZATION</p><span>{String(selected + 1).padStart(2, "0")} / {String(organizations.length).padStart(2, "0")}</span></div>
-              <ExperiencePhoto src={org.photo} alt={org.photoAlt ?? `${org.name} event photo with Reynald and fellow members`} fit={org.photoFit} />
-              <h3>{org.name}</h3><p className={styles.role}>{org.role}</p><p className={styles.period}>{org.period}</p>
-              <p className={styles.description}>{org.description}</p>
-              {"highlights" in org && org.highlights && <div className={styles.contributions}><h4>HOW I CONTRIBUTE</h4><ul>{org.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>}
-              <EditorialTags items={org.tags} />
-              {org.link && <a className={`${pageStyles.button} ${styles.orgLink}`} href={org.link} target="_blank" rel="noreferrer">VIEW ORGANIZATION ON FACEBOOK <span aria-hidden="true">↗</span></a>}
+        <div className={styles.organizationGrid}>
+          {organizations.map((item, index) => (
+            <article className={styles.organizationCard} key={`${item.name}-${item.role}`}>
+              <ExperiencePhoto src={item.photo} alt={item.photoAlt ?? `${item.name} event photo`} fit={item.photoFit} />
+              <div className={styles.organizationCardBody}>
+                <p className={styles.eyebrow}>{String(index + 1).padStart(2, "0")} / {String(organizations.length).padStart(2, "0")} · STUDENT ORGANIZATION</p>
+                <h3>{item.name}</h3>
+                <p className={styles.role}>{item.role}</p>
+                <p className={styles.period}>{item.period}</p>
+                <p className={styles.description}>{item.description}</p>
+                {item.highlights && <div className={styles.contributions}><h4>HOW I CONTRIBUTE</h4><ul>{item.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div>}
+                <div className={styles.organizationCardFooter}>
+                  <EditorialTags items={item.tags} />
+                  {item.link && <a className={`${pageStyles.button} ${styles.orgLink}`} href={item.link} target="_blank" rel="noreferrer">VIEW ORGANIZATION <span aria-hidden="true">↗</span></a>}
+                </div>
+              </div>
             </article>
-            <div className={styles.navigation}><button className={pageStyles.button} type="button" onClick={() => move(-1)} aria-label="Previous organization role">← PREVIOUS</button><button className={pageStyles.button} type="button" onClick={() => move(1)} aria-label="Next organization role">NEXT →</button></div>
-          </div>
+          ))}
         </div>
       </section>
 
