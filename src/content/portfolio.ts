@@ -268,8 +268,8 @@ export const organizations: Organization[] = [
     shortName: "Google Developers on Campus - NU Manila",
     role: "Office of the Vice President - Externals Officer",
     period: "Aug 2024 - Jul 2025",
-    photo: "/experiences/gdsc-nu-manila-talagahay.jpg",
-    photoAlt: "Google Developer Student Clubs NU Manila Talaghay creative banner",
+    photo: "/experiences/gdsc-nu-manila-teamwork.jpg",
+    photoAlt: "Google Developer Student Clubs NU Manila Teamwork banner",
     link: "https://www.facebook.com/gdgoc.numanila",
     description:
       "Coordinated with external organizations, industry professionals, and student communities to support GDG on Campus initiatives.",
@@ -284,8 +284,8 @@ export const organizations: Organization[] = [
     shortName: "Google Developers on Campus - NU Manila",
     role: "Creative Committee Member",
     period: "Aug 2023 - Jul 2024",
-    photo: "/experiences/gdsc-nu-manila-talagahay.jpg",
-    photoAlt: "Google Developer Student Clubs NU Manila Talaghay creative banner",
+    photo: "/experiences/gdsc-nu-manila-teamwork.jpg",
+    photoAlt: "Google Developer Student Clubs NU Manila Teamwork banner",
     link: "https://www.facebook.com/gdgoc.numanila",
     description:
       "Created visual and promotional materials for Google Developers on Campus events and initiatives.",
