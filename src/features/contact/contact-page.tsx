@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { Asset } from "@/components/ui/design";
 import { EditorialHero } from "@/components/ui/editorial";
 import editorialStyles from "@/components/ui/editorial.module.css";
-import { profile } from "@/content/portfolio";
+import { profile } from "@/content/profile";
 import successStyles from "./contact-success.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { TitlePanel } from "@/components/ui/title-panel";

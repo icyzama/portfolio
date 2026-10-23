@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
+import { PreviewImage } from "@/components/ui/preview-image";
 import { Asset } from "@/components/ui/design";
 import { EditorialHero, EditorialTags, EditorialLink } from "@/components/ui/editorial";
 import { projects, type Project } from "@/content/portfolio";
@@ -75,11 +75,10 @@ export function ProjectsPage() {
                     className={styles.previewBackdrop}
                     style={{ backgroundImage: project.preview.blurDataURL ? `url(${project.preview.blurDataURL})` : undefined }}
                   />
-                  <Image
+                  <PreviewImage
                     src={project.preview.src}
                     alt={project.preview.alt}
                     sizes={category === "All" ? "(max-width: 700px) calc(100vw - 96px), (max-width: 970px) 40vw, (max-width: 1300px) 27vw, 20vw" : "(max-width: 700px) calc(100vw - 96px), 300px"}
-                    loading="lazy"
                     className={`${styles.previewImage} ${project.preview.zoom ? styles.previewZoom : ""} ${project.preview.cropTop ? styles.previewCropTop : ""}`}
                     fill
                   />

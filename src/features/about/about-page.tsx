@@ -1,4 +1,5 @@
 import Image from "next/image";
+import portrait from "../../../public/figma/about-img74051.png";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { ActionLink } from "@/components/ui/design";
 import { EditorialHero } from "@/components/ui/editorial";
@@ -122,7 +123,7 @@ export function AboutPage() {
         <figure className={styles.portraitPanel}>
           <div className={styles.portraitMeta}><span>MANILA, PHILIPPINES</span><span aria-hidden="true">↗</span></div>
           <div className={styles.portraitFrame}><Image
-            src="/figma/about-img74051.png"
+            src={portrait}
             width={1279}
             height={1919}
             sizes="(max-width: 700px) 300px, (max-width: 1100px) 32vw, 360px"

@@ -108,6 +108,7 @@ export async function POST(request: Request) {
     const content = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
     const sent = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      cache: "no-store",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: `Reynald's Portfolio <${sender}>`,
