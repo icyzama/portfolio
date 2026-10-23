@@ -10,7 +10,8 @@
     "qa": "node scripts/qa.mjs",
     "qa:contact": "node scripts/qa.mjs --contact-only",
     "qa:images": "node --test scripts/preview-image.test.mjs",
-    "qa:cache": "node --test scripts/cache.test.mjs"
+    "qa:cache": "node --test scripts/cache.test.mjs",
+    "qa:contact-ui": "node --test scripts/contact-page.test.mjs"
   },
   "dependencies": {
     "next": "16.4.2",

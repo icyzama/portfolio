@@ -80,6 +80,9 @@ export async function POST(request: Request) {
   const sender = process.env.CONTACT_FROM_EMAIL?.trim();
   const recipient = process.env.CONTACT_TO_EMAIL?.trim() || profile.email;
   if (!apiKey || !sender || !emailPattern.test(sender) || !emailPattern.test(recipient)) {
+    console.error("Contact email configuration is missing or invalid", {
+      apiKeyPresent: Boolean(apiKey), senderValid: Boolean(sender && emailPattern.test(sender)), recipientValid: emailPattern.test(recipient),
+    });
     return reply(503, "The contact form is temporarily unavailable. Please use the email link above.");
   }
 
@@ -104,6 +107,7 @@ export async function POST(request: Request) {
   attempt.count += 1;
   attempts.set(key, attempt);
 
+  let providerStatus: number | undefined;
   try {
     const content = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
     const sent = await fetch("https://api.resend.com/emails", {
@@ -119,13 +123,16 @@ export async function POST(request: Request) {
       }),
       signal: AbortSignal.timeout(15_000),
     });
+    providerStatus = sent.status;
     if (!sent.ok) throw new Error("Message not accepted");
     const result: unknown = await sent.json();
     if (!result || typeof result !== "object" || !("id" in result) || typeof result.id !== "string" || !result.id.trim()) {
       throw new Error("Message not accepted");
     }
+    console.info("Contact email accepted by Resend", { messageId: result.id });
     return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
   } catch {
+    console.error("Contact email delivery failed", { providerStatus: providerStatus ?? null });
     return reply(502, "Your message could not be sent. Please try again later or use the email link above.");
   }
 }

@@ -42,4 +42,12 @@ Run `node scripts/qa.mjs --contact-only` for isolated handler checks. Resend req
 
 A live delivery check requires a configured Resend account and verified sender domain. Send one deliberate message from the form, check the Resend dashboard and Gmail inbox, and verify Reply-To and HTML/plain-text rendering. Live delivery is separate from the mocked checks.
 
+## If an email does not arrive
+
+- Note whether the form reports success or an error, and whether the test was on localhost or a deployed website. Local `.env.local` settings do not configure the hosting environment; add the variables to the host and redeploy there.
+- With `onboarding@resend.dev`, the destination must match the Resend account email. Open Resend's **Emails** page for the request's delivery status and check the recipient inbox/spam folder.
+- The server logs acceptance with the Resend message ID, provider failure with its HTTP status, or missing/invalid configuration with boolean flags. It does not log credentials, recipient addresses, or message content. Acceptance confirms a provider request, not inbox placement.
+- A sending-only API key cannot list sent emails through the API. Inspect the Resend dashboard rather than increasing the application's API-key permissions just for diagnosis.
+- The sending modal reflects the actual pending request. A failure closes it, shows the form error, restores focus, and preserves the draft for retry. Closing the progress dialog with Escape hides progress without cancelling an already-running request.
+
 References: [Resend sending API](https://resend.com/docs/api-reference/emails/send-email), [Resend domain verification](https://resend.com/docs/dashboard/domains/introduction).
