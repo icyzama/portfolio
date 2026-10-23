@@ -1,0 +1,116 @@
+{
+  "label": "before",
+  "generatedAt": "2026-10-23T09:34:54.920Z",
+  "htmlBytes": 33057,
+  "method": "HTTP response bytes for source-set candidates selected from server HTML at 390px and 1440px with DPR 2. Candidate selection models the existing sizes attributes. Not a browser network capture, visual check, or full-page transfer measurement.",
+  "measurements": [
+    {
+      "viewport": 390,
+      "devicePixelRatio": 2,
+      "projectNetworkImageElements": 8,
+      "predictedUniqueRequests": 8,
+      "imageResponseBytes": 77522,
+      "requests": [
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fsmartflood.png&w=32&q=75",
+          "bytes": 260,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fsmartflood.png&w=640&q=75",
+          "bytes": 18780,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fdalo.png&w=32&q=75",
+          "bytes": 138,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fdalo.png&w=640&q=75",
+          "bytes": 8322,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fecobridge.png&w=32&q=75",
+          "bytes": 206,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fecobridge.png&w=640&q=75",
+          "bytes": 16414,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fkuryentech-team.jpg&w=32&q=75",
+          "bytes": 442,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fkuryentech-team.jpg&w=640&q=75",
+          "bytes": 32960,
+          "contentType": "image/webp"
+        }
+      ]
+    },
+    {
+      "viewport": 1440,
+      "devicePixelRatio": 2,
+      "projectNetworkImageElements": 8,
+      "predictedUniqueRequests": 8,
+      "imageResponseBytes": 113074,
+      "requests": [
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fsmartflood.png&w=32&q=75",
+          "bytes": 260,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fsmartflood.png&w=828&q=75",
+          "bytes": 26706,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fdalo.png&w=32&q=75",
+          "bytes": 138,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fdalo.png&w=828&q=75",
+          "bytes": 13778,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fecobridge.png&w=32&q=75",
+          "bytes": 206,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fecobridge.png&w=828&q=75",
+          "bytes": 22022,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fkuryentech-team.jpg&w=32&q=75",
+          "bytes": 442,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2Fprojects%2Fkuryentech-team.jpg&w=828&q=75",
+          "bytes": 49522,
+          "contentType": "image/webp"
+        }
+      ]
+    }
+  ],
+  "smartFlood": {
+    "original": {
+      "bytes": 1206251,
+      "contentType": "image/png"
+    },
+    "optimized640": {
+      "bytes": 18780,
+      "contentType": "image/webp"
+    }
+  }
+}

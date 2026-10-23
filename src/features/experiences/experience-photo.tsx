@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./experiences.module.css";
 
-export function ExperiencePhoto({ src, alt, fit = "cover" }: { src?: string; alt: string; fit?: "cover" | "contain" }) {
+export function ExperiencePhoto({ src, alt, fit = "cover", sizes = "(max-width: 1000px) 90vw, 46vw" }: { src?: string; alt: string; fit?: "cover" | "contain"; sizes?: string }) {
   return (
     <figure className={`${styles.photo} ${fit === "contain" ? styles.photoContain : ""}`} aria-label={src ? undefined : `Photo placeholder: ${alt}`}>
       {src ? (
@@ -12,12 +12,13 @@ export function ExperiencePhoto({ src, alt, fit = "cover" }: { src?: string; alt
               alt=""
               width={1280}
               height={720}
-              sizes="(max-width: 700px) 90vw, 50vw"
+              sizes={sizes}
+              loading="lazy"
               className={styles.photoBackdrop}
               aria-hidden="true"
             />
           )}
-          <Image src={src} alt={alt} width={1280} height={720} sizes="(max-width: 700px) 90vw, 50vw" className={styles.photoImage} />
+          <Image src={src} alt={alt} width={1280} height={720} sizes={sizes} loading="lazy" className={styles.photoImage} />
         </>
       ) : (
         <div className={styles.photoPlaceholder}>

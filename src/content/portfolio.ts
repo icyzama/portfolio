@@ -1,3 +1,8 @@
+import smartFloodImage from "../../public/projects/smartflood.png";
+import daloImage from "../../public/projects/dalo.png";
+import ecoBridgeImage from "../../public/projects/ecobridge.png";
+import kuryentechImage from "../../public/projects/kuryentech-team.jpg";
+
 export const profile = {
   name: "Reynald Quijano",
   email: "quijanorrq@gmail.com",
@@ -61,7 +66,7 @@ export type Project = {
   icon?: string;
   liveUrl?: string;
   sourceUrl?: string;
-  preview?: { src: string; alt: string; zoom?: boolean; cropTop?: boolean };
+  preview?: { src: string; alt: string; blurDataURL?: string; zoom?: boolean; cropTop?: boolean };
 };
 
 export const projects: Project[] = [
@@ -73,7 +78,8 @@ export const projects: Project[] = [
     liveUrl: "https://smart-flood-landing-page-hb6z.vercel.app",
     sourceUrl: "https://github.com/wendev27/SmartFlood-V4",
     preview: {
-      src: "/projects/smartflood.png",
+      src: smartFloodImage.src,
+      blurDataURL: smartFloodImage.blurDataURL,
       alt: "SmartFlood landing page showing flood alerts and a solar-powered monitoring device",
       zoom: true,
     },
@@ -93,7 +99,8 @@ export const projects: Project[] = [
     subtitle: "Where Every Event Becomes an Experience",
     sourceUrl: "https://github.com/jamenggay/Event-Registration-System",
     preview: {
-      src: "/projects/dalo.png",
+      src: daloImage.src,
+      blurDataURL: daloImage.blurDataURL,
       alt: "DALO event platform login page with a colorful logo and sign-in form",
       zoom: true,
       cropTop: true,
@@ -114,7 +121,8 @@ export const projects: Project[] = [
     subtitle: "Sustainable Resource Redistribution System",
     sourceUrl: "https://github.com/DDoS-Depressed-Devs-on-Site/EcoBridge-Full",
     preview: {
-      src: "/projects/ecobridge.png",
+      src: ecoBridgeImage.src,
+      blurDataURL: ecoBridgeImage.blurDataURL,
       alt: "EcoBridge homepage with its forest-themed design and AI-assisted donation matching message",
     },
     recognition: "GDSC-L Hackfest 2025 Entry",
@@ -130,7 +138,8 @@ export const projects: Project[] = [
     name: "Kuryentech",
     sourceUrl: "https://github.com/0CottonBuds/KuryenTech",
     preview: {
-      src: "/projects/kuryentech-team.jpg",
+      src: kuryentechImage.src,
+      blurDataURL: kuryentechImage.blurDataURL,
       alt: "The four-member Kuryentech team holding certificates at the IDOL hackathon",
     },
     recognition: "Top 15 Nationally - Philippines",
