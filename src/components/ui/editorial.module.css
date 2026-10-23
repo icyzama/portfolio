@@ -33,7 +33,7 @@
 .description { font-size: 13px; line-height: 1.75; color: var(--text-muted, #4c4b46); }
 .card > .description { flex: 1; }
 .projectPreview { position: relative; width: 100%; aspect-ratio: 16 / 9; flex-shrink: 0; overflow: hidden; margin: 20px 0 0; border: var(--rule); background: var(--background); }
-.previewBackdrop { object-fit: cover; filter: blur(14px) brightness(.72); transform: scale(1.06); }
+.previewBackdrop { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(14px) brightness(.72); transform: scale(1.06); }
 .previewImage { z-index: 1; object-fit: contain; object-position: center; }
 .previewZoom { object-fit: cover; }
 .previewCropTop { transform: translateY(-4%) scale(1.18); transform-origin: center; }

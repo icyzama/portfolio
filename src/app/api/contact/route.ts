@@ -1,6 +1,7 @@
-import nodemailer from "nodemailer";
 import { createHash } from "node:crypto";
+import { isIP } from "node:net";
 import { profile } from "@/content/portfolio";
+import { contactEmail } from "@/features/contact/contact-email";
 
 export const runtime = "nodejs";
 
@@ -60,7 +61,7 @@ export async function POST(request: Request) {
     collaboration: "Collaboration",
     general: "General question",
   };
-  const topicLabel = topicLabels[topic];
+  const topicLabel = Object.hasOwn(topicLabels, topic) ? topicLabels[topic] : undefined;
   const organization = read("organization");
   const timeline = read("timeline");
   const timelineLabels: Record<string, string> = {
@@ -69,22 +70,30 @@ export async function POST(request: Request) {
     "one-to-three-months": "1–3 months",
     flexible: "Flexible / still planning",
   };
-  const timelineLabel = timelineLabels[timeline];
+  const timelineLabel = Object.hasOwn(timelineLabels, timeline) ? timelineLabels[timeline] : undefined;
   const message = read("message");
   if (!name || name.length > 100 || !emailPattern.test(email) || email.length > 254 || !topicLabel || organization.length > 120 || /[\r\n\0]/.test(name + email + organization) || (timeline && (!timelineLabel || topic !== "project")) || !message || message.length > 5000 || /\0/.test(message)) {
     return reply(400, "Please enter a valid name, email, reason for reaching out, and message within the form limits.");
   }
 
-  const user = process.env.GMAIL_USER?.trim();
-  const password = process.env.GMAIL_APP_PASSWORD?.replace(/\s/g, "");
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const sender = process.env.CONTACT_FROM_EMAIL?.trim();
   const recipient = process.env.CONTACT_TO_EMAIL?.trim() || profile.email;
-  if (!user || !password || !emailPattern.test(user) || !emailPattern.test(recipient)) {
+  if (!apiKey || !sender || !emailPattern.test(sender) || !emailPattern.test(recipient)) {
     return reply(503, "The contact form is temporarily unavailable. Please use the email link above.");
   }
 
   const now = Date.now();
   for (const [key, attempt] of attempts) if (attempt.expires <= now) attempts.delete(key);
-  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  // Only trust a header our deployment proxy overwrites. Unknown clients share a
+  // conservative bucket rather than letting caller-selected headers bypass it.
+  const trustedHeader = process.env.VERCEL === "1"
+    ? "x-vercel-forwarded-for"
+    : process.env.CONTACT_TRUSTED_IP_HEADER?.trim();
+  const forwarded = trustedHeader && /^[a-z0-9-]+$/i.test(trustedHeader)
+    ? request.headers.get(trustedHeader)?.trim()
+    : undefined;
+  const ip = forwarded && isIP(forwarded) ? forwarded : "untrusted";
   const key = createHash("sha256").update(ip).digest("hex");
   const attempt = attempts.get(key) || { count: 0, expires: now + windowMs };
   if (attempt.count >= 5) {
@@ -95,30 +104,27 @@ export async function POST(request: Request) {
   attempt.count += 1;
   attempts.set(key, attempt);
 
-  const transport = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: { user, pass: password },
-    connectionTimeout: 10_000,
-    greetingTimeout: 10_000,
-    socketTimeout: 15_000,
-    disableFileAccess: true,
-    disableUrlAccess: true,
-  });
   try {
-    const sent = await transport.sendMail({
-      from: { name: "Reynald's Portfolio", address: user },
-      to: recipient,
-      replyTo: { name, address: email },
-      subject: `[Portfolio] ${topicLabel}`,
-      text: `New message from your portfolio\n\nName: ${name}\nEmail: ${email}\nReason: ${topicLabel}\nOrganization: ${organization || "Not provided"}${timelineLabel ? `\nProject timeline: ${timelineLabel}` : ""}\n\n${message}`,
+    const content = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
+    const sent = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: `Reynald's Portfolio <${sender}>`,
+        to: [recipient],
+        reply_to: email,
+        subject: `[Portfolio] ${topicLabel}`,
+        ...content,
+      }),
+      signal: AbortSignal.timeout(15_000),
     });
-    if (!sent.accepted.length) throw new Error("Message not accepted");
+    if (!sent.ok) throw new Error("Message not accepted");
+    const result: unknown = await sent.json();
+    if (!result || typeof result !== "object" || !("id" in result) || typeof result.id !== "string" || !result.id.trim()) {
+      throw new Error("Message not accepted");
+    }
     return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
   } catch {
     return reply(502, "Your message could not be sent. Please try again later or use the email link above.");
-  } finally {
-    transport.close();
   }
 }

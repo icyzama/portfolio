@@ -1,0 +1,76 @@
+{
+  "label": "after",
+  "generatedAt": "2026-10-23T09:42:33.668Z",
+  "htmlBytes": 28975,
+  "method": "HTTP response bytes for source-set candidates selected from server HTML at 390px and 1440px with DPR 2. Candidate selection models the existing sizes attributes. Not a browser network capture, visual check, or full-page transfer measurement.",
+  "measurements": [
+    {
+      "viewport": 390,
+      "devicePixelRatio": 2,
+      "projectNetworkImageElements": 4,
+      "predictedUniqueRequests": 4,
+      "imageResponseBytes": 76476,
+      "requests": [
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsmartflood.3n6ubsd25_jkx.png&w=640&q=75",
+          "bytes": 18780,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdalo.442uy36ife0ss.png&w=640&q=75",
+          "bytes": 8322,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fecobridge.0z83agpct4hwo.png&w=640&q=75",
+          "bytes": 16414,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fkuryentech-team.31_51kxw7h3_s.jpg&w=640&q=75",
+          "bytes": 32960,
+          "contentType": "image/webp"
+        }
+      ]
+    },
+    {
+      "viewport": 1440,
+      "devicePixelRatio": 2,
+      "projectNetworkImageElements": 4,
+      "predictedUniqueRequests": 4,
+      "imageResponseBytes": 76476,
+      "requests": [
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsmartflood.3n6ubsd25_jkx.png&w=640&q=75",
+          "bytes": 18780,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdalo.442uy36ife0ss.png&w=640&q=75",
+          "bytes": 8322,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fecobridge.0z83agpct4hwo.png&w=640&q=75",
+          "bytes": 16414,
+          "contentType": "image/webp"
+        },
+        {
+          "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fkuryentech-team.31_51kxw7h3_s.jpg&w=640&q=75",
+          "bytes": 32960,
+          "contentType": "image/webp"
+        }
+      ]
+    }
+  ],
+  "smartFlood": {
+    "original": {
+      "bytes": 1206251,
+      "contentType": "image/png"
+    },
+    "optimized640": {
+      "bytes": 18780,
+      "contentType": "image/webp"
+    }
+  }
+}

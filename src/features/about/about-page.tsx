@@ -131,7 +131,7 @@ export function AboutPage() {
             preload
           /></div>
           <figcaption className={styles.role}><span className={styles.eyebrow}>CURRENTLY AT NEXVISION</span><strong>Full Stack Developer Intern</strong></figcaption>
-          <p className={styles.graduation}>EXPECTED GRADUATION / SEPTEMBER 2027</p>
+          <p className={styles.graduation}>EXPECTED GRADUATION / {profile.expectedGraduation.toUpperCase()}</p>
         </figure>
         <div className={styles.expertise} aria-label="How I contribute">
           {[

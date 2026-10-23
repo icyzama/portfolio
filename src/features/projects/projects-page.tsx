@@ -70,18 +70,16 @@ export function ProjectsPage() {
               <p className={styles.description}>{project.description}</p>
               {project.preview && (
                 <figure className={styles.projectPreview}>
-                  <Image
-                    src={project.preview.src}
-                    alt=""
-                    fill
-                    sizes="1px"
+                  <div
                     aria-hidden="true"
                     className={styles.previewBackdrop}
+                    style={{ backgroundImage: project.preview.blurDataURL ? `url(${project.preview.blurDataURL})` : undefined }}
                   />
                   <Image
                     src={project.preview.src}
                     alt={project.preview.alt}
-                    sizes="(max-width: 700px) calc(100vw - 96px), (max-width: 1000px) 42vw, 28vw"
+                    sizes={category === "All" ? "(max-width: 700px) calc(100vw - 96px), (max-width: 970px) 40vw, (max-width: 1300px) 27vw, 20vw" : "(max-width: 700px) calc(100vw - 96px), 300px"}
+                    loading="lazy"
                     className={`${styles.previewImage} ${project.preview.zoom ? styles.previewZoom : ""} ${project.preview.cropTop ? styles.previewCropTop : ""}`}
                     fill
                   />

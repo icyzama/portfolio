@@ -1,6 +1,8 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
@@ -16,10 +18,9 @@ const hackathons = projects.filter(
 const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
 const tabKeys = ["orgs", "hackathons", "internships"] as const;
 
-export function ExperiencesPage() {
-  const query = useSearchParams().get("tab");
+export function ExperiencesPage({ tab }: { tab?: string }) {
   const router = useRouter();
-  const activeTab = query === "hackathons" ? 1 : query === "internships" ? 2 : 0;
+  const activeTab = tab === "hackathons" ? 1 : tab === "internships" ? 2 : 0;
 
   function selectTab(index: number) {
     router.replace(`/experiences?tab=${tabKeys[index]}`, { scroll: false });
@@ -39,15 +40,16 @@ export function ExperiencesPage() {
       </TitlePanel>
       <div className={styles.tabs} role="tablist" aria-label="Experience categories">
         {tabs.map((name, index) => (
-          <button
-            type="button"
+          <Link
+            href={`/experiences?tab=${tabKeys[index]}`}
+            replace
+            scroll={false}
             key={name}
             id={`experience-tab-${index}`}
             role="tab"
             aria-selected={activeTab === index}
             aria-controls="experience-panel"
             tabIndex={activeTab === index ? 0 : -1}
-            onClick={() => selectTab(index)}
             onKeyDown={(event) => {
               const next = event.key === "ArrowRight"
                 ? (index + 1) % tabs.length
@@ -67,7 +69,7 @@ export function ExperiencesPage() {
           >
             <span className={styles.tabNumber} aria-hidden="true">0{index + 1}</span>
             {name}
-          </button>
+          </Link>
         ))}
       </div>
       <div
@@ -115,13 +117,14 @@ export function ExperiencesPage() {
             {project.slug === "smartflood" ? (
               <figure
                 className={`${styles.photo} ${styles.smartFloodPhoto}`}
-                role="img"
-                aria-label={project.preview?.alt ?? "SmartFlood project preview"}
-              />
+              >
+                {project.preview && <Image src={project.preview.src} alt={project.preview.alt} fill sizes="(max-width: 700px) 85vw, (max-width: 1000px) 42vw, 28vw" loading="lazy" className={styles.smartFloodImage} />}
+              </figure>
             ) : (
               <ExperiencePhoto
                 src={project.preview?.src}
                 alt={project.preview?.alt ?? `${project.name} team or event photo`}
+                sizes="(max-width: 700px) 85vw, (max-width: 1000px) 42vw, 28vw"
               />
             )}
             <div className={styles.projectMeta}><span className={styles.projectNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span>{project.year} / {project.category}</span></div>

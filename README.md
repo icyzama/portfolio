@@ -16,7 +16,10 @@ Open http://localhost:3000.
 ```powershell
 npm run lint
 npm run build
+npm run qa:contact
 ```
+
+For production HTTP checks, run `npm run start -- --hostname 127.0.0.1 --port 3000` in another terminal after building, then `npm run qa`. The QA script checks page responses, server-rendered content, local assets, and Contact behavior with email delivery mocked.
 
 ## Structure
 
@@ -24,7 +27,7 @@ npm run build
 - `src/components/layout/`: shared header and footer
 - `src/components/ui/`: shared design primitives
 - `src/features/`: page implementations and page-specific interactions
-- `src/content/portfolio.ts`: editable profile, navigation, sample projects, organizations, services, upcoming posts
+- `src/content/portfolio.ts`: editable profile, navigation, projects, organizations, services, upcoming posts
 - `public/figma/`: exact local image and SVG assets exported from the original design
 
 ## Design reference
@@ -37,6 +40,6 @@ Fonts are downloaded by Next.js during the build and served locally at runtime. 
 
 ## Personalize before publishing
 
-Edit `src/content/portfolio.ts` to replace the five sample projects and bracketed experience placeholders. Existing statistics and the latest strip are source-design content; review them before publication. Add a real resume under `public/` and set `profile.resume` to its path to enable downloading.
+Edit `src/content/portfolio.ts` to maintain your projects, organizations, links, and profile information. Review the Home statistics and latest updates before publication. Add a real resume under `public/` and set `profile.resume` to its path to enable downloading. Blog topics are a preview of upcoming writing, and the internship photo is still a placeholder.
 
-The Contact form and Blog contact form open email drafts through `mailto:`. They do not send messages automatically or store submissions. Direct delivery requires an email provider or backend, to be chosen with the owner before integration.
+The Contact form submits to a server endpoint and sends through **Resend**, using an HTML template and plain-text alternative. Configure the API key, verified sender address, destination inbox, and trusted proxy as described in [Contact email setup](docs/contact-email.md). The endpoint needs a Node.js server and server-only email configuration. Blog topic suggestions open a `mailto:` draft in the visitor's email application.
