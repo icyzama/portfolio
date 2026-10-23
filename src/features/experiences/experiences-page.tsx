@@ -1,8 +1,4 @@
-"use client";
-
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { PreviewImage } from "@/components/ui/preview-image";
 import { organizations, projects } from "@/content/portfolio";
 import styles from "./experiences.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
@@ -11,20 +7,15 @@ import editorialStyles from "@/components/ui/editorial.module.css";
 import { TitlePanel } from "@/components/ui/title-panel";
 import { pageLabels } from "@/components/ui/page-label";
 import { ExperiencePhoto } from "./experience-photo";
+import { ExperienceTabs } from "./experience-tabs";
 
 const hackathons = projects.filter(
   (project) => project.category === "Hackathon" || project.slug === "smartflood",
 );
-const tabs = ["Student Organizations", "Projects & Hackathons", "Internships"];
-const tabKeys = ["orgs", "hackathons", "internships"] as const;
 
 export function ExperiencesPage({ tab }: { tab?: string }) {
-  const router = useRouter();
   const activeTab = tab === "hackathons" ? 1 : tab === "internships" ? 2 : 0;
 
-  function selectTab(index: number) {
-    router.replace(`/experiences?tab=${tabKeys[index]}`, { scroll: false });
-  }
 
   return (
     <div className={`${pageStyles.surface} focus-sections`}>
@@ -38,40 +29,7 @@ export function ExperiencesPage({ tab }: { tab?: string }) {
           className={editorialStyles.openingHero}
         />
       </TitlePanel>
-      <div className={styles.tabs} role="tablist" aria-label="Experience categories">
-        {tabs.map((name, index) => (
-          <Link
-            href={`/experiences?tab=${tabKeys[index]}`}
-            replace
-            scroll={false}
-            key={name}
-            id={`experience-tab-${index}`}
-            role="tab"
-            aria-selected={activeTab === index}
-            aria-controls="experience-panel"
-            tabIndex={activeTab === index ? 0 : -1}
-            onKeyDown={(event) => {
-              const next = event.key === "ArrowRight"
-                ? (index + 1) % tabs.length
-                : event.key === "ArrowLeft"
-                  ? (index + tabs.length - 1) % tabs.length
-                  : event.key === "Home"
-                    ? 0
-                    : event.key === "End"
-                      ? tabs.length - 1
-                      : null;
-              if (next !== null) {
-                event.preventDefault();
-                selectTab(next);
-                document.getElementById(`experience-tab-${next}`)?.focus();
-              }
-            }}
-          >
-            <span className={styles.tabNumber} aria-hidden="true">0{index + 1}</span>
-            {name}
-          </Link>
-        ))}
-      </div>
+      <ExperienceTabs activeTab={activeTab} />
       <div
         id="experience-panel"
         className={styles.panel}
@@ -118,7 +76,7 @@ export function ExperiencesPage({ tab }: { tab?: string }) {
               <figure
                 className={`${styles.photo} ${styles.smartFloodPhoto}`}
               >
-                {project.preview && <Image src={project.preview.src} alt={project.preview.alt} fill sizes="(max-width: 700px) 85vw, (max-width: 1000px) 42vw, 28vw" loading="lazy" className={styles.smartFloodImage} />}
+                {project.preview && <PreviewImage src={project.preview.src} alt={project.preview.alt} fill sizes="(max-width: 700px) 85vw, (max-width: 1000px) 42vw, 28vw" className={styles.smartFloodImage} />}
               </figure>
             ) : (
               <ExperiencePhoto

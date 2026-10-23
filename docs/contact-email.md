@@ -4,6 +4,10 @@ The Contact form posts JSON to `/api/contact`. The Node.js endpoint sends an HTM
 
 ## Local development
 
+For a first test before domain verification, sign in to Resend, create an API key with **Sending access**, and put the key in `.env.local`. Use `CONTACT_FROM_EMAIL=onboarding@resend.dev` and set `CONTACT_TO_EMAIL` to the email address used for your Resend account. The test sender is restricted to your own account address. It is not your Gmail address or a branded production sender. Restart the server after saving the configuration, then submit a deliberate test through the Contact form and inspect Resend's email logs and your inbox.
+
+For production:
+
 1. Verify a sending domain in your Resend account and create a sending API key. Resend's test domain has recipient restrictions; use a verified domain for production delivery.
 2. Copy `.env.example` to `.env.local` only if the file does not exist. Otherwise, add the new variables without overwriting existing configuration.
 3. Set `RESEND_API_KEY` to the API key, `CONTACT_FROM_EMAIL` to a bare sender address on the verified domain, and `CONTACT_TO_EMAIL` to your destination inbox. The recipient defaults to the public portfolio email when omitted.

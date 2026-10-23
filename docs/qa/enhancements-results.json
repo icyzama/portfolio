@@ -1,0 +1,467 @@
+{
+  "generatedAt": "2026-10-23T10:31:10.961Z",
+  "checks": 71,
+  "passed": 71,
+  "failed": 0,
+  "results": [
+    {
+      "name": "HTTP page /",
+      "status": "pass",
+      "detail": {
+        "title": "Reynald Quijano | Portfolio",
+        "bytes": 26629
+      }
+    },
+    {
+      "name": "HTTP page /about",
+      "status": "pass",
+      "detail": {
+        "title": "About | Reynald Quijano",
+        "bytes": 39355
+      }
+    },
+    {
+      "name": "HTTP page /experiences",
+      "status": "pass",
+      "detail": {
+        "title": "Experiences | Reynald Quijano",
+        "bytes": 81732
+      }
+    },
+    {
+      "name": "HTTP page /projects",
+      "status": "pass",
+      "detail": {
+        "title": "Projects | Reynald Quijano",
+        "bytes": 27325
+      }
+    },
+    {
+      "name": "HTTP page /blog",
+      "status": "pass",
+      "detail": {
+        "title": "Blog | Reynald Quijano",
+        "bytes": 14427
+      }
+    },
+    {
+      "name": "HTTP page /services",
+      "status": "pass",
+      "detail": {
+        "title": "Services | Reynald Quijano",
+        "bytes": 20294
+      }
+    },
+    {
+      "name": "HTTP page /contact",
+      "status": "pass",
+      "detail": {
+        "title": "Contact | Reynald Quijano",
+        "bytes": 16780
+      }
+    },
+    {
+      "name": "Server HTML primary heading /",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /about",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /experiences",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /projects",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /blog",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /services",
+      "status": "pass"
+    },
+    {
+      "name": "Server HTML primary heading /contact",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection (default)",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection ?tab=orgs",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection ?tab=hackathons",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection ?tab=internships",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection ?tab=invalid",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences server tab selection ?tab=internships&tab=orgs",
+      "status": "pass"
+    },
+    {
+      "name": "Experiences heading is visible without client-side streaming scripts",
+      "status": "pass"
+    },
+    {
+      "name": "HTTP unknown route returns 404",
+      "status": "pass"
+    },
+    {
+      "name": "HTTP GET contact endpoint returns 405",
+      "status": "pass"
+    },
+    {
+      "name": "HTTP malformed JSON rejected",
+      "status": "pass"
+    },
+    {
+      "name": "HTTP empty form rejected",
+      "status": "pass"
+    },
+    {
+      "name": "HTTP cross-origin request rejected",
+      "status": "pass"
+    },
+    {
+      "name": "Internal HTML links resolve",
+      "status": "pass",
+      "detail": {
+        "count": 11,
+        "links": [
+          "/",
+          "/about",
+          "/about#tech-stack",
+          "/experiences",
+          "/experiences?tab=orgs",
+          "/experiences?tab=hackathons",
+          "/experiences?tab=internships",
+          "/projects",
+          "/blog",
+          "/services",
+          "/contact"
+        ]
+      }
+    },
+    {
+      "name": "Referenced local assets respond successfully",
+      "status": "pass",
+      "detail": {
+        "count": 66
+      }
+    },
+    {
+      "name": "Contact rejects missing name",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects blank message",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects invalid email",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects unknown topic",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects long name",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects long organization",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects long message",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects header injection",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects NUL in message",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects non-project timeline",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects invalid project timeline",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects non-string email",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects payload null",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects payload []",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects payload 42",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects wrong media type",
+      "status": "pass",
+      "detail": {
+        "status": 415,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects oversized request",
+      "status": "pass",
+      "detail": {
+        "status": 413,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact honeypot returns success without sending",
+      "status": "pass"
+    },
+    {
+      "name": "Contact missing Resend key returns 503",
+      "status": "pass",
+      "detail": {
+        "status": 503,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact missing configured sender returns 503",
+      "status": "pass",
+      "detail": {
+        "status": 503,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact valid message sends with controlled recipient and Reply-To",
+      "status": "pass"
+    },
+    {
+      "name": "Contact optional project fields included",
+      "status": "pass"
+    },
+    {
+      "name": "Contact provider failure {\"error\":true}",
+      "status": "pass"
+    },
+    {
+      "name": "Contact provider failure {\"reject\":true}",
+      "status": "pass"
+    },
+    {
+      "name": "Contact provider failure {\"noId\":true}",
+      "status": "pass"
+    },
+    {
+      "name": "Contact HTML escapes visitor fields and preserves plain text and line breaks",
+      "status": "pass"
+    },
+    {
+      "name": "Contact sixth request is limited and expiry resets limit",
+      "status": "pass"
+    },
+    {
+      "name": "Contact rejects inherited topic constructor",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects inherited topic __proto__",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects inherited topic toString",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact rejects inherited timeline constructor",
+      "status": "pass",
+      "detail": {
+        "status": 400,
+        "sends": 0
+      }
+    },
+    {
+      "name": "Contact accepts supported topic job",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts supported topic project",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts supported topic collaboration",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts supported topic general",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts project timeline (empty)",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts project timeline asap",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts project timeline within-month",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts project timeline one-to-three-months",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Contact accepts project timeline flexible",
+      "status": "pass",
+      "detail": {
+        "status": 200,
+        "sends": 1
+      }
+    },
+    {
+      "name": "Changing untrusted forwarded headers cannot reset the rate limit",
+      "status": "pass"
+    },
+    {
+      "name": "Vercel uses its protected address header, not ordinary forwarding headers",
+      "status": "pass"
+    },
+    {
+      "name": "Explicit trusted proxy header accepts a single IP and rejects address chains",
+      "status": "pass"
+    }
+  ]
+}

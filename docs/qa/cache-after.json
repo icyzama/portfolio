@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-10-23T10:25:16.593Z",
+  "origin": "http://127.0.0.1:3002",
+  "method": "Local production HTTP requests followed by conditional GET when an ETag is supplied. No browser/CDN cache reuse is claimed.",
+  "records": [
+    {
+      "kind": "home",
+      "url": "/",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "s-maxage=31536000",
+      "etag": "\"56lluv3qehkht\"",
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+    },
+    {
+      "kind": "experiences-default",
+      "url": "/experiences",
+      "firstStatus": 200,
+      "repeatedStatus": 200,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "etag": null,
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+    },
+    {
+      "kind": "experiences-internships",
+      "url": "/experiences?tab=internships",
+      "firstStatus": 200,
+      "repeatedStatus": 200,
+      "cacheControl": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "etag": null,
+      "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+    },
+    {
+      "kind": "original-svg",
+      "url": "/skills/react.svg",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "etag": "W/\"b7d-1a122027beb\"",
+      "vary": "Accept-Encoding"
+    },
+    {
+      "kind": "original-photo",
+      "url": "/experiences/aws-sug-ph-day-one-banner.jpg",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "etag": "W/\"5b063-1a1551fec06\"",
+      "vary": null
+    },
+    {
+      "kind": "hashed-font",
+      "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "etag": "W/\"9074-1a1684a085c\"",
+      "vary": null
+    },
+    {
+      "kind": "hashed-css",
+      "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "etag": "W/\"eadd-1a1684a0886\"",
+      "vary": "Accept-Encoding"
+    },
+    {
+      "kind": "hashed-js",
+      "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=31536000, immutable",
+      "etag": "W/\"15d0-1a1684a0990\"",
+      "vary": "Accept-Encoding"
+    },
+    {
+      "kind": "optimized-image",
+      "url": "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fsmartflood.3n6ubsd25_jkx.png&w=3840&q=75",
+      "firstStatus": 200,
+      "repeatedStatus": 304,
+      "cacheControl": "public, max-age=315360000, immutable",
+      "etag": "k1UV19j0FlcQBdP5Q55Uaq5cIza8TfrE6tnq-XhXLdU",
+      "vary": "Accept"
+    },
+    {
+      "kind": "contact-invalid-post",
+      "firstStatus": 400,
+      "cacheControl": "no-store"
+    }
+  ]
+}

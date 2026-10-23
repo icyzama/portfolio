@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import ts from 'typescript';
 import * as crypto from 'node:crypto';
 import { isIP } from 'node:net';
+const origin = process.env.QA_BASE_URL || 'http://127.0.0.1:3000';
 const results = [];
 async function check(name, run) {
   try { const detail = await run(); results.push({ name, status: 'pass', detail }); }
@@ -44,7 +45,7 @@ function handler(options = {}) {
 }
 const valid = { name: 'QA Visitor', email: 'visitor@example.com', topic: 'general', message: 'QA message; delivery is mocked.' };
 function request(body = valid, headers = {}) {
-  return new Request('http://127.0.0.1:3000/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Forwarded-For': '192.0.2.1', ...headers }, body: typeof body === 'string' ? body : JSON.stringify(body) });
+  return new Request(origin + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Forwarded-For': '192.0.2.1', ...headers }, body: typeof body === 'string' ? body : JSON.stringify(body) });
 }
 async function expectStatus(body, expected, headers = {}, options = {}) {
   const h = handler(options); const response = await h.post(request(body, headers));
@@ -55,7 +56,7 @@ async function checkPages() {
   const routes = ['/', '/about', '/experiences', '/projects', '/blog', '/services', '/contact'];
   const assets = new Set(); const internal = new Set();
   for (const route of routes) await check('HTTP page ' + route, async () => {
-    const response = await fetch('http://127.0.0.1:3000' + route); assert.equal(response.status, 200);
+    const response = await fetch(origin + route); assert.equal(response.status, 200);
     const html = await response.text(); assert.match(html, /<title>[^<]+<\/title>/); assert.match(html, /id="main-content"/);
     for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
       const value = match[1].replaceAll('&amp;', '&');
@@ -66,18 +67,18 @@ async function checkPages() {
     return { title: html.match(/<title>([^<]+)<\/title>/)[1], bytes: Buffer.byteLength(html) };
   });
   for (const route of routes) await check('Server HTML primary heading ' + route, async () => {
-    const html = await (await fetch('http://127.0.0.1:3000' + route)).text();
+    const html = await (await fetch(origin + route)).text();
     assert.match(html, /<h1[ >]/, 'No primary heading in server HTML; verify whether substantive content requires JavaScript.');
   });
   for (const [query, index] of [['', 0], ['?tab=orgs', 0], ['?tab=hackathons', 1], ['?tab=internships', 2], ['?tab=invalid', 0], ['?tab=internships&tab=orgs', 0]]) await check('Experiences server tab selection ' + (query || '(default)'), async () => {
-    const html = await (await fetch('http://127.0.0.1:3000/experiences' + query)).text();
+    const html = await (await fetch(origin + '/experiences' + query)).text();
     const selected = html.match(new RegExp('<(?:button|a)[^>]*id="experience-tab-' + index + '"[^>]*>'))?.[0];
     assert.ok(selected?.includes('aria-selected="true"'), 'Expected selected tab in server HTML');
     assert.match(html, /LEARNING WITH COMMUNITY\./);
     assert.ok(!html.includes('BAILOUT_TO_CLIENT_SIDE_RENDERING'));
   });
   await check('Experiences heading is visible without client-side streaming scripts', async () => {
-    const html = await (await fetch('http://127.0.0.1:3000/experiences')).text();
+    const html = await (await fetch(origin + '/experiences')).text();
     const markup = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '');
     const hidden = []; let headings = 0;
     for (const [tag] of markup.matchAll(/<div\b[^>]*>|<\/div>|<h1\b[^>]*>/g)) {
@@ -87,21 +88,21 @@ async function checkPages() {
     }
     assert.equal(headings, 1);
   });
-  await check('HTTP unknown route returns 404', async () => assert.equal((await fetch('http://127.0.0.1:3000/qa-missing-route')).status, 404));
-  await check('HTTP GET contact endpoint returns 405', async () => assert.equal((await fetch('http://127.0.0.1:3000/api/contact')).status, 405));
-  await check('HTTP malformed JSON rejected', async () => assert.equal((await fetch('http://127.0.0.1:3000/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' })).status, 400));
-  await check('HTTP empty form rejected', async () => assert.equal((await fetch('http://127.0.0.1:3000/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).status, 400));
-  await check('HTTP cross-origin request rejected', async () => assert.equal((await fetch('http://127.0.0.1:3000/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'https://untrusted.example' }, body: '{}' })).status, 403));
+  await check('HTTP unknown route returns 404', async () => assert.equal((await fetch(origin + '/qa-missing-route')).status, 404));
+  await check('HTTP GET contact endpoint returns 405', async () => assert.equal((await fetch(origin + '/api/contact')).status, 405));
+  await check('HTTP malformed JSON rejected', async () => assert.equal((await fetch(origin + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' })).status, 400));
+  await check('HTTP empty form rejected', async () => assert.equal((await fetch(origin + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })).status, 400));
+  await check('HTTP cross-origin request rejected', async () => assert.equal((await fetch(origin + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: 'https://untrusted.example' }, body: '{}' })).status, 403));
   await check('Internal HTML links resolve', async () => {
     const checked = [];
     for (const link of internal) {
-      const url = new URL(link, 'http://127.0.0.1:3000'); url.hash = '';
+      const url = new URL(link, origin); url.hash = '';
       const res = await fetch(url); assert.equal(res.status, 200, link); checked.push(link);
     }
     return { count: checked.length, links: checked };
   });
   await check('Referenced local assets respond successfully', async () => {
-    for (const asset of assets) { const res = await fetch(new URL(asset, 'http://127.0.0.1:3000')); assert.equal(res.status, 200, asset); await res.arrayBuffer(); }
+    for (const asset of assets) { const res = await fetch(new URL(asset, origin)); assert.equal(res.status, 200, asset); await res.arrayBuffer(); }
     return { count: assets.size };
   });
 }
@@ -126,6 +127,7 @@ async function checkPages() {
     const h = handler(); const res = await h.post(request({ ...valid, to: 'attacker@example.com', from: 'attacker@example.com' }));
     assert.equal(res.status, 200); assert.equal(h.sent.length, 1); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); assert.equal(h.sent[0].from, "Reynald's Portfolio <sender@example.com>"); assert.equal(h.sent[0].reply_to, valid.email); assert.equal(res.headers.get('Cache-Control'), 'no-store');
     assert.equal(h.providerCalls[0].init.headers.Authorization, 'Bearer fake-qa-key');
+    assert.equal(h.providerCalls[0].init.cache, 'no-store');
     assert.ok(h.providerCalls[0].init.signal instanceof AbortSignal);
     assert.match(h.sent[0].html, /QA Visitor/); assert.match(h.sent[0].text, /QA Visitor/);
   });
