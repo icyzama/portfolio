@@ -14,15 +14,17 @@ const source = fs.readFileSync('src/app/api/contact/route.ts', 'utf8');
 const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
 const baseEnv = { RESEND_API_KEY: 'fake-qa-key', CONTACT_FROM_EMAIL: 'sender@example.com', CONTACT_TO_EMAIL: 'owner@example.com' };
 function handler(options = {}) {
-  const sent = []; const providerCalls = []; let clock = Date.now();
+  const sent = []; const providerCalls = []; const logs = []; let clock = Date.now();
   const mod = { exports: {} };
   const sandbox = {
     module: mod, exports: mod.exports, Buffer, Response, AbortSignal, process: { env: { ...baseEnv, ...options.env } },
     Date: class extends Date { static now() { return clock; } },
+    console: { info: (...args) => logs.push(args.join(' ')), error: (...args) => logs.push(args.join(' ')) },
     async fetch(url, init) {
       assert.equal(url, 'https://api.resend.com/emails');
       providerCalls.push({ url, init }); sent.push(JSON.parse(init.body));
       if (options.error) throw Error('simulated provider failure');
+      if (options.providerFailure) return Response.json(options.providerFailure.body, { status: options.providerFailure.status });
       if (options.reject) return Response.json({ message: 'provider rejection' }, { status: 422 });
       if (options.noId) return Response.json({});
       return Response.json({ id: 'qa-email-id' });
@@ -41,7 +43,7 @@ function handler(options = {}) {
     }
   };
   vm.runInNewContext(compiled, sandbox, { filename: 'contact-route.qa.cjs' });
-  return { post: mod.exports.POST, sent, providerCalls, advance(ms) { clock += ms; } };
+  return { post: mod.exports.POST, sent, providerCalls, logs, advance(ms) { clock += ms; } };
 }
 const valid = { name: 'QA Visitor', email: 'visitor@example.com', topic: 'general', message: 'QA message; delivery is mocked.' };
 function request(body = valid, headers = {}) {
@@ -135,6 +137,18 @@ async function checkPages() {
     const h = handler(); assert.equal((await h.post(request({ ...valid, topic: 'project', organization: 'QA Org', timeline: 'asap' }))).status, 200); assert.match(h.sent[0].text, /QA Org/); assert.match(h.sent[0].text, /As soon as possible/);
   });
   for (const options of [{ error: true }, { reject: true }, { noId: true }]) await check('Contact provider failure ' + JSON.stringify(options), async () => { const h = handler(options); assert.equal((await h.post(request())).status, 502); });
+  for (const [status, detail, reason] of [
+    [403, 'You can only send testing emails to your own email address (owner@example.com).', 'test_recipient_not_allowed'],
+    [403, 'The example.com domain is not verified.', 'sender_domain_not_verified'],
+    [401, 'API key fake-qa-key is invalid', 'provider_authentication'],
+    [429, 'Too many requests', 'provider_rate_limit'],
+    [422, 'Invalid payload for owner@example.com', 'provider_rejection'],
+  ]) await check('Contact diagnostics identify ' + reason + ' without leaking provider details', async () => {
+    const h = handler({ providerFailure: { status, body: { name: 'validation_error', message: detail } } });
+    assert.equal((await h.post(request())).status, 502);
+    const log = h.logs.join('\n'); assert.ok(log.includes(reason)); assert.ok(log.includes(String(status)));
+    assert.ok(!log.includes('owner@example.com')); assert.ok(!log.includes('fake-qa-key'));
+  });
   await check('Contact HTML escapes visitor fields and preserves plain text and line breaks', async () => {
     const h = handler(); const message = '<img src=x onerror=alert(1)>\nSecond & final line';
     assert.equal((await h.post(request({ ...valid, name: 'QA <Visitor>', message }))).status, 200);
