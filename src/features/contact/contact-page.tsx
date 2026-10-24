@@ -38,7 +38,7 @@ export function ContactPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(Object.fromEntries(data)),
-        signal: AbortSignal.timeout(30_000),
+        signal: AbortSignal.timeout(45_000),
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "Your message could not be sent. Please try again.");

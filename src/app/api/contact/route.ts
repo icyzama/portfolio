@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { isIP } from "node:net";
 import { profile } from "@/content/portfolio";
-import { contactEmail } from "@/features/contact/contact-email";
+import { contactEmail, contactSenderReceiptEmail } from "@/features/contact/contact-email";
 
 export const runtime = "nodejs";
 
@@ -12,6 +12,55 @@ const emailPattern = /^[^\s@<>,;:"]+@[^\s@<>,;:"]+\.[^\s@<>,;:"]+$/;
 
 function reply(status: number, message: string, headers?: Record<string, string>) {
   return Response.json({ message }, { status, headers: { "Cache-Control": "no-store", ...headers } });
+}
+
+class EmailDeliveryError extends Error {
+  constructor(readonly providerStatus: number | null, readonly reason: string) {
+    super("Email delivery failed");
+  }
+}
+
+async function sendWithResend(apiKey: string, message: Record<string, unknown>) {
+  let providerStatus: number | undefined;
+  try {
+    const sent = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      cache: "no-store",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify(message),
+      signal: AbortSignal.timeout(15_000),
+    });
+    providerStatus = sent.status;
+    if (!sent.ok) {
+      const failure: unknown = await sent.json().catch(() => null);
+      const detail = failure && typeof failure === "object" && "message" in failure && typeof failure.message === "string"
+        ? failure.message.toLowerCase() : "";
+      // Classify known failures without logging provider messages that may contain addresses.
+      const reason = sent.status === 401 ? "provider_authentication"
+        : sent.status === 429 ? "provider_rate_limit"
+        : sent.status === 403 && detail.includes("only send testing emails") ? "test_recipient_not_allowed"
+        : sent.status === 403 && detail.includes("not verified") ? "sender_domain_not_verified"
+        : "provider_rejection";
+      throw new EmailDeliveryError(sent.status, reason);
+    }
+    const result: unknown = await sent.json().catch(() => null);
+    if (!result || typeof result !== "object" || !("id" in result) || typeof result.id !== "string" || !result.id.trim()) {
+      throw new EmailDeliveryError(sent.status, "provider_invalid_response");
+    }
+    return result.id;
+  } catch (error) {
+    if (error instanceof EmailDeliveryError) throw error;
+    const reason = error && typeof error === "object" && "name" in error && (error.name === "TimeoutError" || error.name === "AbortError")
+      ? "provider_timeout" : "provider_connection";
+    throw new EmailDeliveryError(providerStatus ?? null, reason);
+  }
+}
+
+function logDeliveryFailure(message: string, error: unknown) {
+  const failure = error instanceof EmailDeliveryError
+    ? { providerStatus: error.providerStatus, reason: error.reason }
+    : { providerStatus: null, reason: "provider_connection" };
+  console.error(`${message} ${JSON.stringify(failure)}`);
 }
 
 export async function POST(request: Request) {
@@ -103,48 +152,44 @@ export async function POST(request: Request) {
   attempt.count += 1;
   attempts.set(key, attempt);
 
-  let providerStatus: number | undefined;
-  let failureReason = "provider_invalid_response";
+  let ownerMessageId: string;
   try {
-    const content = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
-    const sent = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      cache: "no-store",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: `Reynald's Portfolio <${sender}>`,
-        to: [recipient],
-        reply_to: email,
-        subject: `[Portfolio] ${topicLabel}`,
-        ...content,
-      }),
-      signal: AbortSignal.timeout(15_000),
+    const ownerMessage = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
+    ownerMessageId = await sendWithResend(apiKey, {
+      from: `Reynald's Portfolio <${sender}>`,
+      to: [recipient],
+      reply_to: email,
+      subject: `[Portfolio] ${topicLabel}`,
+      ...ownerMessage,
     });
-    providerStatus = sent.status;
-    if (!sent.ok) {
-      const failure: unknown = await sent.json().catch(() => null);
-      const detail = failure && typeof failure === "object" && "message" in failure && typeof failure.message === "string"
-        ? failure.message.toLowerCase() : "";
-      // Classify known failures without logging provider messages that may contain addresses.
-      failureReason = sent.status === 401 ? "provider_authentication"
-        : sent.status === 429 ? "provider_rate_limit"
-        : sent.status === 403 && detail.includes("only send testing emails") ? "test_recipient_not_allowed"
-        : sent.status === 403 && detail.includes("not verified") ? "sender_domain_not_verified"
-        : "provider_rejection";
-      throw new Error("Message not accepted");
-    }
-    const result: unknown = await sent.json();
-    if (!result || typeof result !== "object" || !("id" in result) || typeof result.id !== "string" || !result.id.trim()) {
-      throw new Error("Message not accepted");
-    }
-    console.info(`Contact email accepted by Resend ${JSON.stringify({ messageId: result.id })}`);
-    return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
   } catch (error) {
-    if (providerStatus === undefined) {
-      failureReason = error && typeof error === "object" && "name" in error && (error.name === "TimeoutError" || error.name === "AbortError")
-        ? "provider_timeout" : "provider_connection";
-    }
-    console.error(`Contact email delivery failed ${JSON.stringify({ providerStatus: providerStatus ?? null, reason: failureReason })}`);
+    logDeliveryFailure("Contact email delivery failed", error);
     return reply(502, "Your message could not be sent. Please try again later or use the email link above.");
   }
+
+  console.info(`Contact email accepted by Resend ${JSON.stringify({ messageId: ownerMessageId })}`);
+  try {
+    const receipt = contactSenderReceiptEmail({
+      name,
+      email,
+      topic: topicLabel,
+      ownerName: profile.name,
+      ownerBio: profile.contactReceiptBio,
+      siteUrl: profile.siteUrl,
+      projectsUrl: new URL("/projects", profile.siteUrl).toString(),
+      linkedinUrl: profile.linkedin,
+    });
+    const receiptMessageId = await sendWithResend(apiKey, {
+      from: `Reynald's Portfolio <${sender}>`,
+      to: [email],
+      reply_to: recipient,
+      ...receipt,
+    });
+    console.info(`Contact sender receipt accepted by Resend ${JSON.stringify({ messageId: receiptMessageId })}`);
+  } catch (error) {
+    // Do not report a failed submission once the owner's notification was accepted.
+    logDeliveryFailure("Contact sender receipt failed", error);
+  }
+
+  return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
 }
