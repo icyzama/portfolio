@@ -80,6 +80,9 @@ export async function POST(request: Request) {
   const sender = process.env.CONTACT_FROM_EMAIL?.trim();
   const recipient = process.env.CONTACT_TO_EMAIL?.trim() || profile.email;
   if (!apiKey || !sender || !emailPattern.test(sender) || !emailPattern.test(recipient)) {
+    console.error(`Contact email configuration is missing or invalid ${JSON.stringify({
+      apiKeyPresent: Boolean(apiKey), senderValid: Boolean(sender && emailPattern.test(sender)), recipientValid: emailPattern.test(recipient),
+    })}`);
     return reply(503, "The contact form is temporarily unavailable. Please use the email link above.");
   }
 
@@ -104,10 +107,13 @@ export async function POST(request: Request) {
   attempt.count += 1;
   attempts.set(key, attempt);
 
+  let providerStatus: number | undefined;
+  let failureReason = "provider_invalid_response";
   try {
     const content = contactEmail({ name, email, topic: topicLabel, organization, timeline: timelineLabel, message });
     const sent = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      cache: "no-store",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         from: `Reynald's Portfolio <${sender}>`,
@@ -118,13 +124,31 @@ export async function POST(request: Request) {
       }),
       signal: AbortSignal.timeout(15_000),
     });
-    if (!sent.ok) throw new Error("Message not accepted");
+    providerStatus = sent.status;
+    if (!sent.ok) {
+      const failure: unknown = await sent.json().catch(() => null);
+      const detail = failure && typeof failure === "object" && "message" in failure && typeof failure.message === "string"
+        ? failure.message.toLowerCase() : "";
+      // Classify known failures without logging provider messages that may contain addresses.
+      failureReason = sent.status === 401 ? "provider_authentication"
+        : sent.status === 429 ? "provider_rate_limit"
+        : sent.status === 403 && detail.includes("only send testing emails") ? "test_recipient_not_allowed"
+        : sent.status === 403 && detail.includes("not verified") ? "sender_domain_not_verified"
+        : "provider_rejection";
+      throw new Error("Message not accepted");
+    }
     const result: unknown = await sent.json();
     if (!result || typeof result !== "object" || !("id" in result) || typeof result.id !== "string" || !result.id.trim()) {
       throw new Error("Message not accepted");
     }
+    console.info(`Contact email accepted by Resend ${JSON.stringify({ messageId: result.id })}`);
     return reply(200, "Thanks! Your message has been sent. I’ll get back to you by email.");
-  } catch {
+  } catch (error) {
+    if (providerStatus === undefined) {
+      failureReason = error && typeof error === "object" && "name" in error && (error.name === "TimeoutError" || error.name === "AbortError")
+        ? "provider_timeout" : "provider_connection";
+    }
+    console.error(`Contact email delivery failed ${JSON.stringify({ providerStatus: providerStatus ?? null, reason: failureReason })}`);
     return reply(502, "Your message could not be sent. Please try again later or use the email link above.");
   }
 }

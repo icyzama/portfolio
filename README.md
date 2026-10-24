@@ -17,9 +17,14 @@ Open http://localhost:3000.
 npm run lint
 npm run build
 npm run qa:contact
+npm run qa:images
 ```
 
 For production HTTP checks, run `npm run start -- --hostname 127.0.0.1 --port 3000` in another terminal after building, then `npm run qa`. The QA script checks page responses, server-rendered content, local assets, and Contact behavior with email delivery mocked.
+
+Run `npm run qa:cache` against the production server to check asset revalidation and cache boundaries. Set `QA_BASE_URL` when using a different port. `qa:images` uses a simulated DOM to check image lifecycles and keyboard tabs; it is not a visual browser test.
+
+See [Caching policy](docs/caching.md) for freshness and deployment behavior, and [Enhancement QA](docs/qa/enhancements-2026-10-23.md) for measured bundle changes and remaining visual checks.
 
 ## Structure
 
@@ -28,6 +33,7 @@ For production HTTP checks, run `npm run start -- --hostname 127.0.0.1 --port 30
 - `src/components/ui/`: shared design primitives
 - `src/features/`: page implementations and page-specific interactions
 - `src/content/portfolio.ts`: editable profile, navigation, projects, organizations, services, upcoming posts
+- `src/content/profile.ts` and `navigation.ts`: shared profile and navigation values, kept separate from image-heavy content for smaller client bundles
 - `public/figma/`: exact local image and SVG assets exported from the original design
 
 ## Design reference

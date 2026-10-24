@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Asset } from "@/components/ui/design";
 import { EditorialHero } from "@/components/ui/editorial";
 import editorialStyles from "@/components/ui/editorial.module.css";
-import { profile } from "@/content/portfolio";
+import { profile } from "@/content/profile";
 import successStyles from "./contact-success.module.css";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { TitlePanel } from "@/components/ui/title-panel";
@@ -17,8 +17,12 @@ export function ContactPage() {
   const [topic, setTopic] = useState("");
   const inFlight = useRef(false);
   const successDialog = useRef<HTMLDialogElement>(null);
+  const sendingDialog = useRef<HTMLDialogElement>(null);
   const submitButton = useRef<HTMLButtonElement>(null);
   const [replyEmail, setReplyEmail] = useState("");
+  useEffect(() => {
+    if (failed && !sending) submitButton.current?.focus({ preventScroll: true });
+  }, [failed, sending]);
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (inFlight.current) return;
@@ -29,6 +33,7 @@ export function ContactPage() {
     setFailed(false);
     setStatus("");
     try {
+      sendingDialog.current?.showModal();
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,6 +45,7 @@ export function ContactPage() {
       setReplyEmail(String(data.get("email") ?? "").trim());
       form.reset();
       setTopic("");
+      sendingDialog.current?.close();
       successDialog.current?.showModal();
     } catch (error) {
       setFailed(true);
@@ -47,6 +53,7 @@ export function ContactPage() {
     } finally {
       inFlight.current = false;
       setSending(false);
+      sendingDialog.current?.close();
     }
   }
   return (
@@ -192,6 +199,17 @@ export function ContactPage() {
           </div>
         </aside>
       </div>
+      <dialog
+        ref={sendingDialog}
+        className={successStyles.dialog}
+        aria-labelledby="contact-sending-title"
+        aria-describedby="contact-sending-description"
+        tabIndex={-1}
+      >
+        <div className={successStyles.spinner} aria-hidden="true" />
+        <h2 id="contact-sending-title">SENDING MESSAGE.</h2>
+        <p id="contact-sending-description" role="status">Please wait while your message is sent.</p>
+      </dialog>
       <dialog
         ref={successDialog}
         className={successStyles.dialog}

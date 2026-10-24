@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PreviewImage } from "@/components/ui/preview-image";
 import styles from "./experiences.module.css";
 
 export function ExperiencePhoto({ src, alt, fit = "cover", sizes = "(max-width: 1000px) 90vw, 46vw" }: { src?: string; alt: string; fit?: "cover" | "contain"; sizes?: string }) {
@@ -18,7 +19,7 @@ export function ExperiencePhoto({ src, alt, fit = "cover", sizes = "(max-width: 
               aria-hidden="true"
             />
           )}
-          <Image src={src} alt={alt} width={1280} height={720} sizes={sizes} loading="lazy" className={styles.photoImage} />
+          <PreviewImage src={src} alt={alt} width={1280} height={720} sizes={sizes} className={styles.photoImage} />
         </>
       ) : (
         <div className={styles.photoPlaceholder}>

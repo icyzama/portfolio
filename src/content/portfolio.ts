@@ -2,56 +2,17 @@ import smartFloodImage from "../../public/projects/smartflood.png";
 import daloImage from "../../public/projects/dalo.png";
 import ecoBridgeImage from "../../public/projects/ecobridge.png";
 import kuryentechImage from "../../public/projects/kuryentech-team.jpg";
+import awsStudentGroupImage from "../../public/experiences/aws-sug-ph-day-one-banner.jpg";
+import awsClubCeoImage from "../../public/experiences/aws-legarda-ceo-banner.jpg";
+import awsClubOfficerImage from "../../public/experiences/aws-legarda-cloud-officer-banner.jpg";
+import wizardsImage from "../../public/experiences/nu-wizards-circle.png";
+import blockchainImage from "../../public/experiences/jbecp-nu-manila-banner.jpg";
+import studentCouncilImage from "../../public/experiences/nu-ccit-student-council-banner.jpg";
+import googleExternalImage from "../../public/experiences/gdsc-nu-manila-teamwork.jpg";
+import googleCreativeImage from "../../public/experiences/gdsc-nu-manila-talagahay.jpg";
 
-const expectedGraduation = "September 2027";
-
-export const profile = {
-  name: "Reynald Quijano",
-  email: "quijanorrq@gmail.com",
-  github: "https://github.com/icyzama",
-  linkedin: "https://linkedin.com/in/reynaldquijano",
-  expectedGraduation,
-  homeBio:
-    "Fourth-year Information Technology - Mobile and Web Applications student at National University - Manila, aspiring cloud and data engineer. I build responsive, database-driven applications with the PERN stack and TypeScript, and contribute to frontend development, quality assurance, UI/UX, and project coordination.",
-  bio: "I am a fourth-year Information Technology - Mobile and Web Applications student at National University - Manila, specializing in Mobile and Web Applications. I have hands-on full-stack experience with PostgreSQL, Express.js, React, Node.js, and TypeScript, and I am interested in cloud computing, data, and building reliable software.",
-  bioMore:
-    `I currently work as a Full Stack Developer Intern at NexVision Innovations. Outside of work, I lead AWS student communities, help organize cloud workshops, and contribute to university projects. I expect to graduate in ${expectedGraduation}.`,
-  resume: null as string | null,
-};
-
-export const navigation = [
-  {
-    label: "About",
-    href: "/about",
-    description: "About Me + Technical Skills",
-    color: "yellow",
-  },
-  {
-    label: "Experiences",
-    href: "/experiences",
-    description: "Organizations + Hackathons",
-    color: "orange",
-  },
-  {
-    label: "Projects",
-    href: "/projects",
-    description: "Work & Side Projects",
-    color: "blue",
-  },
-  { label: "Blog", href: "/blog", description: "Coming soon", color: "orange" },
-  {
-    label: "Services",
-    href: "/services",
-    description: "Web Development",
-    color: "ink",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    description: "Let’s build something",
-    color: "ink",
-  },
-] as const;
+export { profile } from "./profile";
+export { navigation } from "./navigation";
 
 export type ProjectCategory =
   "Hackathon" | "Research" | "Side Project" | "Personal" | "University Project";
@@ -176,7 +137,7 @@ export const organizations: Organization[] = [
     shortName: "AWS Student User Group PH",
     role: "Director for Marketing",
     period: "Dec 2025 - Present",
-    photo: "/experiences/aws-sug-ph-day-one-banner.jpg",
+    photo: awsStudentGroupImage.src,
     photoAlt: "AWS Student User Group Philippines It's Always Day One banner",
     photoFit: "contain",
     link: "https://www.facebook.com/AWSCloudClubsPhilippines",
@@ -194,7 +155,7 @@ export const organizations: Organization[] = [
     shortName: "AWS Learning Club - Legarda",
     role: "Chief Executive Officer and Lead",
     period: "Jul 2025 - Present",
-    photo: "/experiences/aws-legarda-ceo-banner.jpg",
+    photo: awsClubCeoImage.src,
     photoAlt: "Reynald Quijano, Chief Executive Officer of AWS Learning Club Legarda",
     photoFit: "contain",
     link: "https://www.facebook.com/awslclegarda",
@@ -212,7 +173,7 @@ export const organizations: Organization[] = [
     shortName: "AWS Learning Club - Legarda",
     role: "Cloud Computing and Infrastructure Officer",
     period: "Aug 2024 - Jul 2025",
-    photo: "/experiences/aws-legarda-cloud-officer-banner.jpg",
+    photo: awsClubOfficerImage.src,
     photoAlt: "Reynald Quijano, Cloud Computing and Infrastructure Officer of AWS Learning Club Legarda",
     photoFit: "contain",
     link: "https://www.facebook.com/awslclegarda",
@@ -229,7 +190,7 @@ export const organizations: Organization[] = [
     shortName: "NU Wizards' Circle",
     role: "Communications Coordinator",
     period: "Jul 2025 - Nov 2025",
-    photo: "/experiences/nu-wizards-circle.png",
+    photo: wizardsImage.src,
     photoAlt: "NU Wizards' Circle Revert organization banner",
     link: "https://www.facebook.com/nuwizardscircle",
     description:
@@ -246,7 +207,7 @@ export const organizations: Organization[] = [
     shortName: "JBECP - NU Manila",
     role: "Operations Committee Member",
     period: "Aug 2024 - Jul 2025",
-    photo: "/experiences/jbecp-nu-manila-banner.jpg",
+    photo: blockchainImage.src,
     photoAlt: "JBECP NU Manila organization banner",
     link: "https://www.facebook.com/jbecpnuph",
     description:
@@ -263,7 +224,7 @@ export const organizations: Organization[] = [
     shortName: "NU CCIT Student Council",
     role: "Director Auditor for Bookkeeping and Budgeting",
     period: "Aug 2024 - Jul 2025",
-    photo: "/experiences/nu-ccit-student-council-banner.jpg",
+    photo: studentCouncilImage.src,
     photoAlt: "NU CCIT Student Council Connect, Empower, Achieve banner",
     link: "https://www.facebook.com/ccitsc",
     description:
@@ -280,7 +241,7 @@ export const organizations: Organization[] = [
     shortName: "Google Developers on Campus - NU Manila",
     role: "Office of the Vice President - Externals Officer",
     period: "Aug 2024 - Jul 2025",
-    photo: "/experiences/gdsc-nu-manila-teamwork.jpg",
+    photo: googleExternalImage.src,
     photoAlt: "Google Developer Student Clubs NU Manila Teamwork banner",
     link: "https://www.facebook.com/gdgoc.numanila",
     description:
@@ -296,7 +257,7 @@ export const organizations: Organization[] = [
     shortName: "Google Developers on Campus - NU Manila",
     role: "Creative Committee Member",
     period: "Aug 2023 - Jul 2024",
-    photo: "/experiences/gdsc-nu-manila-talagahay.jpg",
+    photo: googleCreativeImage.src,
     photoAlt: "Google Developer Student Clubs NU Manila Talaghay creative banner",
     link: "https://www.facebook.com/gdgoc.numanila",
     description:

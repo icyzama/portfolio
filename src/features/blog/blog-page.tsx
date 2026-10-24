@@ -2,7 +2,8 @@
 
 import { type FormEvent } from "react";
 import { EditorialHero } from "@/components/ui/editorial";
-import { upcomingPosts, profile } from "@/content/portfolio";
+import { upcomingPosts } from "@/content/portfolio";
+import { profile } from "@/content/profile";
 import { pageLabels } from "@/components/ui/page-label";
 import pageStyles from "@/components/ui/page-system.module.css";
 import editorialStyles from "@/components/ui/editorial.module.css";

@@ -1,0 +1,625 @@
+{
+  "generatedAt": "2026-10-23T10:25:16.883Z",
+  "label": "before",
+  "origin": "http://127.0.0.1:3002",
+  "method": "Local production HTML and referenced initial JS/CSS/font resource bodies, no browser, viewport emulation or CPU/network throttling. Brotli estimates use quality 5. Local response-header timings are diagnostics, not browser paint, interaction or real-user metrics. Image requests are excluded. Resource bodies are reused across page measurements within this run.",
+  "heaviestJavaScriptRoute": "/experiences",
+  "pages": [
+    {
+      "route": "/",
+      "htmlBytes": 26629,
+      "localTimeToHeadersMs": 49.25,
+      "js": {
+        "count": 8,
+        "decodedBytes": 615386,
+        "brotliBytesEstimate": 180850,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    },
+    {
+      "route": "/about",
+      "htmlBytes": 39355,
+      "localTimeToHeadersMs": 19.3,
+      "js": {
+        "count": 9,
+        "decodedBytes": 618743,
+        "brotliBytesEstimate": 182066,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/1bzll31wa-h9w.js",
+            "decodedBytes": 3357,
+            "brotliBytesEstimate": 1216
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    },
+    {
+      "route": "/experiences",
+      "htmlBytes": 49041,
+      "localTimeToHeadersMs": 8.94,
+      "js": {
+        "count": 9,
+        "decodedBytes": 627972,
+        "brotliBytesEstimate": 184646,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/439axnlcz_0he.js",
+            "decodedBytes": 12586,
+            "brotliBytesEstimate": 3796
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 0,
+        "decodedBytes": 0,
+        "brotliBytesEstimate": 0,
+        "assets": []
+      }
+    },
+    {
+      "route": "/projects",
+      "htmlBytes": 27325,
+      "localTimeToHeadersMs": 2.3,
+      "js": {
+        "count": 9,
+        "decodedBytes": 624265,
+        "brotliBytesEstimate": 183798,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/3egh0tlnnhtz9.js",
+            "decodedBytes": 8879,
+            "brotliBytesEstimate": 2948
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    },
+    {
+      "route": "/blog",
+      "htmlBytes": 14427,
+      "localTimeToHeadersMs": 14.09,
+      "js": {
+        "count": 9,
+        "decodedBytes": 620828,
+        "brotliBytesEstimate": 182734,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/0s9opb7n-62vj.js",
+            "decodedBytes": 5442,
+            "brotliBytesEstimate": 1884
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    },
+    {
+      "route": "/services",
+      "htmlBytes": 20294,
+      "localTimeToHeadersMs": 14.11,
+      "js": {
+        "count": 8,
+        "decodedBytes": 615386,
+        "brotliBytesEstimate": 180850,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    },
+    {
+      "route": "/contact",
+      "htmlBytes": 16780,
+      "localTimeToHeadersMs": 14.88,
+      "js": {
+        "count": 9,
+        "decodedBytes": 625760,
+        "brotliBytesEstimate": 184191,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/1ckvzn7sfprko.js",
+            "decodedBytes": 5584,
+            "brotliBytesEstimate": 1885
+          },
+          {
+            "url": "/_next/static/chunks/2r4s4h5xul1n-.js",
+            "decodedBytes": 28739,
+            "brotliBytesEstimate": 7362
+          },
+          {
+            "url": "/_next/static/chunks/2gvu8dyrhibpa.js",
+            "decodedBytes": 229597,
+            "brotliBytesEstimate": 67852
+          },
+          {
+            "url": "/_next/static/chunks/2e268anpfvdoc.js",
+            "decodedBytes": 168355,
+            "brotliBytesEstimate": 43346
+          },
+          {
+            "url": "/_next/static/chunks/turbopack-3-ry682tkyiqk.js",
+            "decodedBytes": 10030,
+            "brotliBytesEstimate": 3790
+          },
+          {
+            "url": "/_next/static/chunks/0a8lsq8m6os5a.js",
+            "decodedBytes": 16812,
+            "brotliBytesEstimate": 4509
+          },
+          {
+            "url": "/_next/static/chunks/2kw1d1s2_agdx.js",
+            "decodedBytes": 43675,
+            "brotliBytesEstimate": 13750
+          },
+          {
+            "url": "/_next/static/chunks/0y7o1f7qx6avv.js",
+            "decodedBytes": 10374,
+            "brotliBytesEstimate": 3341
+          },
+          {
+            "url": "/_next/static/chunks/0cz1d0mv5g_q7.js",
+            "decodedBytes": 112594,
+            "brotliBytesEstimate": 38356
+          }
+        ]
+      },
+      "css": {
+        "count": 2,
+        "decodedBytes": 100936,
+        "brotliBytesEstimate": 19181,
+        "assets": [
+          {
+            "url": "/_next/static/chunks/0d_-z3d169x9-.css",
+            "decodedBytes": 60125,
+            "brotliBytesEstimate": 12147
+          },
+          {
+            "url": "/_next/static/chunks/35bcyfjzd26o-.css",
+            "decodedBytes": 40811,
+            "brotliBytesEstimate": 7034
+          }
+        ]
+      },
+      "fonts": {
+        "count": 2,
+        "decodedBytes": 46772,
+        "brotliBytesEstimate": 46778,
+        "assets": [
+          {
+            "url": "/_next/static/media/5c285b27cdda1fe8-s.p.2_mbdogr7ni8i.woff2",
+            "decodedBytes": 36980,
+            "brotliBytesEstimate": 36984
+          },
+          {
+            "url": "/_next/static/media/5e4d537aaa9e154b-s.p.1ewykk74tw0il.woff2",
+            "decodedBytes": 9792,
+            "brotliBytesEstimate": 9794
+          }
+        ]
+      }
+    }
+  ]
+}
