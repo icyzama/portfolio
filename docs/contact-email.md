@@ -31,16 +31,17 @@ This in-memory limit is basic protection, not a distributed quota. Multiple serv
 
 - The server validates required fields, lengths, and supported topics/timelines before calling Resend.
 - The sender and destination come from server configuration; visitor input cannot override them.
-- The HTML template includes visitor details, the topic, optional organization/timeline, and message. Visitor text is HTML-escaped; the plain-text alternative preserves the original text.
-- Success requires a successful Resend response with a message ID. Provider acceptance does not guarantee inbox placement.
-- Missing configuration returns 503. Provider rejection, network failure, or timeout returns 502. The form preserves the visitor's draft on failure.
-- No automatic confirmation email is sent to visitor-supplied addresses. The visitor email is used for replies and does not receive a copy.
+- The owner notification includes visitor details, the topic, optional organization/timeline, and message. Visitor text is HTML-escaped; the plain-text alternative preserves the original text.
+- After Resend accepts the owner notification, the endpoint sends a separate receipt to the visitor's address. It confirms the selected topic, gives a short portfolio introduction, and links to the portfolio, projects, and LinkedIn. It does not repeat the submitted message.
+- The owner notification uses the visitor's address as Reply-To; the sender receipt uses the configured contact destination as Reply-To.
+- Success requires the owner notification to be accepted by Resend with a message ID. If that send fails, the endpoint returns 502 and the form preserves the visitor's draft. If the owner notification succeeds but the receipt fails, the form still reports success to avoid prompting a duplicate submission; the receipt failure is logged without visitor details.
+- Provider acceptance does not guarantee inbox placement. Production receipts require a verified sender domain; `onboarding@resend.dev` is restricted to test recipients and cannot deliver receipts to arbitrary visitors.
 
 ## Verification
 
 Run `node scripts/qa.mjs --contact-only` for isolated handler checks. Resend requests use a mocked transport with synthetic configuration; the test never sends an email. For production HTTP checks, start the app locally on port 3000 and run `npm run qa`.
 
-A live delivery check requires a configured Resend account and verified sender domain. Send one deliberate message from the form, check the Resend dashboard and Gmail inbox, and verify Reply-To and HTML/plain-text rendering. Live delivery is separate from the mocked checks.
+A live delivery check requires a configured Resend account and verified sender domain. Send one deliberate message from the form, check the owner notification in the configured inbox and the receipt in the visitor inbox, then verify both records in Resend and inspect Reply-To plus HTML/plain-text rendering. Live delivery is separate from the mocked checks.
 
 ## If an email does not arrive
 

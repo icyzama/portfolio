@@ -3,8 +3,10 @@ const expectedGraduation = "September 2027";
 export const profile = {
   name: "Reynald Quijano",
   email: "quijanorrq@gmail.com",
+  siteUrl: "https://portfolio-icyzamas-projects.vercel.app",
   github: "https://github.com/icyzama",
   linkedin: "https://linkedin.com/in/reynaldquijano",
+  contactReceiptBio: "Full Stack Developer and IT student interested in cloud and data engineering.",
   expectedGraduation,
   homeBio:
     "Fourth-year Information Technology - Mobile and Web Applications student at National University - Manila, aspiring cloud and data engineer. I build responsive, database-driven applications with the PERN stack and TypeScript, and contribute to frontend development, quality assurance, UI/UX, and project coordination.",

@@ -17,20 +17,20 @@ function handler(options = {}) {
   const sent = []; const providerCalls = []; const logs = []; let clock = Date.now();
   const mod = { exports: {} };
   const sandbox = {
-    module: mod, exports: mod.exports, Buffer, Response, AbortSignal, process: { env: { ...baseEnv, ...options.env } },
+    module: mod, exports: mod.exports, Buffer, Response, AbortSignal, URL, process: { env: { ...baseEnv, ...options.env } },
     Date: class extends Date { static now() { return clock; } },
     console: { info: (...args) => logs.push(args.join(' ')), error: (...args) => logs.push(args.join(' ')) },
     async fetch(url, init) {
       assert.equal(url, 'https://api.resend.com/emails');
       providerCalls.push({ url, init }); sent.push(JSON.parse(init.body));
-      if (options.error) throw Error('simulated provider failure');
+      if (options.error || options.failAt === providerCalls.length) throw Error('simulated provider failure');
       if (options.providerFailure) return Response.json(options.providerFailure.body, { status: options.providerFailure.status });
       if (options.reject) return Response.json({ message: 'provider rejection' }, { status: 422 });
       if (options.noId) return Response.json({});
-      return Response.json({ id: 'qa-email-id' });
+      return Response.json({ id: `qa-email-${providerCalls.length}` });
     },
     require(id) {
-      if (id === '@/content/portfolio') return { profile: { email: 'fallback@example.com' } };
+      if (id === '@/content/portfolio') return { profile: { name: 'Reynald Quijano', email: 'owner@example.com', siteUrl: 'https://portfolio.example.com', linkedin: 'https://linkedin.com/in/reynaldquijano', contactReceiptBio: 'Full Stack Developer and IT student interested in cloud and data engineering.' } };
       if (id === 'node:crypto') return crypto;
       if (id === 'node:net') return { isIP };
       if (id === '@/features/contact/contact-email') {
@@ -122,21 +122,44 @@ async function checkPages() {
   for (const body of [null, [], 42]) await check('Contact rejects payload ' + JSON.stringify(body), () => expectStatus(body, 400));
   await check('Contact rejects wrong media type', () => expectStatus(valid, 415, { 'Content-Type': 'text/plain' }));
   await check('Contact rejects oversized request', () => expectStatus('a'.repeat(32769), 413));
-  await check('Contact message with an accidentally filled website field still sends through Resend', async () => { const h = handler(); assert.equal((await h.post(request({ ...valid, website: 'autofilled.example.com' }))).status, 200); assert.equal(h.sent.length, 1); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); });
+  await check('Contact message with an accidentally filled website field still sends through Resend', async () => { const h = handler(); assert.equal((await h.post(request({ ...valid, website: 'autofilled.example.com' }))).status, 200); assert.equal(h.sent.length, 2); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); });
   await check('Contact missing Resend key returns 503', () => expectStatus(valid, 503, {}, { env: { RESEND_API_KEY: '' } }));
   await check('Contact missing configured sender returns 503', () => expectStatus(valid, 503, {}, { env: { CONTACT_FROM_EMAIL: '' } }));
   await check('Contact valid message sends with controlled recipient and Reply-To', async () => {
     const h = handler(); const res = await h.post(request({ ...valid, to: 'attacker@example.com', from: 'attacker@example.com' }));
-    assert.equal(res.status, 200); assert.equal(h.sent.length, 1); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); assert.equal(h.sent[0].from, "Reynald's Portfolio <sender@example.com>"); assert.equal(h.sent[0].reply_to, valid.email); assert.equal(res.headers.get('Cache-Control'), 'no-store');
+    assert.equal(res.status, 200); assert.equal(h.sent.length, 2); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); assert.equal(h.sent[0].from, "Reynald's Portfolio <sender@example.com>"); assert.equal(h.sent[0].reply_to, valid.email); assert.equal(res.headers.get('Cache-Control'), 'no-store');
     assert.equal(h.providerCalls[0].init.headers.Authorization, 'Bearer fake-qa-key');
     assert.equal(h.providerCalls[0].init.cache, 'no-store');
     assert.ok(h.providerCalls[0].init.signal instanceof AbortSignal);
     assert.match(h.sent[0].html, /QA Visitor/); assert.match(h.sent[0].text, /QA Visitor/);
   });
+  await check('Contact success sends the owner notification and a portfolio receipt to the visitor', async () => {
+    const h = handler();
+    const res = await h.post(request({ ...valid, name: 'QA <Visitor>', topic: 'project' }));
+    assert.equal(res.status, 200); assert.equal(h.sent.length, 2); assert.equal(h.providerCalls.length, 2);
+    const [owner, receipt] = h.sent;
+    assert.deepEqual(JSON.parse(JSON.stringify(owner.to)), ['owner@example.com']);
+    assert.equal(owner.reply_to, valid.email);
+    assert.deepEqual(JSON.parse(JSON.stringify(receipt.to)), [valid.email]);
+    assert.equal(receipt.from, owner.from); assert.equal(receipt.reply_to, 'owner@example.com');
+    assert.match(receipt.subject, /received your message/i);
+    assert.match(receipt.html, /QA &lt;Visitor&gt;/); assert.ok(!receipt.html.includes('<Visitor>'));
+    assert.match(receipt.text, /Freelance project/); assert.match(receipt.text, /Full Stack Developer and IT student/i);
+    assert.match(receipt.html, /https:\/\/portfolio\.example\.com\/projects/);
+    assert.match(receipt.text, /https:\/\/linkedin\.com\/in\/reynaldquijano/);
+    assert.ok(!receipt.text.includes(valid.message)); assert.ok(!receipt.html.includes(valid.message));
+  });
+  await check('Contact submission remains successful when the sender receipt fails after owner delivery', async () => {
+    const h = handler({ failAt: 2 });
+    assert.equal((await h.post(request())).status, 200);
+    assert.equal(h.sent.length, 2);
+    assert.ok(h.logs.some(log => log.includes('Contact sender receipt failed')));
+    assert.ok(!h.logs.join('\n').includes(valid.email));
+  });
   await check('Contact optional project fields included', async () => {
     const h = handler(); assert.equal((await h.post(request({ ...valid, topic: 'project', organization: 'QA Org', timeline: 'asap' }))).status, 200); assert.match(h.sent[0].text, /QA Org/); assert.match(h.sent[0].text, /As soon as possible/);
   });
-  for (const options of [{ error: true }, { reject: true }, { noId: true }]) await check('Contact provider failure ' + JSON.stringify(options), async () => { const h = handler(options); assert.equal((await h.post(request())).status, 502); });
+  for (const options of [{ error: true }, { reject: true }, { noId: true }]) await check('Contact provider failure ' + JSON.stringify(options), async () => { const h = handler(options); assert.equal((await h.post(request())).status, 502); assert.equal(h.sent.length, 1); });
   for (const [status, detail, reason] of [
     [403, 'You can only send testing emails to your own email address (owner@example.com).', 'test_recipient_not_allowed'],
     [403, 'The example.com domain is not verified.', 'sender_domain_not_verified'],
@@ -157,7 +180,7 @@ async function checkPages() {
   });
   await check('Contact sixth request is limited and expiry resets limit', async () => {
     const h = handler(); for (let i = 0; i < 5; i++) assert.equal((await h.post(request())).status, 200);
-    const res = await h.post(request()); assert.equal(res.status, 429); assert.ok(Number(res.headers.get('Retry-After')) > 0); assert.equal(h.sent.length, 5);
+    const res = await h.post(request()); assert.equal(res.status, 429); assert.ok(Number(res.headers.get('Retry-After')) > 0); assert.equal(h.sent.length, 10);
     h.advance(15 * 60 * 1000 + 1); assert.equal((await h.post(request())).status, 200);
   });
   for (const topic of ['constructor', '__proto__', 'toString']) await check('Contact rejects inherited topic ' + topic, () => expectStatus({ ...valid, topic }, 400));
