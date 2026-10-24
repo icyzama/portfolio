@@ -122,7 +122,7 @@ async function checkPages() {
   for (const body of [null, [], 42]) await check('Contact rejects payload ' + JSON.stringify(body), () => expectStatus(body, 400));
   await check('Contact rejects wrong media type', () => expectStatus(valid, 415, { 'Content-Type': 'text/plain' }));
   await check('Contact rejects oversized request', () => expectStatus('a'.repeat(32769), 413));
-  await check('Contact honeypot returns success without sending', async () => { const h = handler(); assert.equal((await h.post(request({ ...valid, website: 'bot' }))).status, 200); assert.equal(h.sent.length, 0); });
+  await check('Contact message with an accidentally filled website field still sends through Resend', async () => { const h = handler(); assert.equal((await h.post(request({ ...valid, website: 'autofilled.example.com' }))).status, 200); assert.equal(h.sent.length, 1); assert.deepEqual(JSON.parse(JSON.stringify(h.sent[0].to)), ['owner@example.com']); });
   await check('Contact missing Resend key returns 503', () => expectStatus(valid, 503, {}, { env: { RESEND_API_KEY: '' } }));
   await check('Contact missing configured sender returns 503', () => expectStatus(valid, 503, {}, { env: { CONTACT_FROM_EMAIL: '' } }));
   await check('Contact valid message sends with controlled recipient and Reply-To', async () => {

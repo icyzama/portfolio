@@ -34,7 +34,7 @@ This in-memory limit is basic protection, not a distributed quota. Multiple serv
 - The HTML template includes visitor details, the topic, optional organization/timeline, and message. Visitor text is HTML-escaped; the plain-text alternative preserves the original text.
 - Success requires a successful Resend response with a message ID. Provider acceptance does not guarantee inbox placement.
 - Missing configuration returns 503. Provider rejection, network failure, or timeout returns 502. The form preserves the visitor's draft on failure.
-- No automatic confirmation email is sent to visitor-supplied addresses. A hidden field rejects simple automated submissions without contacting the provider.
+- No automatic confirmation email is sent to visitor-supplied addresses. The visitor email is used for replies and does not receive a copy.
 
 ## Verification
 
