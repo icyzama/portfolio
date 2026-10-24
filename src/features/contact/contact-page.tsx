@@ -103,10 +103,6 @@ export function ContactPage() {
             <p className={styles.eyebrow}>01 / DIRECT MESSAGE</p>
             <h2>SEND A MESSAGE.</h2>
           </div>
-          <div className="contact-honeypot" aria-hidden="true">
-            <label htmlFor="contact-website">Leave this field empty</label>
-            <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
-          </div>
           <fieldset className="contact-fields" disabled={sending}>
           <div className="form-pair">
             <label>

@@ -47,10 +47,6 @@ export async function POST(request: Request) {
     return reply(400, "Please complete the contact form.");
   }
   const fields = payload as Record<string, unknown>;
-  // Hidden field catches automated submissions without sending an email.
-  if (typeof fields.website === "string" && fields.website.trim()) {
-    return reply(200, "Thanks! Your message has been sent.");
-  }
   const read = (key: string) => typeof fields[key] === "string" ? fields[key].trim() : "";
   const name = read("name");
   const email = read("email");
