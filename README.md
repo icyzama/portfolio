@@ -1,70 +1,126 @@
 # Portfolio
 
-Reynald Quijano’s personal portfolio showcases projects, experience, services, technical skills, and ways to get in touch. It is built with Next.js App Router, TypeScript, Tailwind CSS, and ESLint, and implements the original Figma Page 1.
+A personal portfolio for Reynald Quijano, built to present projects, experience, technical skills, services, and contact options. The interface follows the [original Figma design](https://www.figma.com/design/htPgB4X3o9UtycpH6bcYss/Portfolio-1.0?node-id=0-1) and adapts its editorial layout to smaller screens.
 
 **Live site:** [portfolio-icyzamas-projects.vercel.app](https://portfolio-icyzamas-projects.vercel.app)
 
-## Featured work
+## What the application includes
 
-- **[SmartFlood](https://smart-flood-landing-page-hb6z.vercel.app)** — Capstone project for flood monitoring and relief allocation. [Source](https://github.com/wendev27/SmartFlood-V4)
-- **[DALO](https://github.com/jamenggay/Event-Registration-System)** — Event platform project recognized as Best Website.
-- **[EcoBridge](https://github.com/DDoS-Depressed-Devs-on-Site/EcoBridge-Full)** — Hackathon project for redistributing surplus resources.
-- **[Kuryentech](https://github.com/0CottonBuds/KuryenTech)** — Energy management app and national top-15 hackathon entry.
+| Route | Purpose |
+| --- | --- |
+| `/` | Introduction and entry points to the rest of the site |
+| `/about` | Biography and grouped technical skills |
+| `/projects` | Filterable project cards and a details dialog with source or live links |
+| `/experiences` | Organizations, hackathons, and internship tabs; the selected tab is reflected in the URL |
+| `/services` | Web development services |
+| `/blog` | Upcoming writing topics and a topic suggestion that opens an email draft |
+| `/contact` | Contact links and a form for opportunities, projects, and collaboration |
+| `POST /api/contact` | Validates form submissions and sends email through Resend |
 
-Project details and links are maintained in [`src/content/portfolio.ts`](src/content/portfolio.ts).
+## Architecture
 
-## Skills featured
+The project uses the **Next.js App Router**. Files in `src/app/` define routes and metadata; each page delegates its UI to a matching module in `src/features/`. The root layout supplies the shared header, footer, fonts, preloader, motion behavior, and skip link.
 
-The About page groups skills in frontend and design, backend, databases, cloud, languages, and tools. Highlights include React, TypeScript, Figma, Node.js, Express.js, MySQL, Supabase, Amazon EC2, and Amazon S3.
+```mermaid
+flowchart LR
+    Browser --> Routes["App Router pages<br/>src/app"]
+    Routes --> Features["Page features<br/>src/features"]
+    Features --> UI["Shared layout and UI<br/>src/components"]
+    Features --> Content["Profile and portfolio data<br/>src/content"]
+    Features --> Assets["Local images and SVGs<br/>public"]
+    Browser -->|Contact form| API["POST /api/contact"]
+    API -->|HTTPS| Resend["Resend email API"]
+```
 
-## Links
+Most content is stored in TypeScript modules rather than fetched from a CMS. `src/content/profile.ts` holds the name, bio, contact links, and resume path. `src/content/portfolio.ts` holds projects, organizations, services, and planned blog topics. `src/content/navigation.ts` defines the main navigation. Project and organization images are local assets under `public/`.
 
-[Portfolio](https://portfolio-icyzamas-projects.vercel.app) · [GitHub](https://github.com/icyzama) · [LinkedIn](https://linkedin.com/in/reynaldquijano) · [Email](mailto:quijanorrq@gmail.com)
+Interactive elements are client components where browser state is needed: project filters and dialogs, experience tabs, skill popovers, image previews, motion, and the contact form. Route files, the shared layout, and other page composition stay in the App Router's server-rendered structure.
+
+### Contact flow
+
+1. The Contact page posts JSON to `/api/contact`.
+2. The Node.js route checks the request origin, content type, payload size, field values, and a per-instance rate limit.
+3. The route sends the portfolio owner an email through the Resend HTTPS API. If that succeeds, it attempts a separate confirmation email to the visitor.
+4. Responses and outbound email requests use `no-store`. A failed confirmation does not turn an accepted owner notification into a failed form submission.
+
+The contact endpoint needs server-side configuration and cannot run as a static HTML export. See [Contact email setup](docs/contact-email.md) for verified-domain setup, proxy trust, rate-limit behavior, and delivery checks.
+
+### Caching
+
+Next.js manages page and content-hashed build assets. Local files under `public/figma`, `public/skills`, `public/projects`, and `public/experiences` use revalidation headers from `next.config.ts`. Content changes are published by rebuilding and deploying the site. The contact endpoint is uncached. See [Caching policy](docs/caching.md) for the resource-by-resource rules and verification steps.
+
+## Tech stack
+
+| Area | Technology |
+| --- | --- |
+| Framework | Next.js 16 App Router, React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS 4, global CSS, and CSS Modules |
+| Images and fonts | `next/image`; Archivo Black and DM Sans through `next/font` |
+| Email | Node.js route handler and Resend HTTPS API |
+| Quality checks | ESLint, Node.js test runner, and repository QA scripts |
+| Package manager | npm (`package-lock.json`) |
+
+## Project structure
+
+```text
+src/
+  app/                 Routes, metadata, root layout, global styles, contact API
+  components/
+    layout/             Shared header and footer
+    ui/                 Reusable visual and interaction components
+  content/              Profile, navigation, projects, organizations, services
+  features/             UI and behavior grouped by page
+public/                 Local images, icons, and Figma exports
+scripts/                QA and audit scripts
+docs/                   Contact, caching, and QA notes
+```
 
 ## Run locally
 
-```powershell
-npm install
+Install Node.js and npm, then from the repository root:
+
+```bash
+npm ci
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open [http://localhost:3000](http://localhost:3000). The pages work without email credentials; sending the contact form requires the variables below.
+
+For a production build:
+
+```bash
+npm run build
+npm run start
+```
+
+### Contact environment variables
+
+Copy `.env.example` to `.env.local` and set the server-only values needed for email delivery:
+
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_API_KEY` | Resend API key with sending access |
+| `CONTACT_FROM_EMAIL` | Sender address on a verified domain |
+| `CONTACT_TO_EMAIL` | Destination inbox; defaults to the email in `profile.ts` if omitted |
+| `CONTACT_TRUSTED_IP_HEADER` | Optional header set by a trusted reverse proxy for per-client rate limiting; Vercel is detected automatically |
+
+Do not prefix these variables with `NEXT_PUBLIC_` or commit `.env.local`. The deployment must support the Node.js runtime and outbound HTTPS for the contact form.
 
 ## Checks
 
-```powershell
-npm run lint
-npm run build
-npm run qa:contact
-npm run qa:images
-```
+| Command | What it checks |
+| --- | --- |
+| `npm run lint` | ESLint |
+| `npm run build` | Production compilation |
+| `npm run qa:contact` | Contact route behavior with mocked email delivery |
+| `npm run qa:contact-ui` | Contact form interaction tests |
+| `npm run qa:images` | Image lifecycle and keyboard interaction tests in a simulated DOM |
+| `npm run qa` | HTTP responses, rendered content, local assets, and Contact behavior against a running production server |
+| `npm run qa:cache` | Cache headers and revalidation against a running production server |
 
-For production HTTP checks, run `npm run start -- --hostname 127.0.0.1 --port 3000` in another terminal after building, then `npm run qa`. The QA script checks page responses, server-rendered content, local assets, and Contact behavior with email delivery mocked.
+For the last two commands, run `npm run build` and start the production server in another terminal first. Set `QA_BASE_URL` if it is not running at `http://127.0.0.1:3000`. The mocked checks do not send real email. See the [QA notes](docs/qa/enhancements-2026-10-23.md) for recorded results and remaining visual checks.
 
-Run `npm run qa:cache` against the production server to check asset revalidation and cache boundaries. Set `QA_BASE_URL` when using a different port. `qa:images` uses a simulated DOM to check image lifecycles and keyboard tabs; it is not a visual browser test.
+## Updating the site
 
-See [Caching policy](docs/caching.md) for freshness and deployment behavior, and [Enhancement QA](docs/qa/enhancements-2026-10-23.md) for measured bundle changes and remaining visual checks.
-
-## Structure
-
-- `src/app/`: routes, metadata, root layout, global design styles
-- `src/components/layout/`: shared header and footer
-- `src/components/ui/`: shared design primitives
-- `src/features/`: page implementations and page-specific interactions
-- `src/content/portfolio.ts`: editable projects, organizations, services, and upcoming posts
-- `src/content/profile.ts` and `navigation.ts`: shared profile and navigation values, kept separate from image-heavy content for smaller client bundles
-- `public/figma/`: exact local image and SVG assets exported from the original design
-
-## Design reference
-
-[Original Figma Page 1](https://www.figma.com/design/htPgB4X3o9UtycpH6bcYss/Portfolio-1.0?node-id=0-1)
-
-Preserves the original cream, black, blue, orange, and yellow palette, Archivo Black headings, DM Sans body text, bold borders, grids, portrait, and organization photo. Approved content changes: fourth-year on Home, Blog coming soon, and freelance web development with quotes discussed by contact.
-
-Fonts are downloaded by Next.js during the build and served locally at runtime. The responsive layout stacks the original sections on smaller screens.
-
-## Personalize before publishing
-
-Edit `src/content/portfolio.ts` to maintain projects, organizations, and services. Update your bio, contact links, and site URL in `src/content/profile.ts`. Review the Home statistics and latest updates before publication. Add a real resume under `public/` and set `profile.resume` to its path to enable downloading. Blog topics are a preview of upcoming writing, and the internship photo is still a placeholder.
-
-The Contact form submits to a server endpoint and sends through **Resend**, using an HTML template and plain-text alternative. Configure the API key, verified sender address, destination inbox, and trusted proxy as described in [Contact email setup](docs/contact-email.md). The endpoint needs a Node.js server and server-only email configuration. Blog topic suggestions open a `mailto:` draft in the visitor's email application.
+Edit `src/content/profile.ts` for the bio, contact links, site URL, and resume path. Edit `src/content/portfolio.ts` for projects, organizations, services, and upcoming posts. Add corresponding images to `public/` and update their imports when changing visual content. The resume download is disabled until a file is added under `public/` and `profile.resume` points to it.
