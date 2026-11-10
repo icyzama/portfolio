@@ -64,8 +64,10 @@ export function ProjectsPage() {
           {visible.map((project) => (
             <article className={styles.card} key={project.slug}>
               <div className={styles.meta}><span className={styles.number} aria-hidden="true">{String(projects.indexOf(project) + 1).padStart(2, "0")}</span><span>{project.year}<br />{project.category}</span></div>
-              <p className={styles.recognition}>{project.icon && <Asset src={project.icon} width={14} />}{project.recognition}</p>
-              {project.status && <p className={styles.status}>{project.status}</p>}
+              <div className={styles.projectBadgeRow}>
+                <p className={styles.recognition}>{project.icon && <Asset src={project.icon} width={14} />}{project.recognition}</p>
+                {project.status && <p className={styles.status}>{project.status}</p>}
+              </div>
               <h2>{project.name}</h2>
               {project.subtitle && <p className={styles.fullTitle}>{project.subtitle}</p>}
               <p className={styles.description}>{project.description}</p>
@@ -97,10 +99,12 @@ export function ProjectsPage() {
         <div className={styles.dialogHeader}><p className={styles.eyebrow}>PROJECT DETAILS</p><button type="button" className={pageStyles.button} onClick={() => dialog.current?.close()} aria-label="Close project details">CLOSE ×</button></div>
         {selected && (
           <>
-            <p className={styles.recognition}>{selected.recognition}</p>
+            <div className={styles.projectBadgeRow}>
+              <p className={styles.recognition}>{selected.recognition}</p>
+              {selected.status && <p className={styles.status}>{selected.status}</p>}
+            </div>
             <h2 id="project-dialog-title">{selected.fullTitle ?? selected.name}</h2>
             <p className={styles.eyebrow}>{selected.year} / {selected.category}</p>
-            {selected.status && <p className={styles.status}>{selected.status}</p>}
             <p className={styles.description} style={{ marginTop: 18 }}>{selected.description}</p>
             <EditorialTags items={selected.tags} />
             {(selected.liveUrl || selected.sourceUrl) && (

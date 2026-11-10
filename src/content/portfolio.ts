@@ -37,6 +37,26 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "mood-for-thought",
+    name: "Mood for Thought",
+    fullTitle: "Mood for Thought: AI-Assisted Creative Direction",
+    subtitle: "AI-Assisted Creative Direction for Branding Designers",
+    sourceUrl: "https://github.com/icyzama/mood-for-thought",
+    preview: {
+      src: moodForThoughtImage.src,
+      blurDataURL: moodForThoughtImage.blurDataURL,
+      alt: "Mood for Thought landing page preview with colorful creative direction cards",
+    },
+    recognition: "Personal Project",
+    description:
+      "An AI-assisted creative direction app for branding designers. Turn a rough brief into visual directions, refine a favorite, and gather references in a moodboard. The design prototype is complete and application development is underway.",
+    tags: ["Next.js", "React", "TypeScript", "OpenAI", "Supabase", "Figma"],
+    year: "2026",
+    category: "Personal",
+    status: "In Progress",
+    tone: "pink",
+  },
+  {
     slug: "smartflood",
     name: "SmartFlood",
     fullTitle: "SmartFlood: AI-Optimized Relief Allocation with Near-Real-Time Flood Monitoring for Flood-Affected Communities",
@@ -116,26 +136,6 @@ export const projects: Project[] = [
     category: "Hackathon",
     tone: "blue",
     icon: "/figma/projects-iconmedal1.svg",
-  },
-  {
-    slug: "mood-for-thought",
-    name: "Mood for Thought",
-    fullTitle: "Mood for Thought: AI-Assisted Creative Direction",
-    subtitle: "AI-Assisted Creative Direction for Branding Designers",
-    sourceUrl: "https://github.com/icyzama/mood-for-thought",
-    preview: {
-      src: moodForThoughtImage.src,
-      blurDataURL: moodForThoughtImage.blurDataURL,
-      alt: "Mood for Thought landing page preview with colorful creative direction cards",
-    },
-    recognition: "Personal Project",
-    description:
-      "An AI-assisted creative direction app for branding designers. Turn a rough brief into visual directions, refine a favorite, and gather references in a moodboard. The design prototype is complete and application development is underway.",
-    tags: ["Next.js", "React", "TypeScript", "OpenAI", "Supabase", "Figma"],
-    year: "2026",
-    category: "Personal",
-    status: "In Progress",
-    tone: "pink",
   },
 ];
 
