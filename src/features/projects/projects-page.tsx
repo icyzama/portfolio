@@ -10,8 +10,8 @@ import { pageLabels } from "@/components/ui/page-label";
 import pageStyles from "@/components/ui/page-system.module.css";
 import { TitlePanel } from "@/components/ui/title-panel";
 
-const categories = ["All", "Hackathon", "University Project"];
-const categoryLabels = ["All Projects", "Hackathons", "University Projects"];
+const categories = ["All", "Hackathon", "University Project", "Personal"];
+const categoryLabels = ["All Projects", "Hackathons", "University Projects", "Personal Projects"];
 export function ProjectsPage() {
   const [category, setCategory] = useState("All");
   const [selected, setSelected] = useState<Project | null>(null);
@@ -65,6 +65,7 @@ export function ProjectsPage() {
             <article className={styles.card} key={project.slug}>
               <div className={styles.meta}><span className={styles.number} aria-hidden="true">{String(projects.indexOf(project) + 1).padStart(2, "0")}</span><span>{project.year}<br />{project.category}</span></div>
               <p className={styles.recognition}>{project.icon && <Asset src={project.icon} width={14} />}{project.recognition}</p>
+              {project.status && <p className={styles.status}>{project.status}</p>}
               <h2>{project.name}</h2>
               {project.subtitle && <p className={styles.fullTitle}>{project.subtitle}</p>}
               <p className={styles.description}>{project.description}</p>
@@ -99,6 +100,7 @@ export function ProjectsPage() {
             <p className={styles.recognition}>{selected.recognition}</p>
             <h2 id="project-dialog-title">{selected.fullTitle ?? selected.name}</h2>
             <p className={styles.eyebrow}>{selected.year} / {selected.category}</p>
+            {selected.status && <p className={styles.status}>{selected.status}</p>}
             <p className={styles.description} style={{ marginTop: 18 }}>{selected.description}</p>
             <EditorialTags items={selected.tags} />
             {(selected.liveUrl || selected.sourceUrl) && (

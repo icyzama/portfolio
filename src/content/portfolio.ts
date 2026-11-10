@@ -2,6 +2,7 @@ import smartFloodImage from "../../public/projects/smartflood.png";
 import daloImage from "../../public/projects/dalo.png";
 import ecoBridgeImage from "../../public/projects/ecobridge.png";
 import kuryentechImage from "../../public/projects/kuryentech-team.jpg";
+import moodForThoughtImage from "../../public/projects/mood-for-thought.png";
 import awsStudentGroupImage from "../../public/experiences/aws-sug-ph-day-one-banner.jpg";
 import awsClubCeoImage from "../../public/experiences/aws-legarda-ceo-banner.jpg";
 import awsClubOfficerImage from "../../public/experiences/aws-legarda-cloud-officer-banner.jpg";
@@ -26,6 +27,7 @@ export type Project = {
   tags: string[];
   year: string;
   category: ProjectCategory;
+  status?: "In Progress";
   tone: string;
   icon?: string;
   liveUrl?: string;
@@ -114,6 +116,26 @@ export const projects: Project[] = [
     category: "Hackathon",
     tone: "blue",
     icon: "/figma/projects-iconmedal1.svg",
+  },
+  {
+    slug: "mood-for-thought",
+    name: "Mood for Thought",
+    fullTitle: "Mood for Thought: AI-Assisted Creative Direction",
+    subtitle: "AI-Assisted Creative Direction for Branding Designers",
+    sourceUrl: "https://github.com/icyzama/mood-for-thought",
+    preview: {
+      src: moodForThoughtImage.src,
+      blurDataURL: moodForThoughtImage.blurDataURL,
+      alt: "Mood for Thought landing page preview with colorful creative direction cards",
+    },
+    recognition: "Personal Project",
+    description:
+      "An AI-assisted creative direction app for branding designers. Turn a rough brief into visual directions, refine a favorite, and gather references in a moodboard. The design prototype is complete and application development is underway.",
+    tags: ["Next.js", "React", "TypeScript", "OpenAI", "Supabase", "Figma"],
+    year: "2026",
+    category: "Personal",
+    status: "In Progress",
+    tone: "pink",
   },
 ];
 
